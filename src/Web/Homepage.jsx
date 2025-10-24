@@ -1,66 +1,85 @@
-import { useState } from 'react'
-import './Homepage.css'
-import book1 from "../assets/book1.jpg"
-import book2 from "../assets/book2.png"
-import book3 from "../assets/book3.gif"
-
+import { FaSearch, FaShoppingCart,  } from "react-icons/fa";
+import { MdLogin,MdOutlineShoppingCart  } from "react-icons/md";
+import "./Homepage.css";
+import logo from "../assets/logo.png"; 
+const books = [
+  {
+    id: 1,
+    title: "Harry Potter and the Philosopher's Stone",
+    author: "J.K. Rowling",
+    price: "$12.99",
+    image: "https://via.placeholder.com/150"
+  },
+  {
+    id: 2,
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    price: "$15.99",
+    image: "https://via.placeholder.com/150"
+  },
+  {
+    id: 3,
+    title: "1984",
+    author: "George Orwell",
+    price: "$10.99",
+    image: "https://via.placeholder.com/150"
+  },
+];
 
 function Homepage() {
-  const [cartCount, setCartCount] = useState(0)
-
-  const addToCart = () => {
-    setCartCount(cartCount + 1)
-  }
-
   return (
-    <>
+    <div className="homepage">
       {/* Header */}
       <header className="header">
-        <h1 className="logo">📚 Korn Bookstore</h1>
+        
+         <img src={logo} alt="BookStore Logo" className="logo" />
+         
         <nav>
-          <a href="#">Home</a>
-          <a href="#">Books</a>
-          <a href="#">Contact</a>
+          <a href="#home">หน้าแรก</a>
+          <a href="#shop">10 อันดับ</a>
+      
         </nav>
-        <div className="cart">🛒 {cartCount}</div>
+         <div className="search-container">
+            <MdOutlineShoppingCart className="header-icon" />
+        <MdLogin className="header-icon" />
+        <input
+          type="text"
+          placeholder="ค้นหาหนังสือตามชื่อเรื่อง"
+          className="search-bar"
+        />
+        <FaSearch className="search-icon" />
+      </div>
       </header>
 
       {/* Hero Section */}
       <section className="hero">
-        <h2>Welcome to Korn Bookstore</h2>
-        <p>Find your next great read with us!</p>
+        <h2>Discover Your Next Favorite Book</h2>
+        <p>Find the best books from various genres all in one place!</p>
+        <button>Shop Now</button>
       </section>
 
-      {/* Book List */}
-      <section className="book-list">
-        <div className="book">
-          <img src={book1} alt="Book 1" />
-          <h3>The Great Adventure</h3>
-          <p>฿250</p>
-          <button onClick={addToCart}>Add to Cart</button>
-        </div>
-
-        <div className="book">
-          <img src={book2} alt="Book 2" />
-          <h3>Secrets of the Universe</h3>
-          <p>฿320</p>
-          <button onClick={addToCart}>Add to Cart</button>
-        </div>
-
-        <div className="book">
-          <img src={book3} alt="Book 3" />
-          <h3>Learn React the Fun Way</h3>
-          <p>฿290</p>
-          <button onClick={addToCart}>Add to Cart</button>
+      {/* Featured Books */}
+      <section className="books-section">
+        <h2>Featured Books</h2>
+        <div className="books-grid">
+          {books.map((book) => (
+            <div key={book.id} className="book-card">
+              <img src={book.image} alt={book.title} />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+              <p className="price">{book.price}</p>
+              <button>Add to Cart</button>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Footer */}
       <footer className="footer">
-        <p>© 2025 Korn Bookstore. All rights reserved.</p>
+        <p>&copy; 2025 BookStore. All rights reserved.</p>
       </footer>
-    </>
-  )
+    </div>
+  );
 }
 
-export default Homepage
+export default Homepage;
