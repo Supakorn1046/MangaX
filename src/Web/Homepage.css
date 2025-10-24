@@ -83,34 +83,41 @@ body {
 
 /* Hero Section */
 .hero {
-  text-align: center;
-  padding: 4rem 2rem;
-  background-color: #7900ad;
-  color: white;
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
 }
 
-.hero h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+.hero-buttons {
+  position: absolute;
+  bottom: 20px; /* ปุ่มอยู่ด้านล่าง */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
 }
 
-.hero button {
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
+.hero-buttons button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
   border: none;
-  background-color: #fdd835;
-  color: #4a148c;
+  background-color: rgba(255,255,255,0.5);
   cursor: pointer;
-  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.hero button:hover {
-  background-color: #fbc02d;
+.hero-buttons button.active,
+.hero-buttons button:hover {
+  background-color: #fdd835;
 }
 
 /* Books Section */
@@ -179,6 +186,6 @@ body {
 .footer {
   text-align: center;
   padding: 1rem;
-  background-color: #4a148c;
+  background-color: #000000;
   color: white;
 }
