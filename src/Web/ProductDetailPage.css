@@ -1,0 +1,272 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F4D58D; /* สีพื้นหลังหลัก (เหลือง/ส้ม) */
+}
+
+/* === Layout หลักของหน้า === */
+.product-detail-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ให้ความสูงอย่างน้อยเต็มจอ */
+}
+
+/* Header (คงเดิม) */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  padding: 0 5%;
+  height: 80px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  flex-shrink: 0; /* ป้องกัน header หด */
+}
+/* (โค้ด .header .search-container, .search-bar, .logo ฯลฯ... คงเดิมทั้งหมด) */
+.header .search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  position: relative; 
+}
+.header .search-bar {
+  padding: 0.5rem 2.5rem 0.5rem 0.3rem;
+  border-radius: 3px;
+  border: none;
+  font-size: 0.8rem;
+  outline: none;
+}
+.header .header-icon {
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.header .search-bar:focus {
+  box-shadow: 0 0 5px #fdd835;
+}
+.header .search-icon {
+  position: absolute;
+  right: 20px;
+  top: 30%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+.header .logo {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-left: -88px;
+}
+.header h1 { margin: 0; }
+.header nav a {
+  color: white;
+  margin-left: 2rem;
+  text-decoration: none;
+}
+.header nav a:hover {
+  text-decoration: underline;
+}
+
+
+/* ===== 
+  CSS ใหม่สำหรับส่วนกลาง (รายละเอียดสินค้า)
+===== */
+.product-detail-container {
+  flex-grow: 1; /* ดันให้ Footer อยู่ล่าง */
+  padding: 3rem 2rem; /* เว้นระยะห่างรอบๆ */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.detail-card {
+  background-color: #ffffff; /* พื้นหลังการ์ดสีขาว */
+  border-radius: 10px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 950px; /* จำกัดความกว้างสูงสุด */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.detail-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.detail-content {
+  display: flex;
+  gap: 2.5rem; /* ช่องว่างระหว่าง รูป กับ ข้อมูล */
+}
+
+/* ส่วนซ้าย (รูป + ปุ่มล่าง) */
+.detail-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-basis: 40%; /* ความกว้างส่วนรูป */
+  max-width: 350px;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.bottom-action-btn {
+  background-color: #0d6efd; /* สีน้ำเงิน */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+.bottom-action-btn:hover {
+  background-color: #0b5ed7;
+}
+
+/* ส่วนขวา (ข้อมูล) */
+.detail-right {
+  flex-basis: 60%; /* ความกว้างส่วนข้อมูล */
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  flex-grow: 1; /* ดันให้ปุ่ม Add to cart อยู่ล่างสุด */
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.product-price {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quantity-section label {
+  font-size: 1rem;
+  color: #555;
+  font-weight: 600;
+}
+.quantity-input {
+  width: 60px;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.add-to-cart-btn {
+  background-color: #333; /* สีดำ (ตามรูป) */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  align-self: flex-end; /* ดันปุ่มไปทางขวา */
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+.add-to-cart-btn:hover {
+  background-color: #555;
+}
+/* ===== จบ CSS ใหม่ ===== */
+
+
+/* Footer (คงเดิม) */
+.footer {
+  padding: 1rem;
+  background-color: #AFAA98;
+  color: rgb(0, 0, 0);
+  flex-shrink: 0; /* ป้องกัน footer หด */
+}
+/* (โค้ด .footer-content, .footer-section ฯลฯ... คงเดิมทั้งหมด) */
+.footer-content {
+  display: flex;
+  justify-content: flex-start;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+.third-column {
+  margin-left: 35rem;
+}
+.footer-section {
+  text-align: left;
+}
+.image-link {
+  margin-bottom: 9px;
+  display: block;
+}
+.image-link img {
+  width: 40px;
+  height: auto;
+}
+.third-column {
+  display: flex;
+  flex-direction: column;
+}
+.social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.social-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+.image-link img {
+  width: 30px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* === CSS สำหรับ Mobile (ถ้าต้องการ) === */
+@media (max-width: 768px) {
+  .detail-content {
+    flex-direction: column; /* เรียงบนลงล่างในจอมือถือ */
+  }
+  .detail-left, .detail-right {
+    flex-basis: 100%;
+  }
+  .add-to-cart-btn {
+    align-self: stretch; /* ปุ่มเต็มความกว้าง */
+  }
+}
