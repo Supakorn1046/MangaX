@@ -1,0 +1,248 @@
+/* General Styles */
+.sport-page {
+  min-height: 100vh;
+  background-color: #F4D58D;
+}
+
+/* Header */
+.sport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  padding: 0 5%;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+.sport-header .sport-search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  position: relative;
+}
+
+.sport-header .sport-search-bar {
+  padding: 0.5rem 2.5rem 0.5rem 0.3rem;
+  border-radius: 3px;
+  border: none;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.sport-header .sport-header-icon {
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.sport-header .sport-search-bar:focus {
+  box-shadow: 0 0 5px #fdd835;
+}
+
+.sport-header .sport-search-icon {
+ position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+.sport-header .sport-logo {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-left: -88px;
+}
+
+.sport-header nav a {
+  color: white;
+  margin-left: 2rem;
+  text-decoration: none;
+}
+
+.sport-header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Books Section */
+.sport-books-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.sport-red-box {
+  display: inline-block; 
+  background-color: #e53935;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  margin: 0 0 2rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sport-books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sport-book-card {
+  background-color: rgb(0, 0, 0);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  text-align: center;
+}
+
+.sport-book-card:hover {
+  transform: translateY(-5px);
+}
+
+.sport-book-image-placeholder {
+  width: 100%;
+  height: 250px;
+  background-color: #333;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.sport-book-card h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: #f70088;
+}
+
+.sport-book-card p {
+  margin: 0.3rem 0;
+  color: #ffffff;
+}
+
+.sport-book-card .sport-price {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.sport-book-card button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #2466b3;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.sport-book-card button:hover {
+  background-color: #0356f19f;
+}
+
+/* Footer */
+.sport-footer {
+  padding: 2rem 1rem;
+  background-color: #AFAA98;
+  color: rgb(0, 0, 0);
+  margin-top: 3rem;
+}
+
+.sport-footer-content {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1rem; 
+}
+
+.sport-third-column {
+  margin-left: 35rem;
+}
+
+.sport-footer-section {
+  text-align: left;
+  flex: 1;
+  min-width: 200px;
+}
+
+.sport-footer-section p:first-child {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.sport-footer-section p {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.sport-payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sport-image-link {
+  margin-bottom: 9px;
+  display: block;
+}
+
+.sport-image-link img {
+  width: 40px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.sport-image-link img:hover {
+  transform: scale(1.1);
+}
+
+.sport-social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sport-social-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.sport-social-row .sport-image-link img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sport-books-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .sport-footer-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .sport-third-column {
+    margin-left: 0;
+  }
+  
+  .sport-header .sport-search-bar {
+    width: 200px;
+  }
+}

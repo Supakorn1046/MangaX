@@ -47,7 +47,7 @@ body {
 .header .search-icon {
   position: absolute;
   right: 20px; /* ระยะจากขอบขวา */
-  top: 30%;
+  top: 50%;
   transform: translateY(-50%);
   color: #888;
   pointer-events: none; /* ให้คลิกผ่าน icon ได้ */
@@ -175,12 +175,12 @@ body {
 .book-card h3 {
   font-size: 1.2rem;
   margin: 0.5rem 0;
-  color: #f70088;
+  color: #ff0000;
 }
 
 .book-card p {
   margin: 0.3rem 0;
-  color: #ffffff;
+  color: #fffbfb;
 }
 
 .book-card .price {
@@ -192,14 +192,14 @@ body {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #2466b3;
-  color: rgb(255, 255, 255);
+  background-color: #fffefe;
+  color: rgb(0, 0, 0);
   border-radius: 5px;
   cursor: pointer;
 }
 
 .book-card button:hover {
-  background-color: #0356f19f;
+  background-color: #c4b9b99f;
 }
 
 /* Footer */
@@ -210,10 +210,12 @@ body {
 }
 
 .footer-content {
-  display: flex;
+ display: flex;
   justify-content: flex-start;
-  gap: 4rem; /* ระยะห่างระหว่างคอลัมน์ 1-2 และ 2-3 */
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1rem; 
 
   
 }
@@ -257,4 +259,3 @@ body {
   height: auto;
   transition: transform 0.3s ease;
 }
-

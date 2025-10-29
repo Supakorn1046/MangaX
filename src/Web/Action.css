@@ -1,0 +1,249 @@
+/* General Styles */
+.action-page {
+  min-height: 100vh;
+  background-color: #F4D58D;
+}
+
+/* Header */
+.action-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  padding: 0 5%;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+.action-header .action-search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  position: relative;
+}
+
+.action-header .action-search-bar {
+  padding: 0.5rem 2.5rem 0.5rem 0.3rem;
+  border-radius: 3px;
+  border: none;
+  font-size: 0.8rem;
+  outline: none;
+  width: 200px;
+}
+
+.action-header .action-header-icon {
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.action-header .action-search-bar:focus {
+  box-shadow: 0 0 5px #fdd835;
+}
+
+.action-header .action-search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
+}
+
+.action-header .action-logo {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-left: -88px;
+}
+
+.action-header nav a {
+  color: white;
+  margin-left: 2rem;
+  text-decoration: none;
+}
+
+.action-header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Books Section */
+.action-books-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.action-red-box {
+  display: inline-block; 
+  background-color: #e53935;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  margin: 0 0 2rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.action-books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.action-book-card {
+  background-color: rgb(0, 0, 0);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  text-align: center;
+}
+
+.action-book-card:hover {
+  transform: translateY(-5px);
+}
+
+.action-book-image-placeholder {
+  width: 100%;
+  height: 250px;
+  background-color: #333;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.action-book-card h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: #f70088;
+}
+
+.action-book-card p {
+  margin: 0.3rem 0;
+  color: #ffffff;
+}
+
+.action-book-card .action-price {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.action-book-card button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #2466b3;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.action-book-card button:hover {
+  background-color: #0356f19f;
+}
+
+/* Footer */
+.action-footer {
+  padding: 2rem 1rem;
+  background-color: #AFAA98;
+  color: rgb(0, 0, 0);
+  margin-top: 3rem;
+}
+
+.action-footer-content {
+    display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1rem; 
+}
+
+.action-third-column {
+  margin-left: 35rem;
+}
+
+.action-footer-section {
+  text-align: left;
+  flex: 1;
+  min-width: 200px;
+}
+
+.action-footer-section p:first-child {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.action-footer-section p {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.action-payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.action-image-link {
+  margin-bottom: 9px;
+  display: block;
+}
+
+.action-image-link img {
+  width: 40px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.action-image-link img:hover {
+  transform: scale(1.1);
+}
+
+.action-social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.action-social-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.action-social-row .action-image-link img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .action-books-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .action-footer-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .action-third-column {
+    margin-left: 0;
+  }
+  
+  .action-header .action-search-bar {
+    width: 200px;
+  }
+}
