@@ -63,7 +63,56 @@ function Homepage() {
 
       {/* Featured Books */}
       <section className="books-section">
-        <h2>Featured Books</h2>
+        <h2>มังงะขายดี 10 อันดับ</h2>
+        <div className="books-grid">
+          {books.map((book) => (
+            <div key={book.id} className="book-card">
+              <img src={book.image} alt={book.title} />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+              <p className="price">{book.price}</p>
+              <button>Add to Cart</button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Books */}
+      <section className="books-section">
+        <h2>ใหม่</h2>
+        <div className="books-grid">
+          {books.map((book) => (
+            <div key={book.id} className="book-card">
+              <img src={book.image} alt={book.title} />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+              <p className="price">{book.price}</p>
+              <button>Add to Cart</button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Books */}
+      <section className="books-section">
+        <h2>ต่อสู้</h2>
+        <div className="books-grid">
+          {books.map((book) => (
+            <div key={book.id} className="book-card">
+              <img src={book.image} alt={book.title} />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+              <p className="price">{book.price}</p>
+              <button>Add to Cart</button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* Featured Books */}
+      <section className="books-section">
+        <h2>กีฬา</h2>
         <div className="books-grid">
           {books.map((book) => (
             <div key={book.id} className="book-card">
