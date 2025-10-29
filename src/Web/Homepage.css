@@ -1,0 +1,191 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F4D58D;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  padding: 0 5%;       /* ขอบซ้ายขวา */
+  height: 80px;        /* ความสูงคงที่ของ header */
+  box-sizing: border-box;
+  justify-content: flex-start;
+
+}
+
+.header .search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* ช่องว่างระหว่าง icon และ search bar */
+  margin-left: auto; /* ดัน container ไปด้านขวาของ header */
+  position: relative; 
+}
+
+.header .search-bar {
+  padding: 0.5rem 2.5rem 0.5rem 0.3rem; /* เพิ่มขอบขวาให้ icon */
+  border-radius: 3px;
+  border: none;
+  font-size: 0.8rem;
+  outline: none;
+}
+.header .header-icon {
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.header .search-bar:focus {
+  box-shadow: 0 0 5px #fdd835;
+}
+
+.header .search-icon {
+  position: absolute;
+  right: 10px; /* ระยะจากขอบขวา */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none; /* ให้คลิกผ่าน icon ได้ */
+}
+.header .logo {
+  max-height: 80px;    /* โลโก้ไม่เกินความสูงนี้ */
+  width: auto;         /* รักษาสัดส่วน */
+  object-fit: contain; /* รูปจะไม่บิดและพอดีพื้นที่ */
+  margin-left: -66px;
+  
+}
+
+
+.header h1 {
+  margin: 0;
+}
+
+
+
+.header nav a:hover {
+  text-decoration: underline;
+}
+
+.header nav a {
+  color: white;
+  margin-left: 2rem;
+  text-decoration: none;
+}
+
+.header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hero-buttons {
+  position: absolute;
+  bottom: 20px; /* ปุ่มอยู่ด้านล่าง */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.hero-buttons button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.hero-buttons button.active,
+.hero-buttons button:hover {
+  background-color: #fdd835;
+}
+
+/* Books Section */
+.books-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.books-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.books-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.book-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+
+.book-card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.book-card h3 {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.book-card p {
+  margin: 0.3rem 0;
+}
+
+.book-card .price {
+  font-weight: bold;
+  color: #4a148c;
+}
+
+.book-card button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #4a148c;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.book-card button:hover {
+  background-color: #7b1fa2;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #000000;
+  color: white;
+}
