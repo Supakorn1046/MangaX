@@ -1,0 +1,146 @@
+/* --- Main Profile Content Layout (ส่วนกลาง) --- */
+.profile-main-content {
+    background-color: #F4D58D; 
+    padding: 40px 0;
+    
+    display: flex;
+    
+    justify-content: center;
+    
+    align-items: flex-start; 
+    
+    width: 100%; 
+    
+    min-height: calc(100vh - 80px - 53px); 
+}
+
+.user-profile-box {
+    display: flex;
+    width: 90%; 
+    max-width: 1200px;
+    background-color: #fff;
+    min-height: 500px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    
+    /* **[แก้ไข/เพิ่ม]** บังคับให้จัดกึ่งกลางตัวเองในแนวนอน */
+    margin: 0 auto;
+}
+
+/* --- Sidebar Styles --- */
+.sidebar {
+    width: 300px; 
+    background-color: #f0f0f0; /* สีเทาอ่อนของแถบเมนู */
+    padding: 40px 0 40px 20px;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 10px 20px;
+    margin: 5px 0;
+    color: #000;
+    font-weight: 400;
+}
+
+.sidebar-link.active {
+    color: #4a148c; /* สีม่วงจาก Homepage.css เดิม */
+    font-weight: 600;
+    /* จำลองเส้นสีน้ำเงิน/ฟ้าเหมือนในภาพต้นฉบับ */
+    border-right: 3px solid #007bff; 
+    background-color: #e5e5e5;
+}
+
+.sidebar-link.logout {
+    margin-top: 30px;
+    color: #dc3545; /* สีแดงสำหรับออกจากระบบ */
+}
+
+/* --- User Info Section Styles --- */
+.user-info-section {
+    flex-grow: 1; 
+    padding: 40px 60px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.user-details-grid {
+    display: grid;
+    /* รูป/ว่าง (150px), หัวข้อ (150px), ค่าข้อมูล (ที่เหลือ) */
+    grid-template-columns: 150px 150px 1fr; 
+    gap: 15px 0;
+    align-items: center;
+}
+
+.profile-icon {
+    grid-area: 1 / 1 / 6 / 2; 
+    text-align: center;
+    margin-top: -20px;
+}
+
+.icon-large-user {
+    font-size: 80px;
+    color: #aaa;
+}
+
+.detail-label {
+    grid-column: 2 / 3;
+    font-weight: 400;
+    color: #555;
+}
+
+.detail-value {
+    grid-column: 3 / 4;
+    font-weight: 600;
+    color: #333;
+}
+
+.address-line {
+    line-height: 1.4;
+}
+
+/* --- CSS เพิ่มเติมสำหรับหน้าประวัติการซื้อ --- */
+
+.order-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-history-table th {
+    text-align: left;
+    padding: 10px 0;
+    font-weight: 600;
+    border-bottom: 2px solid #ccc;
+    color: #555;
+}
+
+.order-history-table td {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.order-history-table tr:last-child td {
+    border-bottom: none;
+}
+
+.order-item-img {
+    width: 60px; /* ขนาดรูปภาพในตาราง */
+    height: auto;
+    display: block;
+    float: left;
+    margin-right: 15px;
+}
+
+.order-item-title {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.4;
+    color: #333;
+}
