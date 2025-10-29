@@ -12,6 +12,16 @@ import book2 from "../assets/book2.png";
 import book3 from "../assets/book3.gif";
 import book4 from "../assets/book4.png";
 import book5 from "../assets/book5.png";
+import visaImage from '../assets/visa.png';
+import mastercardImage from '../assets/mastercard.png';
+import paypalImage from '../assets/paypal.png';
+import fbImage from '../assets/fb.png';
+import igImage from '../assets/ig.png';
+import lineImage from '../assets/line.png';
+import ytImage from '../assets/yt1.png';
+import ttImage from '../assets/tt.png';
+import xImage from '../assets/x.png';
+
 const books = [
   { id: 1, title: "Harry Potter", author: "J.K. Rowling", price: "$12.99", image: book1 },
   { id: 2, title: "The Hobbit", author: "J.R.R. Tolkien", price: "$15.99", image: book2 },
@@ -19,8 +29,9 @@ const books = [
   { id: 4, title: "1984", author: "George Orwell", price: "$10.99", image: book4 },
   { id: 5, title: "1984", author: "George Orwell", price: "$10.99", image: book5 }
 ];
+
 function Homepage() {
-  const images = [promo1, promo2, promo3 , promo4];
+  const images = [promo1, promo2, promo3, promo4];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -55,62 +66,20 @@ function Homepage() {
       <section className="hero">
         <img src={images[current]} alt="Promotion" className="hero-image" />
         {/* ปุ่มเลือกภาพ */}
-  <div className="hero-buttons">
-    {images.map((_, index) => (
-      <button
-        key={index}
-        className={current === index ? "active" : ""}
-        onClick={() => setCurrent(index)}
-      ></button>
-    ))}
-  </div>
-      </section>
-
-      {/* Featured Books */}
-      <section className="books-section">
-  <h2 className="red-box-top10">มังงะขายดี 10 อันดับ</h2>
-
-  <div className="books-grid">
-    {books.map((book) => (
-      <div key={book.id} className="book-card">
-        <img src={book.image} alt={book.title} />
-        <h3>{book.title}</h3>
-        <p>{book.author}</p>
-        <p className="price">{book.price}</p>
-        <button>Add to Cart</button>
-      </div>
-    ))}
-
-    {/* ปุ่มดูทั้งหมดเป็น item ตัวสุดท้ายของ grid */}
-    <div className="view-all-card">
-      <button className="view-all-btn">ดูทั้งหมด</button>
-    </div>
-  </div>
-</section>
-
-      {/* Featured Books */}
-      <section className="books-section">
-        <h2 class="red-box">ใหม่</h2>
-        <div className="books-grid">
-          {books.map((book) => (
-            <div key={book.id} className="book-card">
-              <img src={book.image} alt={book.title} />
-              <h3>{book.title}</h3>
-              <p>{book.author}</p>
-              <p className="price">{book.price}</p>
-              <button>Add to Cart</button>
-            </div>
+        <div className="hero-buttons">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={current === index ? "active" : ""}
+              onClick={() => setCurrent(index)}
+            ></button>
           ))}
-          <div className="view-all-card">
-      <button className="view-all-btn">ดูทั้งหมด</button>
-    </div>
-  
         </div>
       </section>
 
       {/* Featured Books */}
       <section className="books-section">
-        <h2 class="red-box">ต่อสู้</h2>
+        <h2 className="red-box-top10">มังงะขายดี 10 อันดับ</h2>
         <div className="books-grid">
           {books.map((book) => (
             <div key={book.id} className="book-card">
@@ -118,20 +87,19 @@ function Homepage() {
               <h3>{book.title}</h3>
               <p>{book.author}</p>
               <p className="price">{book.price}</p>
-              <button>Add to Cart</button>
+              <button>เพิ่มลงตะกร้า</button>
             </div>
           ))}
+          {/* ปุ่มดูทั้งหมดเป็น item ตัวสุดท้ายของ grid */}
           <div className="view-all-card">
-      <button className="view-all-btn">ดูทั้งหมด</button>
-    </div>
-  
+            <button className="view-all-btn">ดูทั้งหมด</button>
+          </div>
         </div>
       </section>
 
-
-      {/* Featured Books */}
+      {/* New Books */}
       <section className="books-section">
-        <h2 class="red-box">กีฬา</h2>
+        <h2 className="red-box">ใหม่</h2>
         <div className="books-grid">
           {books.map((book) => (
             <div key={book.id} className="book-card">
@@ -139,19 +107,107 @@ function Homepage() {
               <h3>{book.title}</h3>
               <p>{book.author}</p>
               <p className="price">{book.price}</p>
-              <button>Add to Cart</button>
+              <button>เพิ่มลงตะกร้า</button>
             </div>
           ))}
           <div className="view-all-card">
-      <button className="view-all-btn">ดูทั้งหมด</button>
-    </div>
-  </div>
-        
+            <button className="view-all-btn">ดูทั้งหมด</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Fighting Genre */}
+      <section className="books-section">
+        <h2 className="red-box">ต่อสู้</h2>
+        <div className="books-grid">
+          {books.map((book) => (
+            <div key={book.id} className="book-card">
+              <img src={book.image} alt={book.title} />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+              <p className="price">{book.price}</p>
+              <button>เพิ่มลงตะกร้า</button>
+            </div>
+          ))}
+          <div className="view-all-card">
+            <button className="view-all-btn">ดูทั้งหมด</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Sports Genre */}
+      <section className="books-section">
+        <h2 className="red-box">กีฬา</h2>
+        <div className="books-grid">
+          {books.map((book) => (
+            <div key={book.id} className="book-card">
+              <img src={book.image} alt={book.title} />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+              <p className="price">{book.price}</p>
+              <button>เพิ่มลงตะกร้า</button>
+            </div>
+          ))}
+          <div className="view-all-card">
+            <button className="view-all-btn">ดูทั้งหมด</button>
+          </div>
+        </div>
       </section>
 
       {/* Footer */}
       <footer className="footer">
-        <p>&copy; 2025 BookStore. All rights reserved.</p>
+        <div className="footer-content">
+          <div className="footer-section">
+            <p><strong>ทางลัด</strong></p>
+            <p>หนังสือขายดี 10 อันดับ</p>
+            <p>ต่อสู้</p>
+            <p>โรแมนซ์</p>
+            <p>กีฬา</p>
+          </div>
+          
+          <div className="footer-section">
+            <p><strong>ช่องทางชำระเงิน</strong></p>
+            <div className="payment-methods">
+              <div className="image-link">
+                <img src={visaImage} alt="visa" />
+              </div>
+              <div className="image-link">
+                <img src={mastercardImage} alt="mastercard" />
+              </div>
+              <div className="image-link">
+                <img src={paypalImage} alt="paypal" />
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-section third-column">
+            <p><strong>ติดตามข่าวสารได้ที่</strong></p>
+            <div className="social-icons">
+              <div className="social-row">
+                <div className="image-link">
+                  <img src={fbImage} alt="facebook" />
+                </div>
+                <div className="image-link">
+                  <img src={igImage} alt="instagram" />
+                </div>
+                <div className="image-link">
+                  <img src={lineImage} alt="line" />
+                </div>
+              </div>
+              <div className="social-row">
+                <div className="image-link">
+                  <img src={ytImage} alt="youtube" />
+                </div>
+                <div className="image-link">
+                  <img src={ttImage} alt="tiktok" />
+                </div>
+                <div className="image-link">
+                  <img src={xImage} alt="x" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

@@ -46,8 +46,8 @@ body {
 
 .header .search-icon {
   position: absolute;
-  right: 10px; /* ระยะจากขอบขวา */
-  top: 50%;
+  right: 20px; /* ระยะจากขอบขวา */
+  top: 30%;
   transform: translateY(-50%);
   color: #888;
   pointer-events: none; /* ให้คลิกผ่าน icon ได้ */
@@ -56,7 +56,7 @@ body {
   max-height: 80px;    /* โลโก้ไม่เกินความสูงนี้ */
   width: auto;         /* รักษาสัดส่วน */
   object-fit: contain; /* รูปจะไม่บิดและพอดีพื้นที่ */
-  margin-left: -66px;
+  margin-left: -88px;
   
 }
 
@@ -199,13 +199,62 @@ body {
 }
 
 .book-card button:hover {
-  background-color: #000000;
+  background-color: #0356f19f;
 }
 
 /* Footer */
 .footer {
-  text-align: center;
   padding: 1rem;
   background-color: #AFAA98;
   color: rgb(0, 0, 0);
 }
+
+.footer-content {
+  display: flex;
+  justify-content: flex-start;
+  gap: 4rem; /* ระยะห่างระหว่างคอลัมน์ 1-2 และ 2-3 */
+  flex-wrap: wrap;
+
+  
+}
+
+.third-column {
+  margin-left: 35rem; /* เพิ่มระยะห่างจากคอลัมน์ที่ 2 */
+}
+.footer-section {
+  text-align: left;
+}
+
+.image-link {
+  margin-bottom: 9px; /* ห่างระหว่างบรรทัด */
+  display: block; /* ทำให้แต่ละอันอยู่คนละบรรทัด */
+}
+
+.image-link img {
+  width: 40px;
+  height: auto;
+}
+
+.third-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: column; /* จัดเรียงแนวตั้ง */
+  gap: 2px; /* ระยะห่างระหว่างแถว */
+}
+
+.social-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start; /* หรือ center ถ้าต้องการให้อยู่กลาง */
+}
+
+.image-link img {
+  width: 30px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
