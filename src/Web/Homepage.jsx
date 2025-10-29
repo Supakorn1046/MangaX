@@ -27,7 +27,7 @@ function Homepage() {
 
   return (
     <div className="homepage">
-      {/* Header */}
+
       <header className="header">
         <img src={logo} alt="BookStore Logo" className="logo" />
         <nav>
@@ -46,10 +46,9 @@ function Homepage() {
         </div>
       </header>
 
-      {/* Hero Section (Carousel) */}
       <section className="hero">
         <img src={images[current]} alt="Promotion" className="hero-image" />
-        {/* ปุ่มเลือกภาพ */}
+
   <div className="hero-buttons">
     {images.map((_, index) => (
       <button
@@ -61,7 +60,6 @@ function Homepage() {
   </div>
       </section>
 
-      {/* Featured Books */}
       <section className="books-section">
         <h2>มังงะขายดี 10 อันดับ</h2>
         <div className="books-grid">
@@ -77,7 +75,6 @@ function Homepage() {
         </div>
       </section>
 
-      {/* Featured Books */}
       <section className="books-section">
         <h2>ใหม่</h2>
         <div className="books-grid">
@@ -93,7 +90,6 @@ function Homepage() {
         </div>
       </section>
 
-      {/* Featured Books */}
       <section className="books-section">
         <h2>ต่อสู้</h2>
         <div className="books-grid">
@@ -110,7 +106,6 @@ function Homepage() {
       </section>
 
 
-      {/* Featured Books */}
       <section className="books-section">
         <h2>กีฬา</h2>
         <div className="books-grid">
@@ -126,7 +121,6 @@ function Homepage() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <p>&copy; 2025 BookStore. All rights reserved.</p>
       </footer>

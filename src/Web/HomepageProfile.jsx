@@ -5,11 +5,9 @@ import "./Homepage.css";
 import "./HomepageProfile.css";
 import logo from "../assets/logo.png"; 
 
-// --- Component สำหรับแสดง "ข้อมูลผู้ใช้งาน" ---
 const UserInfoContent = ({ user }) => (
     <section className="user-info-section">
         <h2 className="section-title">ข้อมูลผู้ใช้งาน</h2>
-        {/* ... (โค้ด Grid ข้อมูลผู้ใช้งานที่เคยให้ไป) ... */}
         <div className="user-details-grid">
             <div className="profile-icon">
                 <span className="icon-large-user">👤</span>
@@ -33,9 +31,7 @@ const UserInfoContent = ({ user }) => (
     </section>
 );
 
-// --- Component สำหรับแสดง "ประวัติการซื้อ" ---
 const OrderHistoryContent = () => {
-    // ข้อมูลจำลองสำหรับประวัติการซื้อ
     const history = [
         { id: 101, title: "มหาเวทย์ผนึกมาร เล่ม 21", quantity: 10, price: 1300.00, image: "https://via.placeholder.com/60x90?text=JJK21" },
         { id: 102, title: "มหาเวทย์ผนึกมาร เล่ม 21", quantity: 5, price: 650.00, image: "https://via.placeholder.com/60x90?text=JJK21_2" },
@@ -71,7 +67,6 @@ const OrderHistoryContent = () => {
 };
 
 
-// ข้อมูลจำลองสำหรับ Profile
 const mockUserData = {
     name: "สมศรี ใจดี", email: "supakorn.jeam@ku.th", gender: "ชาย",
     phone: "092-321-1222", address: "บ้านเลขที่ 8 ซอยอนามัย 33 ชลบุรี 10150"
@@ -79,7 +74,7 @@ const mockUserData = {
 
 
 const HomepageProfile = ({ user = mockUserData }) => {
-    // State สำหรับการเปลี่ยนหน้า (account หรือ history)
+   
     const [activeTab, setActiveTab] = useState('account'); 
 
     const renderContent = () => {
@@ -95,9 +90,8 @@ const HomepageProfile = ({ user = mockUserData }) => {
     return (
         <div className="homepage">
             
-            {/* Header (คัดลอกมาจาก Homepage.jsx) */}
             <header className="header">
-                {/* ... (โค้ด Header) ... */}
+    
                 <img src={logo} alt="BookStore Logo" className="logo" />
                 <nav>
                     <a href="#home">หน้าแรก</a>
@@ -112,11 +106,9 @@ const HomepageProfile = ({ user = mockUserData }) => {
                 </div>
             </header>
 
-            {/* Main Content (ส่วนข้อมูลผู้ใช้งาน/ประวัติการซื้อ) */}
             <main className="profile-main-content"> 
                 <div className="user-profile-box">
                     
-                    {/* เมนูด้านซ้าย (Sidebar) */}
                     <aside className="sidebar">
                         <a 
                             href="#" 
@@ -135,13 +127,11 @@ const HomepageProfile = ({ user = mockUserData }) => {
                         <a href="#" className="sidebar-link logout">ออกจากระบบ</a>
                     </aside>
                     
-                    {/* ส่วนแสดงเนื้อหาที่เปลี่ยนไปตาม State */}
                     {renderContent()}
 
                 </div>
             </main>
 
-            {/* Footer (คัดลอกมาจาก Homepage.jsx) */}
             <footer className="footer">
                 <p>&copy; 2025 BookStore. All rights reserved.</p>
             </footer>

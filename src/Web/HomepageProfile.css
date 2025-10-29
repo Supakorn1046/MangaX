@@ -1,4 +1,3 @@
-/* --- Main Profile Content Layout (ส่วนกลาง) --- */
 .profile-main-content {
     background-color: #F4D58D; 
     padding: 40px 0;
@@ -22,14 +21,12 @@
     min-height: 500px; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     
-    /* **[แก้ไข/เพิ่ม]** บังคับให้จัดกึ่งกลางตัวเองในแนวนอน */
     margin: 0 auto;
 }
 
-/* --- Sidebar Styles --- */
 .sidebar {
     width: 300px; 
-    background-color: #f0f0f0; /* สีเทาอ่อนของแถบเมนู */
+    background-color: #f0f0f0; 
     padding: 40px 0 40px 20px;
 }
 
@@ -42,19 +39,17 @@
 }
 
 .sidebar-link.active {
-    color: #4a148c; /* สีม่วงจาก Homepage.css เดิม */
+    color: #4a148c; 
     font-weight: 600;
-    /* จำลองเส้นสีน้ำเงิน/ฟ้าเหมือนในภาพต้นฉบับ */
     border-right: 3px solid #007bff; 
     background-color: #e5e5e5;
 }
 
 .sidebar-link.logout {
     margin-top: 30px;
-    color: #dc3545; /* สีแดงสำหรับออกจากระบบ */
+    color: #dc3545; 
 }
 
-/* --- User Info Section Styles --- */
 .user-info-section {
     flex-grow: 1; 
     padding: 40px 60px;
@@ -70,7 +65,6 @@
 
 .user-details-grid {
     display: grid;
-    /* รูป/ว่าง (150px), หัวข้อ (150px), ค่าข้อมูล (ที่เหลือ) */
     grid-template-columns: 150px 150px 1fr; 
     gap: 15px 0;
     align-items: center;
@@ -103,8 +97,6 @@
     line-height: 1.4;
 }
 
-/* --- CSS เพิ่มเติมสำหรับหน้าประวัติการซื้อ --- */
-
 .order-history-table {
     width: 100%;
     border-collapse: collapse;
@@ -131,7 +123,7 @@
 }
 
 .order-item-img {
-    width: 60px; /* ขนาดรูปภาพในตาราง */
+    width: 60px; 
     height: auto;
     display: block;
     float: left;

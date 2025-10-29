@@ -1,19 +1,17 @@
-/* General Styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #F4D58D;
 }
 
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #000000;
   color: white;
-  padding: 0 5%;       /* ขอบซ้ายขวา */
-  height: 80px;        /* ความสูงคงที่ของ header */
+  padding: 0 5%;       
+  height: 80px;        
   box-sizing: border-box;
   justify-content: flex-start;
 
@@ -22,13 +20,13 @@ body {
 .header .search-container {
   display: flex;
   align-items: center;
-  gap: 10px; /* ช่องว่างระหว่าง icon และ search bar */
-  margin-left: auto; /* ดัน container ไปด้านขวาของ header */
+  gap: 10px; 
+  margin-left: auto; 
   position: relative; 
 }
 
 .header .search-bar {
-  padding: 0.5rem 2.5rem 0.5rem 0.3rem; /* เพิ่มขอบขวาให้ icon */
+  padding: 0.5rem 2.5rem 0.5rem 0.3rem; 
   border-radius: 3px;
   border: none;
   font-size: 0.8rem;
@@ -46,16 +44,16 @@ body {
 
 .header .search-icon {
   position: absolute;
-  right: 10px; /* ระยะจากขอบขวา */
+  right: 10px; 
   top: 50%;
   transform: translateY(-50%);
   color: #888;
-  pointer-events: none; /* ให้คลิกผ่าน icon ได้ */
+  pointer-events: none; 
 }
 .header .logo {
-  max-height: 80px;    /* โลโก้ไม่เกินความสูงนี้ */
-  width: auto;         /* รักษาสัดส่วน */
-  object-fit: contain; /* รูปจะไม่บิดและพอดีพื้นที่ */
+  max-height: 80px;   
+  width: auto;         
+  object-fit: contain; 
   margin-left: -66px;
   
 }
@@ -81,7 +79,6 @@ body {
   text-decoration: underline;
 }
 
-/* Hero Section */
 .hero {
   position: relative;
   width: 100%;
@@ -98,7 +95,7 @@ body {
 
 .hero-buttons {
   position: absolute;
-  bottom: 20px; /* ปุ่มอยู่ด้านล่าง */
+  bottom: 20px; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -120,7 +117,6 @@ body {
   background-color: #fdd835;
 }
 
-/* Books Section */
 .books-section {
   padding: 3rem 2rem;
   text-align: center;
@@ -182,7 +178,6 @@ body {
   background-color: #7b1fa2;
 }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 1rem;

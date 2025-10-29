@@ -1,22 +1,71 @@
-import React from 'react';
-import HomepageProfile from './Web/HomepageProfile'; // นำเข้าคอมโพเนนต์ UserProfile
+import React, { useState } from 'react'; 
+import MangaXLogin from "./components/MangaXLogin.jsx"; 
+import MangaXRegister from "./components/MangaXRegister.jsx";
+import MangaXProfileDetails from "./components/MangaXProfileDetails.jsx";
+import MangaXLogo from './assets/manga_x_logo.png'; 
+import styles from './components/MangaXLogin.module.css'; 
 
-function App() {
-    // ในสถานการณ์จริง คุณอาจจะดึงข้อมูลผู้ใช้จาก API ที่นี่
-    // หรือใช้ Context API/Redux สำหรับการจัดการสถานะ
+export default function App() {
 
-    // ถ้าคุณต้องการส่งข้อมูลผู้ใช้งานจริงเข้าทาง props (สมมติว่าดึงมาจากเซิร์ฟเวอร์แล้ว)
-    // const realUserData = { /* ... ข้อมูลผู้ใช้จริง ... */ };
+  const [currentPage, setCurrentPage] = useState('login'); 
 
-    return (
-        <div className="App">
-            {/* แสดงผลคอมโพเนนต์ UserProfile */}
-            <HomepageProfile 
-                // ถ้ามีข้อมูลจริง ให้ส่ง props เข้าไปแบบนี้:
-                // user={realUserData} 
+  const CurrentForm = (() => {
+    switch (currentPage) {
+      case 'login':
+        return (
+            <MangaXLogin 
+                onRegisterClick={() => setCurrentPage('register')} 
+                onLoginClick={() => setCurrentPage('profile')} 
             />
-        </div>
-    );
-}
+        );
+      case 'register':
+        return (
+            <MangaXRegister 
+                onBackToLogin={() => setCurrentPage('login')} 
+                onNextToProfile={() => setCurrentPage('profile')}
+            />
+        );
+      case 'profile':
+        return (
+             <MangaXProfileDetails 
+                 onBackToRegister={() => setCurrentPage('register')}
+                 onRegistrationComplete={() => setCurrentPage('login')} 
+             />
+        );
+      default:
+        return <MangaXLogin onRegisterClick={() => setCurrentPage('register')} onLoginClick={() => setCurrentPage('profile')} />;
+    }
+  })();
 
-export default App;
+  return (
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      minHeight: '100vh', 
+      backgroundColor: '#f0f0f0' 
+    }}>
+      <div style={{
+          display: 'flex',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          maxWidth: '800px',
+          width: '90%',
+          backgroundColor: '#fff',
+      }}>
+          <div className={styles.logoPanel}> 
+                <div className={styles.logoBox}>
+                    <img 
+                        src={MangaXLogo} 
+                        alt="MANGA X Logo" 
+                        className={styles.mangaXImageLogo} 
+                    />
+                </div>
+          </div>
+          
+          {CurrentForm} 
+      </div>
+    </div>
+  );
+}
