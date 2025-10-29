@@ -1,0 +1,207 @@
+/* === 1. Layout & Font (สำคัญ) === */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background-color: #f8f9fa; /* สีเทาอ่อน */
+}
+
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* === 2. Sidebar (แถบซ้าย) === */
+.sidebar {
+  width: 250px;
+  background-color: #343a40; /* สีเทาเข้ม */
+  color: #fff;
+  padding: 20px;
+  flex-shrink: 0; /* ป้องกันแถบซ้ายหด */
+}
+
+.sidebar-logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-box {
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.logo-box img {
+  max-width: 100px;
+  display: block;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 10px;
+  text-decoration: none;
+  color: #adb5bd; /* สีเทาอ่อน */
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  background-color: #495057;
+  color: #fff;
+}
+
+.nav-link.active {
+  background-color: #0d6efd; /* สีน้ำเงิน */
+  color: #fff;
+  font-weight: bold;
+}
+
+/* === 3. Main Content (เนื้อหาขวา) === */
+.main-content {
+  flex-grow: 1; /* ขยายเต็มพื้นที่ */
+  padding: 30px;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.main-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+  margin: 0;
+}
+
+/* === 4. Search Bar (ช่องค้นหา) === */
+.search-bar {
+  margin-bottom: 25px;
+}
+
+.search-wrapper {
+  position: relative;
+  max-width: 400px; /* จำกัดความกว้างช่องค้นหา */
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d; /* สีเทา */
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px 12px 45px; /* เว้นที่ให้ไอคอน */
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* === 5. Table (ตาราง) === */
+.table-wrapper {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* ทำให้ขอบมนสวยงาม */
+  overflow-x: auto; /* ถ้าตารางล้น ให้สไลด์ได้ */
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.product-table thead th {
+  font-weight: 600;
+  color: #495057;
+  background-color: #f8f9fa;
+}
+
+.product-image {
+  width: 60px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.product-desc {
+  max-width: 300px; /* จำกัดความกว้างรายละเอียด */
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+/* === 6. Icons (ไอคอน SVG) === */
+.icon {
+  width: 24px;
+  height: 24px;
+}
+.icon-sm {
+  width: 20px;
+  height: 20px;
+}
+
+/* === 7. Buttons (ปุ่ม) === */
+.btn {
+  display: inline-flex; /* ทำให้ไอคอนกับข้อความอยู่กลาง */
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap; /* ป้องกันปุ่มตกบรรทัด */
+}
+
+.btn-primary {
+  background-color: #0d6efd; /* สีน้ำเงิน */
+  color: white;
+}
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-edit {
+  background-color: #198754; /* สีเขียว */
+  color: white;
+}
+.btn-edit:hover {
+  background-color: #157347;
+}
+
+.btn-delete {
+  background-color: #dc3545; /* สีแดง */
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #bb2d3b;
+}
