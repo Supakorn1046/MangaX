@@ -139,14 +139,32 @@ body {
 }
 
 .book-card {
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   padding: 1rem;
+  
   border-radius: 10px;
-  width: 200px;
+  width: 180px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s;
 }
 
+.red-box-top10 {
+  display: inline-block; 
+  background-color: #e53935;  /* สีแดง */
+  color: white;               /* ตัวอักษรสีขาว */
+  padding: 0.35rem 0.7rem;    /* ระยะขอบรอบข้อความ */
+  border-radius: 10px;        /* มุมมน */
+  margin: 0;                  /* ลบ margin ของ h2 ปกติ */
+}
+.red-box {
+  display: block;             /* เปลี่ยนจาก inline-block เป็น block */
+  width: fit-content;         /* ให้ความกว้างพอดีกับข้อความ */
+  background-color: #e53935;  /* สีแดง */
+  color: white;               /* ตัวอักษรสีขาว */
+  padding: 0.35rem 0.7rem;    /* ระยะขอบรอบข้อความ */
+  border-radius: 10px;        /* มุมมน */
+  margin: 0;                  /* ลบ margin ของ h2 ปกติ */
+}
 
 .book-card img {
   width: 100%;
@@ -155,37 +173,39 @@ body {
 }
 
 .book-card h3 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin: 0.5rem 0;
+  color: #f70088;
 }
 
 .book-card p {
   margin: 0.3rem 0;
+  color: #ffffff;
 }
 
 .book-card .price {
   font-weight: bold;
-  color: #4a148c;
+  color: #ffffff;
 }
 
 .book-card button {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #4a148c;
-  color: white;
+  background-color: #2466b3;
+  color: rgb(255, 255, 255);
   border-radius: 5px;
   cursor: pointer;
 }
 
 .book-card button:hover {
-  background-color: #7b1fa2;
+  background-color: #000000;
 }
 
 /* Footer */
 .footer {
   text-align: center;
   padding: 1rem;
-  background-color: #000000;
-  color: white;
+  background-color: #AFAA98;
+  color: rgb(0, 0, 0);
 }

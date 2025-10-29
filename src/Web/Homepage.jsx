@@ -7,13 +7,18 @@ import promo1 from "../assets/promo1.png";
 import promo2 from "../assets/promo2.png";
 import promo3 from "../assets/promo3.png";
 import promo4 from "../assets/promo4.png";
-
+import book1 from "../assets/book1.png";
+import book2 from "../assets/book2.png";
+import book3 from "../assets/book3.gif";
+import book4 from "../assets/book4.png";
+import book5 from "../assets/book5.png";
 const books = [
-  { id: 1, title: "Harry Potter", author: "J.K. Rowling", price: "$12.99", image: "https://via.placeholder.com/150" },
-  { id: 2, title: "The Hobbit", author: "J.R.R. Tolkien", price: "$15.99", image: "https://via.placeholder.com/150" },
-  { id: 3, title: "1984", author: "George Orwell", price: "$10.99", image: "https://via.placeholder.com/150" },
+  { id: 1, title: "Harry Potter", author: "J.K. Rowling", price: "$12.99", image: book1 },
+  { id: 2, title: "The Hobbit", author: "J.R.R. Tolkien", price: "$15.99", image: book2 },
+  { id: 3, title: "1984", author: "George Orwell", price: "$10.99", image: book3 },
+  { id: 4, title: "1984", author: "George Orwell", price: "$10.99", image: book4 },
+  { id: 5, title: "1984", author: "George Orwell", price: "$10.99", image: book5 }
 ];
-
 function Homepage() {
   const images = [promo1, promo2, promo3 , promo4];
   const [current, setCurrent] = useState(0);
@@ -63,7 +68,29 @@ function Homepage() {
 
       {/* Featured Books */}
       <section className="books-section">
-        <h2>มังงะขายดี 10 อันดับ</h2>
+  <h2 className="red-box-top10">มังงะขายดี 10 อันดับ</h2>
+
+  <div className="books-grid">
+    {books.map((book) => (
+      <div key={book.id} className="book-card">
+        <img src={book.image} alt={book.title} />
+        <h3>{book.title}</h3>
+        <p>{book.author}</p>
+        <p className="price">{book.price}</p>
+        <button>Add to Cart</button>
+      </div>
+    ))}
+
+    {/* ปุ่มดูทั้งหมดเป็น item ตัวสุดท้ายของ grid */}
+    <div className="view-all-card">
+      <button className="view-all-btn">ดูทั้งหมด</button>
+    </div>
+  </div>
+</section>
+
+      {/* Featured Books */}
+      <section className="books-section">
+        <h2 class="red-box">ใหม่</h2>
         <div className="books-grid">
           {books.map((book) => (
             <div key={book.id} className="book-card">
@@ -74,12 +101,16 @@ function Homepage() {
               <button>Add to Cart</button>
             </div>
           ))}
+          <div className="view-all-card">
+      <button className="view-all-btn">ดูทั้งหมด</button>
+    </div>
+  
         </div>
       </section>
 
       {/* Featured Books */}
       <section className="books-section">
-        <h2>ใหม่</h2>
+        <h2 class="red-box">ต่อสู้</h2>
         <div className="books-grid">
           {books.map((book) => (
             <div key={book.id} className="book-card">
@@ -90,29 +121,17 @@ function Homepage() {
               <button>Add to Cart</button>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Featured Books */}
-      <section className="books-section">
-        <h2>ต่อสู้</h2>
-        <div className="books-grid">
-          {books.map((book) => (
-            <div key={book.id} className="book-card">
-              <img src={book.image} alt={book.title} />
-              <h3>{book.title}</h3>
-              <p>{book.author}</p>
-              <p className="price">{book.price}</p>
-              <button>Add to Cart</button>
-            </div>
-          ))}
+          <div className="view-all-card">
+      <button className="view-all-btn">ดูทั้งหมด</button>
+    </div>
+  
         </div>
       </section>
 
 
       {/* Featured Books */}
       <section className="books-section">
-        <h2>กีฬา</h2>
+        <h2 class="red-box">กีฬา</h2>
         <div className="books-grid">
           {books.map((book) => (
             <div key={book.id} className="book-card">
@@ -123,7 +142,11 @@ function Homepage() {
               <button>Add to Cart</button>
             </div>
           ))}
-        </div>
+          <div className="view-all-card">
+      <button className="view-all-btn">ดูทั้งหมด</button>
+    </div>
+  </div>
+        
       </section>
 
       {/* Footer */}
