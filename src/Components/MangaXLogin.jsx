@@ -19,8 +19,20 @@ const MangaXLogin = ({ onRegisterClick }) => {
             return;
         }
 
+        // --- 🔑 1. ตรวจสอบเงื่อนไข Admin Login (Hardcoded) ---
+        if (email === 'Admin123123' && password === 'Admin123123') {
+            alert('Admin Login สำเร็จ!');
+            // 💡 เก็บสถานะ Admin ใน localStorage
+            localStorage.setItem('isAdmin', 'true');
+            // 💡 เปลี่ยนเส้นทางไปยังหน้า Admin
+            navigate('/admin_list'); 
+            return; // หยุดฟังก์ชันเพื่อไม่ให้เรียก API ต่อไป
+        }
+        // --- จบเงื่อนไข Admin Login ---
+
+
+        // --- 2. Login ผู้ใช้ทั่วไป (เรียก API Backend) ---
         try {
-            // 2. เรียก API เข้าสู่ระบบ (แก้ไข URL ให้เป็น /api/users/login)
             const response = await fetch('http://localhost:5000/api/users/login', { 
                 method: 'POST',
                 headers: {
@@ -36,11 +48,12 @@ const MangaXLogin = ({ onRegisterClick }) => {
                 
                 // 4. เก็บข้อมูลผู้ใช้ใน localStorage
                 localStorage.setItem('userInfo', JSON.stringify(data)); 
+                localStorage.setItem('isAdmin', 'false'); // ตั้งค่าสถานะเป็น User ธรรมดา
                 
                 // 5. เปลี่ยนเส้นทางไปยัง /homepage
                 navigate('/homepage'); 
                 
-            } else { // Login ไม่สำเร็จ (รหัสผ่านผิด, อีเมลไม่พบใน DB, หรืออื่นๆ)
+            } else { // Login ไม่สำเร็จ
                 setError(data.message || 'อีเมลหรือรหัสผ่านไม่ถูกต้อง');
                 console.error('Login failed:', data.message);
             }

@@ -1,12 +1,27 @@
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './admin_list.css';
-import logoImage from '../assets/logo.png'; //
+import logoImage from '../assets/logo.png';
 import { CartIcon, LogoutIcon, AddIcon, SearchIcon } from './admin_icon.jsx'; 
 
 function ProductPage() {
-    // สร้าง state สำหรับเก็บรายการสินค้า (เริ่มต้นเป็นอาร์เรย์ว่าง)
     const [products, setProducts] = useState([]);
+    
+    const navigate = useNavigate();
+
+    const handleAddProduct = () => {
+        navigate('/admin_add');
+    };
+
+    // 💡 ฟังก์ชัน Logout
+    const handleLogout = () => {
+        // 1. ลบข้อมูลผู้ใช้ออกจาก Local Storage
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('isAdmin');
+        
+        // 2. เปลี่ยนเส้นทางไปยังหน้า Login
+        navigate('/login');
+    };
 
     return (
         <div className="layout-container">
@@ -16,15 +31,15 @@ function ProductPage() {
                     <div className="logo-box">
                         <img src={logoImage} alt="MANGA X Logo"/>
                     </div>
-                    
                 </div>
                 
                 <nav className="sidebar-nav">
-                    <a href="#" className="nav-link active">
+                    <a href="#" className="nav-link active" onClick={() => navigate('/admin_list')}>
                         <CartIcon />
                         จัดการสินค้า
                     </a>
-                    <a href="#" className="nav-link">
+                    {/* 💡 ผูก handleLogout เข้ากับปุ่ม */}
+                    <a href="#" className="nav-link" onClick={handleLogout}>
                         <LogoutIcon />
                         ออกจากระบบ
                     </a>
@@ -39,7 +54,7 @@ function ProductPage() {
                         <CartIcon />
                         รายการสินค้า
                     </h1>
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary" onClick={handleAddProduct}> 
                         <AddIcon />
                         เพิ่มข้อมูล
                     </button>
@@ -69,7 +84,7 @@ function ProductPage() {
                         </thead>
                         <tbody>
                             {products.map((product) => (
-                                <tr key={product.id}>
+                                <tr key={product.id}> 
                                     <td>{product.id}</td>
                                     <td>
                                         <img src={product.img} alt={product.title} className="product-image" />
