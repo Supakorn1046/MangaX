@@ -1,0 +1,198 @@
+.loginContainer {
+    display: flex;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 800px;
+    width: 90%;
+    background-color: #fff;
+}
+
+.logoPanel {
+    background-color: #f7f3ed; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    width: 40%;
+    box-sizing: border-box;
+}
+
+.logoBox {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.mangaXImageLogo {
+    max-width: 150px; 
+    height: auto;    
+    margin: 0 auto 10px; 
+    display: block; 
+}
+
+.logoText {
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.mangaText {
+    color: #333;
+}
+
+.xText {
+    color: #E65239; 
+}
+
+.loginFormPanel {
+    padding: 40px;
+    width: 60%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionHeading {
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.inputGroup {
+    margin-bottom: 20px;
+}
+
+.loginFormPanel input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+.primaryBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+.loginBtn, .createAccountBtn {
+    background-color: #333; 
+    color: white;
+}
+
+.loginBtn:hover, .createAccountBtn:hover {
+    background-color: #555;
+}
+
+.divider {
+    text-align: center;
+    margin: 25px 0 20px 0;
+    position: relative;
+}
+
+.orText {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+}
+
+.socialLoginGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.socialBtn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.socialBtn:hover {
+    transform: translateY(-2px);
+}
+
+.facebookBtn { background-color: #3b5998; }
+.lineBtn     { background-color: #00b900; }
+.googleBtn   { background-color: #dd4b39; }
+.xBtn        { background-color: #000; }
+
+.newAccountSection {
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    margin-top: auto; 
+}
+
+@media (max-width: 650px) {
+    .loginContainer {
+        flex-direction: column;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .logoPanel {
+        width: 100%;
+        padding: 30px 20px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .loginFormPanel {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .socialLoginGroup {
+        flex-wrap: wrap;
+    }
+
+    .socialBtn {
+        flex: 1 1 45%; 
+        margin-bottom: 10px;
+    }
+
+    .selectInput {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+    background-color: white; 
+    appearance: none; 
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB7%22%20d%3D%22M287%2C197.351L146.2%2C56.651L5.4%2C197.351H287z%22%2F%3E%3C%2Fsvg%3E'); /* เพิ่มลูกศร dropdown */
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%;
+    background-size: 0.65em auto;
+}
+
+.flagIcon {
+    font-size: 1.5em; 
+    margin-right: 5px;
+}
+}

@@ -10,10 +10,11 @@ import Buy from './Web/Buy.jsx'
 import Address from './Web/Address.jsx'
 import Payment from './Web/Payment.jsx' // เพิ่ม import
 import HomepageProfile from './Web/HomepageProfile.jsx'
-// \/ --- แก้ไขตรงนี้ --- \/
 import AdminList from './Admin/admin_list.jsx' 
 import AdminAdd from './Admin/admin_add.jsx'
-// /\ --- แก้ไขตรงนี้ --- /\
+import Login from './Components/MangaXLogin.jsx'
+import Detail from './Components/MangaProfileDetails.jsx'
+import Register from './Components/MangaXRegister.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -25,12 +26,14 @@ createRoot(document.getElementById('root')).render(
         <Route path="/new" element={<New />} />
         <Route path="/buy" element={<Buy />} />
         <Route path="/HomepageProfile" element={<HomepageProfile />} />
-        {/* \/ --- แก้ไขตรงนี้ --- \/ */}
         <Route path="/admin_list" element={<AdminList />} />
         <Route path="/admin_add" element={<AdminAdd />} />
-        {/* /\ --- แก้ไขตรงนี้ --- /\ */}
         <Route path="/address" element={<Address />} />
         <Route path="/payment" element={<Payment />} /> {/* เพิ่ม route */}
+        <Route path="/MangaXLogin" element={<Login />} />
+        <Route path="/MangaProfileDetails" element={<Detail />} />
+        <Route path="/MangaXRegister" element={<Register />} />
+
       </Routes>
     </BrowserRouter>
   </StrictMode>,
