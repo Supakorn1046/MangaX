@@ -1,0 +1,65 @@
+/* AuthPage.module.css */
+
+/* ตัวครอบหลัก เพื่อจัดให้อยู่กลางหน้าจอ */
+.authPageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff; /* พื้นหลังสีขาวรอบนอก */
+}
+
+/* กล่องหลัก 2 คอลัมน์ */
+.authContainer {
+  display: flex;
+  flex-direction: row;
+  max-width: 900px; /* ความกว้างสูงสุดของทั้ง 2 คอลัมน์ */
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* ขอบมน */
+  overflow: hidden; /* ซ่อนส่วนที่เกินขอบมน */
+}
+
+/* คอลัมน์ซ้าย (Logo Panel) */
+.logoPanel {
+  flex-basis: 50%;
+  background-color: #f7f3e8; 
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  
+  /* --- 1. แก้ไขตรงนี้ --- */
+  /* เปลี่ยนจาก flex-start (ชิดบน) กลับเป็น center */
+  justify-content: center; 
+
+  align-items: center;
+  border: 10px solid #d8d8d8; 
+  box-sizing: border-box; 
+  border-radius: 10px 0 0 10px; 
+  
+  /* --- 2. เพิ่มบรรทัดนี้ --- */
+  /* นี่คือคำสั่งให้ "หยุดยืด" และ "จัดตัวเองอยู่กึ่งกลาง" */
+  align-self: center; 
+}
+
+.authLogo {
+  max-width: 150px; /* ปรับขนาดโลโก้ */
+  height: auto;
+}
+
+.logoText {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* คอลัมน์ขวา (Form Panel) */
+.formPanel {
+  flex-basis: 50%;
+  background-color: #E8E8E8; /* สีพื้นหลังเทา ตามภาพ */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

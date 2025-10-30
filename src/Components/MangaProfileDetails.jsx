@@ -20,40 +20,7 @@ const MangaXProfileDetails = ({ onBackToRegister, onRegistrationComplete }) => {
                     จะใช้สำหรับการจัดข้อมูลผู้ใช้เท่านั้น
                 </p>
 
-                <p className={styles.orText} style={{ textAlign: 'left', marginTop: '20px' }}>คุณเป็น</p>
-                <div style={{ display: 'flex', gap: '15px', marginBottom: '15px' }}>
-                    <label><input type="radio" name="gender" value="female" /> ผู้หญิง</label>
-                    <label><input type="radio" name="gender" value="male" /> ผู้ชาย</label>
-                    <label><input type="radio" name="gender" value="other" /> อื่นๆ</label>
-                    <label><input type="radio" name="gender" value="prefer_not_to_say" /> ไม่ระบุ</label>
-                </div>
-
-                <p className={styles.orText} style={{ textAlign: 'left', marginBottom: '5px' }}>วันเกิด</p>
-                <div className={styles.inputGroup} style={{ display: 'flex', gap: '10px' }}>
-                    <select className={styles.selectInput} style={{ flex: 1, padding: '12px', border: '1px solid #ccc', borderRadius: '5px' }}>
-                        <option value="">วัน</option>
-                        {Array.from({ length: 31 }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1}</option>)}
-                    </select>
-                    <select className={styles.selectInput} style={{ flex: 1, padding: '12px', border: '1px solid #ccc', borderRadius: '5px' }}>
-                        <option value="">เดือน</option>
-                        {['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'].map((month, i) => (
-                            <option key={month} value={i + 1}>{month}</option>
-                        ))}
-                    </select>
-                    <select className={styles.selectInput} style={{ flex: 1, padding: '12px', border: '1px solid #ccc', borderRadius: '5px' }}>
-                        <option value="">ปี</option>
-                        {Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i).map((year) => (
-                            <option key={year} value={year}>{year}</option>
-                        ))}
-                    </select>
-                </div>
-
                 <p className={styles.orText} style={{ textAlign: 'left', marginBottom: '5px' }}>ที่อยู่</p>
-                <div className={styles.inputGroup}>
-                    <input type="text" placeholder="" />
-                </div>
-
-                <p className={styles.orText} style={{ textAlign: 'left', marginBottom: '5px' }}>รหัสไปรษณีย์</p>
                 <div className={styles.inputGroup}>
                     <input type="text" placeholder="" />
                 </div>

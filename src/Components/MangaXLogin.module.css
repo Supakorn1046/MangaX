@@ -1,198 +1,171 @@
-.loginContainer {
-    display: flex;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    max-width: 800px;
-    width: 90%;
-    background-color: #fff;
-}
+/* ===================================================================
+   MangaXLogin.module.css 
+   สไตล์รวมสำหรับ Login, Register, และ Profile Form Panel
+   ===================================================================
+*/
 
-.logoPanel {
-    background-color: #f7f3ed; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    width: 40%;
-    box-sizing: border-box;
-}
-
-.logoBox {
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.mangaXImageLogo {
-    max-width: 150px; 
-    height: auto;    
-    margin: 0 auto 10px; 
-    display: block; 
-}
-
-.logoText {
-    font-size: 2.5em;
-    font-weight: 600;
-    color: #333;
-    letter-spacing: 1px;
-}
-
-.mangaText {
-    color: #333;
-}
-
-.xText {
-    color: #E65239; 
-}
-
+/* --- 1. Main Form Panel Container (ใช้ร่วมกัน 3 ไฟล์) --- */
 .loginFormPanel {
+    /* จัดให้อยู่ตรงกลางหน้าจอในแนวนอน */
+    max-width: 500px;
+    margin: 40px auto; 
     padding: 40px;
-    width: 60%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* --- 2. Typography & Headings (ใช้ร่วมกัน 3 ไฟล์) --- */
 .sectionHeading {
-    text-align: left;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
     color: #333;
-    margin-bottom: 15px;
-    font-size: 1.1em;
-}
-
-.inputGroup {
     margin-bottom: 20px;
+    /* ใช้สีแดง/ส้มเป็นเส้นแบ่งตาม Brand Color */
+    border-bottom: 2px solid #E65239; 
+    padding-bottom: 10px;
 }
 
-.loginFormPanel input[type="text"] {
+.orText {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* --- 3. Input Group & Fields (ใช้ร่วมกัน 3 ไฟล์) --- */
+.inputGroup {
+    margin-bottom: 15px;
+}
+
+.inputGroup input[type="text"],
+.inputGroup input[type="email"],
+.inputGroup input[type="password"],
+.inputGroup input[type="tel"] {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1em;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    box-sizing: border-box; 
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
+.inputGroup input:focus {
+    border-color: #E65239; /* Brand primary color */
+}
+
+
+/* --- 4. Select Fields (เฉพาะ MangaXProfileDetails) --- */
+.selectInput {
+    /* สไตล์สำหรับ select ในส่วนวัน/เดือน/ปี */
+    font-size: 1rem;
+    height: 44px; /* กำหนดความสูงให้เท่ากับ input text */
+    cursor: pointer;
+}
+
+/* --- 5. Button Styles (ใช้ร่วมกัน 3 ไฟล์) --- */
 .primaryBtn {
     width: 100%;
-    padding: 12px;
-    border: none;
+    padding: 15px;
     border-radius: 5px;
-    font-size: 1em;
-    font-weight: 600;
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
     transition: background-color 0.3s;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
 }
 
-.loginBtn, .createAccountBtn {
-    background-color: #333; 
+/* ปุ่มหลัก: เข้าสู่ระบบ / ไปขั้นตอนต่อไป / บันทึกและสมัครสมาชิก */
+.loginBtn {
+    background-color: #E65239; 
     color: white;
+    border: none;
 }
 
-.loginBtn:hover, .createAccountBtn:hover {
-    background-color: #555;
+.loginBtn:hover {
+    background-color: #d04a32;
 }
+
+/* ปุ่มรอง: ย้อนกลับ / สร้างบัญชีใหม่ */
+.createAccountBtn {
+    background-color: #808080; /* สีเทา */
+    color: white;
+    border: none;
+}
+
+.createAccountBtn:hover {
+    background-color: #6a6a6a;
+}
+
+/* --- 6. Styles for MangaXLogin.jsx (เข้าสู่ระบบ) --- */
 
 .divider {
     text-align: center;
-    margin: 25px 0 20px 0;
+    margin: 20px 0;
+}
+
+.divider .orText {
+    /* ปรับแต่งข้อความ 'หรือ **เข้าสู่ระบบด้วย**' ให้อยู่ตรงกลาง */
     position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    background-color: #fff;
+    font-weight: 500;
 }
 
-.orText {
-    font-size: 0.9em;
-    color: #666;
-    margin: 0;
-}
-
+/* Social Login Buttons */
 .socialLoginGroup {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .socialBtn {
     flex: 1;
-    padding: 12px;
-    border: 1px solid #ccc;
+    padding: 12px 10px;
     border-radius: 5px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: transform 0.2s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border: none;
     color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
 }
 
 .socialBtn:hover {
-    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
-.facebookBtn { background-color: #3b5998; }
-.lineBtn     { background-color: #00b900; }
-.googleBtn   { background-color: #dd4b39; }
-.xBtn        { background-color: #000; }
+.facebookBtn {
+    background-color: #3b5998;
+}
+
+.lineBtn {
+    background-color: #00c300; /* สีเขียวของ LINE */
+}
+
+.googleBtn {
+    background-color: #db4437; /* สีแดงของ Google */
+}
+
+.xBtn {
+    background-color: #000000; /* สีดำของ X (Twitter) */
+}
 
 .newAccountSection {
-    padding-top: 20px;
+    margin-top: 30px;
+    padding-top: 15px;
     border-top: 1px solid #eee;
-    margin-top: auto; 
 }
 
-@media (max-width: 650px) {
-    .loginContainer {
-        flex-direction: column;
-        width: 100%;
-        max-width: 400px;
-    }
-
-    .logoPanel {
-        width: 100%;
-        padding: 30px 20px;
-        border-bottom: 1px solid #ddd;
-    }
-    
-    .loginFormPanel {
-        width: 100%;
-        padding: 30px 20px;
-    }
-
-    .socialLoginGroup {
-        flex-wrap: wrap;
-    }
-
-    .socialBtn {
-        flex: 1 1 45%; 
-        margin-bottom: 10px;
-    }
-
-    .selectInput {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1em;
-    font-family: 'IBM Plex Sans Thai', sans-serif;
-    background-color: white; 
-    appearance: none; 
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB7%22%20d%3D%22M287%2C197.351L146.2%2C56.651L5.4%2C197.351H287z%22%2F%3E%3C%2Fsvg%3E'); /* เพิ่มลูกศร dropdown */
-    background-repeat: no-repeat;
-    background-position: right 0.7em top 50%;
-    background-size: 0.65em auto;
-}
-
+/* --- 7. Utility/Specific Elements (เฉพาะ MangaXProfileDetails) --- */
 .flagIcon {
-    font-size: 1.5em; 
+    font-size: 1.5rem;
+    /* จัดให้อยู่กลางแนวตั้งกับช่องกรอกเบอร์โทรศัพท์ */
+    line-height: 0; 
     margin-right: 5px;
-}
 }

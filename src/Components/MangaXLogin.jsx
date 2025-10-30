@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from './MangaXLogin.module.css'; 
+import styles from './MangaXLogin.module.css';
+
 const MangaXLogin = ({ onRegisterClick }) => { 
     
     const handleLoginSubmit = (e) => {
@@ -32,28 +33,19 @@ const MangaXLogin = ({ onRegisterClick }) => {
                         />
                     </div>
 
+                    <div className={styles.inputGroup}>
+                        <input 
+                            type="password" 
+                            id="password"
+                            name="password"
+                            placeholder="รหัสผ่าน" 
+                            required 
+                        />
+                    </div>
+
                     <button type="submit" className={`${styles.primaryBtn} ${styles.loginBtn}`}>
                         เข้าสู่ระบบ
                     </button>
-
-                    <div className={styles.divider}>
-                        <p className={styles.orText}>หรือ **เข้าสู่ระบบด้วย**</p>
-                    </div>
-
-                    <div className={styles.socialLoginGroup}>
-                        <button type="button" className={`${styles.socialBtn} ${styles.facebookBtn}`} onClick={() => handleSocialLogin('Facebook')}>
-                            <i className="fab fa-facebook-f"></i>
-                        </button>
-                        <button type="button" className={`${styles.socialBtn} ${styles.lineBtn}`} onClick={() => handleSocialLogin('LINE')}>
-                            <i className="fab fa-line"></i>
-                        </button>
-                        <button type="button" className={`${styles.socialBtn} ${styles.googleBtn}`} onClick={() => handleSocialLogin('Google')}>
-                            <i className="fab fa-google"></i>
-                        </button>
-                        <button type="button" className={`${styles.socialBtn} ${styles.xBtn}`} onClick={() => handleSocialLogin('X')}>
-                            <i className="fab fa-twitter"></i>
-                        </button>
-                    </div>
 
                     <div className={styles.newAccountSection}>
                         <p className={styles.sectionHeading}>สมัครสมาชิก</p>

@@ -12,9 +12,10 @@ import Payment from './Web/Payment.jsx' // เพิ่ม import
 import HomepageProfile from './Web/HomepageProfile.jsx'
 import AdminList from './Admin/admin_list.jsx' 
 import AdminAdd from './Admin/admin_add.jsx'
-import Login from './Components/MangaXLogin.jsx'
-import Detail from './Components/MangaProfileDetails.jsx'
-import Register from './Components/MangaXRegister.jsx'
+import Login from './components/MangaXLogin.jsx'
+import Detail from './components/MangaProfileDetails.jsx'
+import Register from './components/MangaXRegister.jsx'
+import AuthPage from './components/AuthPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -30,9 +31,10 @@ createRoot(document.getElementById('root')).render(
         <Route path="/admin_add" element={<AdminAdd />} />
         <Route path="/address" element={<Address />} />
         <Route path="/payment" element={<Payment />} /> {/* เพิ่ม route */}
-        <Route path="/MangaXLogin" element={<Login />} />
+       {/* <Route path="/MangaXLogin" element={<Login />} />
         <Route path="/MangaProfileDetails" element={<Detail />} />
-        <Route path="/MangaXRegister" element={<Register />} />
+        <Route path="/MangaXRegister" element={<Register />} /> */}
+        <Route path="/login" element={<AuthPage />} />
 
       </Routes>
     </BrowserRouter>
