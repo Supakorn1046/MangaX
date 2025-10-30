@@ -41,7 +41,7 @@ const AuthPage = () => {
         <div className={styles.logoPanel}>
           {/* เราจะใช้ไฟล์ logo.png ที่คุณให้มา */}
           <img src={logo} alt="MangaX Logo" className={styles.authLogo} />
-          <span className={styles.logoText}>MANGA X</span>
+          
         </div>
         
         {/* คอลัมน์ขวา (Form) */}

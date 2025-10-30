@@ -55,8 +55,8 @@ function Buy() {
       <header className="buy-header">
         <img src={logo} alt="BookStore Logo" className="buy-logo" />
         <nav>
-          <a href="/">หน้าแรก</a>
-          <a href="#shop">10 อันดับ</a>
+          <Link to="/homepage">หน้าแรก</Link>
+          <Link to="/SeeAlltop10">10 อันดับ</Link>
         </nav>
         <div className="buy-search-container">
           <MdOutlineShoppingCart className="buy-header-icon" />

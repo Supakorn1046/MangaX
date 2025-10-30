@@ -1,20 +1,27 @@
 /* AuthPage.module.css */
 
 /* ตัวครอบหลัก เพื่อจัดให้อยู่กลางหน้าจอ */
-.authPageWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #ffffff; /* พื้นหลังสีขาวรอบนอก */
+.logoPanel {
+    /* ... สไตล์เดิม ... */
+    width: 35%; /* ลดสัดส่วน */
 }
 
+/* Login Form Panel (คอลัมน์ขวา) */
+.loginFormPanel {
+    padding: 40px 50px;
+    /* ... สไตล์เดิม ... */
+    width: 100%; /* เพิ่มสัดส่วน */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 /* กล่องหลัก 2 คอลัมน์ */
 .authContainer {
   display: flex;
   flex-direction: row;
   max-width: 900px; /* ความกว้างสูงสุดของทั้ง 2 คอลัมน์ */
-  width: 90%;
+  width: 300%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px; /* ขอบมน */
   overflow: hidden; /* ซ่อนส่วนที่เกินขอบมน */

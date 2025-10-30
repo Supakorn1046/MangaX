@@ -28,39 +28,38 @@ function Seealltop10() {
   ];
 
   return (
-    <div className="seeall-page">
+    <div className="seealltop10-page">
       {/* Header */}
-      <header className="header">
-        <img src={logo} alt="BookStore Logo" className="logo" />
+      <header className="seealltop10-header">
+        <img src={logo} alt="BookStore Logo" className="seealltop10-logo" />
         <nav>
           <a href="/">หน้าแรก</a>
           <a href="#shop">10 อันดับ</a>
         </nav>
-        <div className="search-container">
-          <MdOutlineShoppingCart className="header-icon" />
-          <MdLogin className="header-icon" />
+        <div className="seealltop10-search-container">
+          <MdOutlineShoppingCart className="seealltop10-header-icon" />
+          <MdLogin className="seealltop10-header-icon" />
           <input
             type="text"
             placeholder="ค้นหาหนังสือตามชื่อเรื่อง"
-            className="search-bar"
+            className="seealltop10-search-bar"
           />
-          <FaSearch className="search-icon" />
+          <FaSearch className="seealltop10-search-icon" />
         </div>
       </header>
 
       {/* เนื้อหาหลัก */}
-      <section className="books-section">
-        <h2 className="red-box-top10">มังงะขายดี 10 อันดับ</h2>
-        <div className="books-grid">
+      <section className="seealltop10-books-section">
+        <h2 className="seealltop10-red-box-top10">มังงะขายดี 10 อันดับ</h2>
+        <div className="seealltop10-books-grid">
           {books.map((book) => (
-            <div key={book.id} className="book-card">
-              <div className="book-image-placeholder">
-                {/* ใส่ placeholder สำหรับรูปภาพ */}
+            <div key={book.id} className="seealltop10-book-card">
+              <div className="seealltop10-book-image-placeholder">
                 <span>รูปภาพ</span>
               </div>
               <h3>{book.title}</h3>
               <p>{book.author}</p>
-              <p className="price">{book.price}</p>
+              <p className="seealltop10-price">{book.price}</p>
               <button>เพิ่มลงตะกร้า</button>
             </div>
           ))}
@@ -68,9 +67,9 @@ function Seealltop10() {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-section">
+      <footer className="seealltop10-footer">
+        <div className="seealltop10-footer-content">
+          <div className="seealltop10-footer-section">
             <p><strong>ทางลัด</strong></p>
             <p>หนังสือขายดี 10 อันดับ</p>
             <p>ต่อสู้</p>
@@ -78,43 +77,43 @@ function Seealltop10() {
             <p>กีฬา</p>
           </div>
           
-          <div className="footer-section">
+          <div className="seealltop10-footer-section">
             <p><strong>ช่องทางชำระเงิน</strong></p>
-            <div className="payment-methods">
-              <div className="image-link">
+            <div className="seealltop10-payment-methods">
+              <div className="seealltop10-image-link">
                 <img src={visaImage} alt="visa" />
               </div>
-              <div className="image-link">
+              <div className="seealltop10-image-link">
                 <img src={mastercardImage} alt="mastercard" />
               </div>
-              <div className="image-link">
+              <div className="seealltop10-image-link">
                 <img src={paypalImage} alt="paypal" />
               </div>
             </div>
           </div>
 
-          <div className="footer-section third-column">
+          <div className="seealltop10-footer-section seealltop10-third-column">
             <p><strong>ติดตามข่าวสารได้ที่</strong></p>
-            <div className="social-icons">
-              <div className="social-row">
-                <div className="image-link">
+            <div className="seealltop10-social-icons">
+              <div className="seealltop10-social-row">
+                <div className="seealltop10-image-link">
                   <img src={fbImage} alt="facebook" />
                 </div>
-                <div className="image-link">
+                <div className="seealltop10-image-link">
                   <img src={igImage} alt="instagram" />
                 </div>
-                <div className="image-link">
+                <div className="seealltop10-image-link">
                   <img src={lineImage} alt="line" />
                 </div>
               </div>
-              <div className="social-row">
-                <div className="image-link">
+              <div className="seealltop10-social-row">
+                <div className="seealltop10-image-link">
                   <img src={ytImage} alt="youtube" />
                 </div>
-                <div className="image-link">
+                <div className="seealltop10-image-link">
                   <img src={ttImage} alt="tiktok" />
                 </div>
-                <div className="image-link">
+                <div className="seealltop10-image-link">
                   <img src={xImage} alt="x" />
                 </div>
               </div>

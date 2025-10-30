@@ -1,111 +1,103 @@
-/* General Styles */
-body {
+/* Homepage Specific Styles */
+.homepage {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #F4D58D;
 }
 
 /* Header */
-.header {
+.homepage .homepage-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #000000;
   color: white;
-  padding: 0 5%;       /* ขอบซ้ายขวา */
-  height: 80px;        /* ความสูงคงที่ของ header */
+  padding: 0 5%;
+  height: 80px;
   box-sizing: border-box;
-  justify-content: flex-start;
-
 }
 
-.header .search-container {
+.homepage .homepage-search-container {
   display: flex;
   align-items: center;
-  gap: 10px; /* ช่องว่างระหว่าง icon และ search bar */
-  margin-left: auto; /* ดัน container ไปด้านขวาของ header */
-  position: relative; 
+  gap: 10px;
+  margin-left: auto;
+  position: relative;
 }
 
-.header .search-bar {
-  padding: 0.5rem 2.5rem 0.5rem 0.3rem; /* เพิ่มขอบขวาให้ icon */
-  border-radius: 3px;
+.homepage .homepage-search-bar {
+  padding: 0.5rem 2.5rem 0.5rem 0.3rem;
+  border-radius: 2px;
   border: none;
   font-size: 0.8rem;
   outline: none;
 }
-.header .header-icon {
+
+.homepage .homepage-header-icon {
   color: white;
   font-size: 1.4rem;
   cursor: pointer;
 }
 
-.header .search-bar:focus {
+.homepage .homepage-search-bar:focus {
   box-shadow: 0 0 5px #fdd835;
 }
 
-.header .search-icon {
+.homepage .homepage-search-icon {
   position: absolute;
-  right: 20px; /* ระยะจากขอบขวา */
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   color: #888;
-  pointer-events: none; /* ให้คลิกผ่าน icon ได้ */
-}
-.header .logo {
-  max-height: 80px;    /* โลโก้ไม่เกินความสูงนี้ */
-  width: auto;         /* รักษาสัดส่วน */
-  object-fit: contain; /* รูปจะไม่บิดและพอดีพื้นที่ */
-  margin-left: -88px;
-  
+  pointer-events: none;
 }
 
+.homepage .homepage-logo {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-left: -63px;
+}
 
-.header h1 {
+.homepage .homepage-header h1 {
   margin: 0;
 }
 
-
-
-.header nav a:hover {
-  text-decoration: underline;
-}
-
-.header nav a {
+.homepage .homepage-nav a {
   color: white;
   margin-left: 2rem;
   text-decoration: none;
 }
 
-.header nav a:hover {
+.homepage .homepage-nav a:hover {
   text-decoration: underline;
 }
 
 /* Hero Section */
-.hero {
+.homepage .homepage-hero {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 500px;
   overflow: hidden;
 }
 
-.hero-image {
+.homepage .homepage-hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: opacity 0.5s ease-in-out;
 }
 
-.hero-buttons {
+.homepage .homepage-hero-buttons {
   position: absolute;
-  bottom: 20px; /* ปุ่มอยู่ด้านล่าง */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
 }
 
-.hero-buttons button {
+.homepage .homepage-hero-buttons button {
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -115,80 +107,81 @@ body {
   transition: background-color 0.3s;
 }
 
-.hero-buttons button.active,
-.hero-buttons button:hover {
+.homepage .homepage-hero-buttons button.homepage-active,
+.homepage .homepage-hero-buttons button:hover {
   background-color: #fdd835;
 }
 
 /* Books Section */
-.books-section {
+.homepage .homepage-books-section {
   padding: 3rem 2rem;
   text-align: center;
 }
 
-.books-section h2 {
+.homepage .homepage-books-section h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 
-.books-grid {
+.homepage .homepage-books-grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
 
-.book-card {
+.homepage .homepage-book-card {
   background-color: rgb(0, 0, 0);
   padding: 1rem;
-  
   border-radius: 10px;
   width: 180px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s;
 }
 
-.red-box-top10 {
-  display: inline-block; 
-  background-color: #e53935;  /* สีแดง */
-  color: white;               /* ตัวอักษรสีขาว */
-  padding: 0.35rem 0.7rem;    /* ระยะขอบรอบข้อความ */
-  border-radius: 10px;        /* มุมมน */
-  margin: 0;                  /* ลบ margin ของ h2 ปกติ */
-}
-.red-box {
-  display: block;             /* เปลี่ยนจาก inline-block เป็น block */
-  width: fit-content;         /* ให้ความกว้างพอดีกับข้อความ */
-  background-color: #e53935;  /* สีแดง */
-  color: white;               /* ตัวอักษรสีขาว */
-  padding: 0.35rem 0.7rem;    /* ระยะขอบรอบข้อความ */
-  border-radius: 10px;        /* มุมมน */
-  margin: 0;                  /* ลบ margin ของ h2 ปกติ */
+.homepage .homepage-red-box-top10 {
+  display: inline-block;
+  background-color: #e53935;
+  color: white;
+  padding: 0.35rem 0.7rem;
+  border-radius: 10px;
+  margin: 0;
 }
 
-.book-card img {
+.homepage .homepage-red-box {
+  display: block;
+  width: fit-content;
+  background-color: #e53935;
+  color: white;
+  padding: 0.35rem 0.7rem;
+  border-radius: 10px;
+  margin: 0 auto 2rem auto;
+}
+
+.homepage .homepage-book-image {
   width: 100%;
   border-radius: 5px;
   margin-bottom: 1rem;
 }
 
-.book-card h3 {
+.homepage .homepage-book-title {
   font-size: 1.2rem;
   margin: 0.5rem 0;
   color: #ff0000;
 }
 
-.book-card p {
+.homepage .homepage-book-author {
   margin: 0.3rem 0;
   color: #fffbfb;
 }
 
-.book-card .price {
+.homepage .homepage-book-price {
   font-weight: bold;
   color: #ffffff;
+  margin: 0.3rem 0;
 }
 
-.book-card button {
+.homepage .homepage-add-to-cart-btn {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   border: none;
@@ -196,66 +189,83 @@ body {
   color: rgb(0, 0, 0);
   border-radius: 5px;
   cursor: pointer;
+  width: 100%;
 }
 
-.book-card button:hover {
+.homepage .homepage-add-to-cart-btn:hover {
   background-color: #c4b9b99f;
 }
 
 /* Footer */
-.footer {
+.homepage .homepage-footer {
   padding: 1rem;
   background-color: #AFAA98;
   color: rgb(0, 0, 0);
 }
 
-.footer-content {
- display: flex;
+.homepage .homepage-footer-content {
+  display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 1rem; 
-
-  
+  gap: 3rem;
 }
 
-.third-column {
-  margin-left: 35rem; /* เพิ่มระยะห่างจากคอลัมน์ที่ 2 */
+.homepage .homepage-third-column {
+  margin-left: auto;
 }
-.footer-section {
+
+.homepage .homepage-footer-section {
   text-align: left;
 }
 
-.image-link {
-  margin-bottom: 9px; /* ห่างระหว่างบรรทัด */
-  display: block; /* ทำให้แต่ละอันอยู่คนละบรรทัด */
+.homepage .homepage-image-link {
+  margin-bottom: 9px;
+  display: block;
 }
 
-.image-link img {
+.homepage .homepage-image-link img {
   width: 40px;
   height: auto;
 }
 
-.third-column {
+.homepage .homepage-social-icons {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
-.social-icons {
-  display: flex;
-  flex-direction: column; /* จัดเรียงแนวตั้ง */
-  gap: 2px; /* ระยะห่างระหว่างแถว */
-}
-
-.social-row {
+.homepage .homepage-social-row {
   display: flex;
   gap: 10px;
-  justify-content: flex-start; /* หรือ center ถ้าต้องการให้อยู่กลาง */
+  justify-content: flex-start;
 }
 
-.image-link img {
+.homepage .homepage-image-link img {
   width: 30px;
   height: auto;
   transition: transform 0.3s ease;
+}
+
+/* View All Card */
+.homepage .homepage-view-all-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+}
+
+.homepage .homepage-view-all-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background-color: #e53935;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.homepage .homepage-view-all-btn:hover {
+  background-color: #c62828;
 }
