@@ -1,7 +1,64 @@
 import express from "express";
 import Book from "../models/Book.js";
+import Order from "../models/Order.js";
 const router = express.Router();
 
+// GET /api/books/bestsellers
+router.get("/bestsellers", async (req, res) => {
+  try {
+    const bestSellers = await Order.aggregate([
+      // 2.1. แยกสินค้า (items) ในแต่ละ Order ออกมาเป็นเอกสารย่อย
+      { $unwind: "$items" },
+      
+      // 2.2. จัดกลุ่มตาม bookId และนับยอดขาย (quantity)
+      {
+        $group: {
+          _id: "$items.bookId",
+          totalSold: { $sum: "$items.quantity" }
+        }
+      },
+      
+      // 2.3. เรียงลำดับจากมากไปน้อย
+      { $sort: { totalSold: -1 } },
+      
+      // 2.4. เอาแค่ 10 อันดับแรก
+      { $limit: 10 },
+      
+      // 2.5. เชื่อม (lookup) กับ collection 'books' เพื่อดึงข้อมูลหนังสือ
+      {
+        $lookup: {
+          from: "books", // (ชื่อ collection ของ Book model)
+          localField: "_id", // (bookId จาก $group)
+          foreignField: "_id", // (field ที่ตรงกันใน 'books')
+          as: "bookDetails"
+        }
+      },
+      
+      // 2.6. $lookup จะคืนค่าเป็น array, ให้ $unwind เพื่อให้เหลือ object เดียว
+      { $unwind: "$bookDetails" },
+      
+      // 2.7. เลือกฟิลด์ที่ต้องการส่งกลับไป (ข้อมูลหนังสือ)
+      {
+        $project: {
+          _id: "$bookDetails._id",
+          title: "$bookDetails.title",
+          author: "$bookDetails.author",
+          price: "$bookDetails.price",
+          category: "$bookDetails.category",
+          image: "$bookDetails.image",
+          stock: "$bookDetails.stock",
+          createdAt: "$bookDetails.createdAt"
+          // totalSold: "$totalSold" // (ส่งยอดขายไปด้วยก็ได้ถ้าอยาก)
+        }
+      }
+    ]);
+    
+    res.json(bestSellers);
+
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching bestsellers: " + error.message });
+  }
+});
 // ดึงหนังสือทั้งหมด
 router.get("/", async (req, res) => {
   try {

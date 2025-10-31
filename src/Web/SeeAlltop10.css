@@ -1,3 +1,6 @@
+/* Seealltop10.css */
+/* สไตล์เฉพาะสำหรับหน้า Seealltop10 */
+
 /* General Styles */
 .seealltop10-page {
   min-height: 100vh;
@@ -107,17 +110,24 @@
   transform: translateY(-5px);
 }
 
-.seealltop10-book-image-placeholder {
+/* 🔑 Container และรูปภาพ - อิงจาก action-page */
+.seealltop10-book-image-container {
   width: 100%;
-  height: 250px;
+  height: 250px; 
   background-color: #333;
   border-radius: 5px;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 0.9rem;
+  overflow: hidden;
+}
+
+.seealltop10-book-image-container .seealltop10-book-image {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; 
+  border-radius: 5px;
 }
 
 .seealltop10-book-card h3 {
@@ -152,7 +162,31 @@
   background-color: #0356f19f;
 }
 
-/* Footer */
+/* Loading and Error States */
+.seealltop10-loading-text {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 2rem 0;
+}
+
+.seealltop10-error-text {
+  font-size: 1.1rem;
+  color: #e53935;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: #ffebee;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.seealltop10-no-books {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 2rem 0;
+  grid-column: 1 / -1;
+}
+
+/* Footer - อิงจาก action-page */
 .seealltop10-footer {
   padding: 2rem 1rem;
   background-color: #AFAA98;
@@ -227,7 +261,7 @@
   height: 30px;
 }
 
-/* Responsive */
+/* Responsive - อิงจาก action-page */
 @media (max-width: 768px) {
   .seealltop10-books-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -245,5 +279,29 @@
   
   .seealltop10-header .seealltop10-search-bar {
     width: 200px;
+  }
+  
+  .seealltop10-book-image-container {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seealltop10-books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  
+  .seealltop10-book-card {
+    padding: 0.8rem;
+  }
+  
+  .seealltop10-book-image-container {
+    height: 180px;
+  }
+  
+  .seealltop10-red-box-top10 {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
   }
 }

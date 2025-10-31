@@ -4,14 +4,14 @@ import { CgProfile } from "react-icons/cg";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./Homepage.css";
-// (Assets imports คงเดิม)
+
+// Assets imports
 import logo from "../assets/logo.png"; 
 import promo1 from "../assets/promo1.png";
 import promo2 from "../assets/promo2.png";
 import promo3 from "../assets/promo3.png";
 import promo4 from "../assets/promo4.png";
 import book1 from "../assets/book1.png";
-// (imports อื่นๆ)
 import book2 from "../assets/book2.png";
 import book3 from "../assets/book3.gif";
 import book4 from "../assets/book4.png";
@@ -26,50 +26,73 @@ import ytImage from '../assets/yt1.png';
 import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
 
-
 // URL ฐานของ API
 const API_BASE_URL = 'http://localhost:5000/api/books';
-const API_CART_URL = 'http://localhost:5000/api/cart'; // 💡 URL สำหรับ Cart API
+const API_CART_URL = 'http://localhost:5000/api/cart'; 
 
-// Mock data (ใช้เป็น Fallback ถ้าดึงข้อมูลไม่ได้)
+// Mock data
 const mockBooks = [
     { _id: 1, title: "Harry Potter", author: "J.K. Rowling", price: 12.99, image: book1, category: 'Fantasy', createdAt: new Date() },
 ];
-const images = [promo1, promo2, promo3, promo4];
 
+const images = [promo1, promo2, promo3, promo4];
 
 function Homepage() {
     const navigate = useNavigate();
     const [current, setCurrent] = useState(0);
     
     const [allBooks, setAllBooks] = useState([]); 
+    const [topSellingBooks, setTopSellingBooks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null); 
 
-    // ----------------------------------------------------
-    // 💡 ฟังก์ชัน Fetch ข้อมูลจาก Backend (โค้ดเดิม)
-    // ----------------------------------------------------
-    const fetchAllBooks = async () => {
-        setLoading(true);
-        try {
-            const response = await fetch(API_BASE_URL);
-            if (!response.ok) {
-                throw new Error('Failed to fetch books');
-            }
-            const data = await response.json();
-            setAllBooks(data); 
-        } catch (error) {
-            console.error("Error fetching books:", error);
-            setAllBooks(mockBooks); 
-        } finally {
-            setLoading(false);
-        }
-    };
-    
     useEffect(() => {
-        fetchAllBooks();
+        const fetchAllData = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                // ดึงหนังสือทั้งหมด
+                const allBooksRes = await fetch(API_BASE_URL);
+                
+                if (!allBooksRes.ok) {
+                    throw new Error('Failed to fetch books data');
+                }
+                
+                const allBooksData = await allBooksRes.json();
+                setAllBooks(allBooksData);
+
+                // พยายามดึงหนังสือขายดี (มี fallback)
+                try {
+                    const topSellingRes = await fetch(`${API_BASE_URL}/bestsellers`);
+                    if (topSellingRes.ok) {
+                        const topSellingData = await topSellingRes.json();
+                        // --- ⭐️ ส่วนที่แก้ไข 1 ⭐️ ---
+                        setTopSellingBooks(topSellingData.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+                    } else {
+                        // ถ้าไม่มี endpoint นี้ ให้ใช้หนังสือทั้งหมดเป็น fallback
+                        // --- ⭐️ ส่วนที่แก้ไข 2 ⭐️ ---
+                        setTopSellingBooks(allBooksData.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+                    }
+                } catch (bestsellerError) {
+                    console.warn('Bestsellers endpoint not available, using fallback');
+                    // --- ⭐️ ส่วนที่แก้ไข 2 (ซ้ำ) ⭐️ ---
+                    setTopSellingBooks(allBooksData.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+                }
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setError(error.message);
+                setAllBooks(mockBooks); 
+                setTopSellingBooks(mockBooks.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+            } finally {
+                setLoading(false);
+            }
+        };
+        
+        fetchAllData();
     }, []);
 
-    // Carousel auto-slide effect (โค้ดเดิม)
+    // (Carousel effect - เหมือนเดิม)
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrent((prev) => (prev + 1) % images.length);
@@ -77,106 +100,87 @@ function Homepage() {
         return () => clearInterval(interval);
     }, [images.length]);
 
-    // Navigation handlers
+    // (Navigation handlers - เหมือนเดิม)
     const handleCartClick = () => {
         navigate('/buy');
     };
-
     const handleProfileClick = () => {
         navigate('/HomepageProfile');
     };
-    
     const handleBookClick = (bookId) => {
         navigate(`/productdetail/${bookId}`);
     };
-
     const handleViewAll = (path) => {
         navigate(path);
     };
     
-    // ----------------------------------------------------
-    // 💡 ฟังก์ชันจัดเรียงและกรองข้อมูล (โค้ดเดิม)
-    // ----------------------------------------------------
+    // (Filter functions - เหมือนเดิม)
     const getNewBooks = () => {
         return [...allBooks]
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .slice(0, 5);
     };
-    
     const getBooksByCategory = (category) => {
         return allBooks
             .filter(book => book.category && book.category.toLowerCase() === category.toLowerCase())
             .slice(0, 5);
     };
     
-    const getTopSellingBooks = () => {
-        return getNewBooks(); 
+    // (Add to cart function - เหมือนเดิม)
+    const handleAddToCart = async (e, book) => {
+        e.stopPropagation();
+        const userInfo = localStorage.getItem('userInfo');
+        if (!userInfo) {
+            alert('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าลงตะกร้า');
+            navigate('/login');
+            return;
+        }
+        const user = JSON.parse(userInfo);
+        const userId = user._id;
+        const cartData = {
+            userId: userId,
+            bookId: book._id,
+            title: book.title,
+            price: book.price,
+            image: book.image,
+            quantity: 1
+        };
+        try {
+            const response = await fetch(`${API_CART_URL}/add`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cartData)
+            });
+            if (response.ok) {
+                alert(`เพิ่ม "${book.title}" ลงตะกร้าสำเร็จ!`);
+            } else {
+                const errData = await response.json();
+                alert(`เกิดข้อผิดพลาด: ${errData.message || 'ไม่สามารถเพิ่มสินค้าได้'}`);
+            }
+        } catch (err) {
+            alert('การเชื่อมต่อล้มเหลว ไม่สามารถเพิ่มสินค้าได้');
+            console.error('Add to cart error:', err);
+        }
     };
 
-
-    // ----------------------------------------------------
-    // 💡 Book card component (แก้ไขให้เพิ่มสินค้าลงตะกร้าได้)
-    // ----------------------------------------------------
+    // (BookCard component - เหมือนเดิม)
     const BookCard = ({ book }) => {
-        
-        // 🔑 ฟังก์ชันสำหรับเพิ่มสินค้าลงตะกร้า
-        const handleAddToCart = async (e) => {
-            e.stopPropagation(); // 💡 ป้องกันไม่ให้ Card หลัก (ที่ไปหน้า Detail) ทำงาน
-            
-            // 1. ดึง User ID จาก localStorage
-            const userInfo = localStorage.getItem('userInfo');
-            if (!userInfo) {
-                alert('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าลงตะกร้า');
-                navigate('/login'); // ส่งไปหน้า Login
-                return;
-            }
-            
-            const user = JSON.parse(userInfo);
-            const userId = user._id; // (ต้องตรงกับ key ที่คุณเก็บตอน Login)
-
-            // 2. เตรียมข้อมูลสำหรับส่งไป API
-            const cartData = {
-                userId: userId,
-                bookId: book._id,
-                title: book.title,
-                price: book.price,
-                image: book.image,
-                quantity: 1 // เพิ่มทีละ 1 ชิ้น
-            };
-
-            // 3. เรียก API POST /api/cart/add
-            try {
-                const response = await fetch(`${API_CART_URL}/add`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(cartData)
-                });
-
-                if (response.ok) {
-                    alert(`เพิ่ม "${book.title}" ลงตะกร้าสำเร็จ!`);
-                } else {
-                    const errData = await response.json();
-                    alert(`เกิดข้อผิดพลาด: ${errData.message || 'ไม่สามารถเพิ่มสินค้าได้'}`);
-                }
-            } catch (err) {
-                alert('การเชื่อมต่อล้มเหลว ไม่สามารถเพิ่มสินค้าได้');
-                console.error('Add to cart error:', err);
-            }
-        };
-        
+        const bookImage = book.image || book1;
         return (
-            <div className="homepage-book-card" onClick={() => handleBookClick(book._id)} style={{ cursor: 'pointer' }}>
-                <img src={book.image || book1} alt={book.title} className="homepage-book-image" /> 
+            <div 
+                className="homepage-book-card" 
+                onClick={() => handleBookClick(book._id)} 
+                style={{ cursor: 'pointer' }}
+            >
+                <img src={bookImage} alt={book.title} className="homepage-book-image" />
                 <h3 className="homepage-book-title">{book.title}</h3>
-                <p className="homepage-book-author">{book.author}</p>
-                <p className="homepage-book-price">฿{book.price ? book.price.toFixed(2) : 'N/A'}</p> 
-                
-                {/* 🔑 ผูก onClick เข้ากับปุ่ม */}
+                <p className="homepage-book-author">{book.author || 'ไม่ทราบผู้แต่ง'}</p>
+                <p className="homepage-book-price">
+                    ฿{book.price ? book.price.toFixed(2) : 'N/A'}
+                </p>
                 <button 
                     className="homepage-add-to-cart-btn" 
-                    onClick={handleAddToCart}
+                    onClick={(e) => handleAddToCart(e, book)}
                 >
                     เพิ่มลงตะกร้า
                 </button>
@@ -184,22 +188,24 @@ function Homepage() {
         );
     };
     
-    // Book section component (โค้ดเดิม)
-    const BookSection = ({ title, isTop10 = false, booksToShow, viewAllPath }) => (
+    // (BookSection component - เหมือนเดิม)
+    const BookSection = ({ title, isTop10 = false, booksToShow = [], viewAllPath }) => (
         <section className="homepage-books-section">
             <h2 className={isTop10 ? "homepage-red-box-top10" : "homepage-red-box"}>
                 {title}
             </h2>
             {loading ? (
                 <div className="loading-text">กำลังโหลดหนังสือ...</div>
+            ) : error ? (
+                <div className="error-text">เกิดข้อผิดพลาด: {error}</div>
             ) : (
                 <div className="homepage-books-grid">
-                    {booksToShow.length > 0 ? (
+                    {booksToShow && booksToShow.length > 0 ? (
                         booksToShow.map((book) => (
-                            <BookCard key={book._id || book.id} book={book} />
+                            <BookCard key={book._id} book={book} />
                         ))
                     ) : (
-                         <div className="no-books-found">ไม่พบหนังสือในหมวดหมู่นี้</div>
+                        <div className="no-books-found">ไม่พบหนังสือในหมวดหมู่นี้</div>
                     )}
                     
                     <div className="homepage-view-all-card">
@@ -215,7 +221,7 @@ function Homepage() {
         </section>
     );
 
-    // Carousel buttons component (โค้ดเดิม)
+    // (Reusable components - เหมือนเดิม)
     const CarouselButtons = () => (
         <div className="homepage-hero-buttons">
             {images.map((_, index) => (
@@ -227,57 +233,47 @@ function Homepage() {
             ))}
         </div>
     );
-    
-    // Reusable components for icons (โค้ดเดิม)
     const PaymentIcon = ({ src, alt }) => (
         <div className="homepage-image-link">
             <img src={src} alt={alt} />
         </div>
     );
-
     const SocialIcon = ({ src, alt }) => (
         <div className="homepage-image-link">
             <img src={src} alt={alt} />
         </div>
     );
 
-
     return (
         <div className="homepage">
-            
-            {/* Header Section (โค้ดเดิม) */}
+            {/* Header Section (เหมือนเดิม) */}
             <header className="homepage-header">
                 <img src={logo} alt="BookStore Logo" className="homepage-logo" />
-                
                 <nav className="homepage-nav">
                     <a href="#home">หน้าแรก</a>
                     <a href="#shop">10 อันดับ</a>
                 </nav>
-                
                 <div className="homepage-search-container">
                     <MdOutlineShoppingCart 
                         className="homepage-header-icon" 
                         onClick={handleCartClick}
                         style={{ cursor: 'pointer' }}
                     />
-                    
                     <CgProfile 
                         className="homepage-header-icon" 
                         onClick={handleProfileClick} 
                         style={{ cursor: 'pointer' }} 
                     />
-                    
                     <input
                         type="text"
                         placeholder="ค้นหาหนังสือตามชื่อเรื่อง"
                         className="homepage-search-bar"
                     />
-                    
                     <FaSearch className="homepage-search-icon" />
                 </div>
             </header>
 
-            {/* Hero Carousel Section (โค้ดเดิม) */}
+            {/* Hero Carousel Section (เหมือนเดิม) */}
             <section className="homepage-hero">
                 <img 
                     src={images[current]} 
@@ -287,11 +283,12 @@ function Homepage() {
                 <CarouselButtons />
             </section>
 
-            {/* Books Sections (โค้ดเดิม) */}
+            {/* Books Sections */}
+            {/* --- ⭐️ ส่วนที่แก้ไข 3 ⭐️ --- */}
             <BookSection 
-                title="มังงะขายดี 10 อันดับ" 
+                title="มังงะขายดี 10 อันดับ" // 👈 เปลี่ยน Title
                 isTop10={true} 
-                booksToShow={getTopSellingBooks()}
+                booksToShow={topSellingBooks} // 👈 (State นี้ถูก slice เหลือ 5 แล้ว)
                 viewAllPath="/SeeAlltop10"
             />
 
@@ -313,10 +310,9 @@ function Homepage() {
                 viewAllPath="/Sport"
             />
 
-            {/* Footer Section (โค้ดเดิม) */}
+            {/* Footer Section (เหมือนเดิม) */}
             <footer className="homepage-footer">
                 <div className="homepage-footer-content">
-                    {/* ... Footer content ... */}
                     <div className="homepage-footer-section">
                         <p><strong>ทางลัด</strong></p>
                         <p>หนังสือขายดี 10 อันดับ</p>
@@ -324,7 +320,6 @@ function Homepage() {
                         <p>โรแมนซ์</p>
                         <p>กีฬา</p>
                     </div>
-                    
                     <div className="homepage-footer-section">
                         <p><strong>ช่องทางชำระเงิน</strong></p>
                         <div className="homepage-payment-methods">
@@ -333,7 +328,6 @@ function Homepage() {
                             <PaymentIcon src={paypalImage} alt="paypal" />
                         </div>
                     </div>
-
                     <div className="homepage-footer-section homepage-third-column">
                         <p><strong>ติดตามข่าวสารได้ที่</strong></p>
                         <div className="homepage-social-icons">

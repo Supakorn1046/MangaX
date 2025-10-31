@@ -2,22 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
+import { CgProfile } from "react-icons/cg"; // ✅ แก้ไข import
 import "./ProductDetailPage.css";
 
 // Assets imports
 import logo from "../assets/logo.png"; 
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
-import paypalImage from '../assets/paypal.png';
+import paypalImage from '../assets/paypal.png'; // ✅ เพิ่ม import
 import fbImage from '../assets/fb.png';
 import igImage from '../assets/ig.png';
 import lineImage from '../assets/line.png';
 import ytImage from '../assets/yt1.png';
 import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
-import bookPlaceholder from '../assets/book1.png'; // fallback image
+import bookPlaceholder from '../assets/book1.png';
 
 const API_BASE_URL = 'http://localhost:5000/api/books';
+const API_CART_URL = 'http://localhost:5000/api/cart';
 
 // Reusable components for icons
 const PaymentIcon = ({ src, alt }) => (
@@ -66,22 +68,86 @@ function ProductDetailPage() {
     if (id) fetchProduct();
   }, [id]);
 
+  // Navigation handlers
   const handleBack = () => navigate(-1);
+  const handleCartClick = () => navigate('/buy');
+  const handleProfileClick = () => navigate('/HomepageProfile');
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value, 10);
-    if (value >= 1) setQuantity(value);
+    const stock = product ? product.stock : 1;
+    if (value >= 1 && value <= stock) {
+      setQuantity(value);
+    } else if (value > stock) {
+      setQuantity(stock);
+    }
+  };
+
+  // Add to cart function
+  const handleAddToCart = async () => {
+    const userInfo = localStorage.getItem('userInfo');
+    if (!userInfo) {
+      alert('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าลงตะกร้า');
+      navigate('/login');
+      return;
+    }
+    
+    const user = JSON.parse(userInfo);
+    const userId = user._id;
+
+    if (product.stock <= 0) {
+      alert("สินค้าหมด");
+      return;
+    }
+    
+    if (quantity > product.stock) {
+      alert(`สินค้ามีไม่เพียงพอ (เหลือ ${product.stock} ชิ้น)`);
+      return;
+    }
+
+    const cartData = {
+      userId: userId,
+      bookId: product._id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      quantity: quantity
+    };
+
+    try {
+      const response = await fetch(`${API_CART_URL}/add`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cartData)
+      });
+
+      if (response.ok) {
+        alert(`เพิ่ม "${product.title}" (จำนวน ${quantity} ชิ้น) ลงตะกร้าสำเร็จ!`);
+      } else {
+        const errData = await response.json();
+        alert(`เกิดข้อผิดพลาด: ${errData.message || 'ไม่สามารถเพิ่มสินค้าได้'}`);
+      }
+    } catch (err) {
+      alert('การเชื่อมต่อล้มเหลว ไม่สามารถเพิ่มสินค้าได้');
+      console.error('Add to cart error:', err);
+    }
   };
 
   if (loading) {
-    return <div className="pdetail-page">กำลังโหลดรายละเอียดสินค้า...</div>;
+    return (
+      <div className="pdetail-page pdetail-loading">
+        กำลังโหลดรายละเอียดสินค้า...
+      </div>
+    );
   }
 
   if (error || !product) {
     return (
-      <div className="pdetail-page">
+      <div className="pdetail-page pdetail-error">
         <p>ข้อผิดพลาด: {error || 'ไม่พบสินค้า'}</p>
-        <button className="pdetail-back-btn" onClick={handleBack}>ย้อนกลับ</button>
+        <button className="pdetail-back-btn" onClick={handleBack}>
+          ย้อนกลับ
+        </button>
       </div>
     );
   }
@@ -95,13 +161,19 @@ function ProductDetailPage() {
       {/* Header */}
       <header className="pdetail-header">
         <img src={logo} alt="BookStore Logo" className="pdetail-logo" />
-        <nav>
+        <nav className="pdetail-nav">
           <a href="/">หน้าแรก</a>
           <a href="#shop">10 อันดับ</a>
         </nav>
         <div className="pdetail-search-container">
-          <MdOutlineShoppingCart className="pdetail-header-icon" />
-          <MdLogin className="pdetail-header-icon" />
+          <MdOutlineShoppingCart 
+            className="pdetail-header-icon" 
+            onClick={handleCartClick}
+          />
+          <CgProfile 
+            className="pdetail-header-icon" 
+            onClick={handleProfileClick}
+          />
           <input
             type="text"
             placeholder="ค้นหาหนังสือตามชื่อเรื่อง"
@@ -117,13 +189,15 @@ function ProductDetailPage() {
           <h2 className="pdetail-title">รายละเอียดสินค้า</h2>
 
           <div className="pdetail-content">
-            {/* Left side (Image + Back Button) */}
+            {/* Left side */}
             <div className="pdetail-left">
               <img src={imageSource} alt={title} className="pdetail-image" />
-              <button className="pdetail-back-btn" onClick={handleBack}>ย้อนกลับ</button>
+              <button className="pdetail-back-btn" onClick={handleBack}>
+                ย้อนกลับ
+              </button>
             </div>
 
-            {/* Right side (Product info) */}
+            {/* Right side */}
             <div className="pdetail-right">
               <h1 className="pdetail-product-title">{title}</h1>
               <p className="pdetail-product-meta">
@@ -160,6 +234,7 @@ function ProductDetailPage() {
               <button
                 className="pdetail-add-btn"
                 disabled={stock <= 0}
+                onClick={handleAddToCart}
               >
                 {stock > 0 ? "เพิ่มลงตะกร้า" : "สินค้าหมด"}
               </button>
@@ -178,7 +253,7 @@ function ProductDetailPage() {
             <p>โรแมนซ์</p>
             <p>กีฬา</p>
           </div>
-
+          
           <div className="pdetail-footer-section">
             <p><strong>ช่องทางชำระเงิน</strong></p>
             <div className="pdetail-payment-methods">
@@ -188,7 +263,7 @@ function ProductDetailPage() {
             </div>
           </div>
 
-          <div className="pdetail-footer-section pdetail-third-col">
+          <div className="pdetail-footer-section pdetail-third-column">
             <p><strong>ติดตามข่าวสารได้ที่</strong></p>
             <div className="pdetail-social-icons">
               <div className="pdetail-social-row">
