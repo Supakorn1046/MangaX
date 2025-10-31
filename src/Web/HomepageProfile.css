@@ -1,138 +1,438 @@
-.profile-main-content {
-    background-color: #F4D58D; 
-    padding: 40px 0;
-    
-    display: flex;
-    
-    justify-content: center;
-    
-    align-items: flex-start; 
-    
-    width: 100%; 
-    
-    min-height: calc(100vh - 80px - 53px); 
+/* ===================== 🔹 Header ===================== */
+.homepage .homepage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  padding: 0 5%;
+  height: 80px;
+  box-sizing: border-box;
 }
 
-.user-profile-box {
-    display: flex;
-    width: 90%; 
-    max-width: 1200px;
-    background-color: #fff;
-    min-height: 500px; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    
-    margin: 0 auto;
+.homepage .homepage-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: 2rem;
 }
 
-.sidebar {
-    width: 300px; 
-    background-color: #f0f0f0; 
-    padding: 40px 0 40px 20px;
+.homepage .homepage-search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  position: relative;
 }
 
-.sidebar-link {
-    display: block;
-    padding: 10px 20px;
-    margin: 5px 0;
-    color: #000;
-    font-weight: 400;
+.homepage .homepage-search-bar {
+  padding: 0.5rem 2.5rem 0.5rem 0.3rem;
+  border-radius: 2px;
+  border: none;
+  font-size: 0.8rem;
+  outline: none;
+  width: 250px;
 }
 
-.sidebar-link.active {
-    color: #4a148c; 
-    font-weight: 600;
-    border-right: 3px solid #007bff; 
-    background-color: #e5e5e5;
+.homepage .homepage-header-icon {
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-.sidebar-link.logout {
-    margin-top: 30px;
-    color: #dc3545; 
+.homepage .homepage-header-icon:hover {
+  color: #fdd835;
 }
 
-.user-info-section {
-    flex-grow: 1; 
-    padding: 40px 60px;
+.homepage .homepage-search-bar:focus {
+  box-shadow: 0 0 5px #fdd835;
 }
 
-.section-title {
-    font-size: 24px;
-    font-weight: 600;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+.homepage .homepage-search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  pointer-events: none;
 }
 
-.user-details-grid {
-    display: grid;
-    grid-template-columns: 150px 150px 1fr; 
-    gap: 15px 0;
-    align-items: center;
+.homepage .homepage-logo {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-left: -63px;
 }
 
-.profile-icon {
-    grid-area: 1 / 1 / 6 / 2; 
-    text-align: center;
-    margin-top: -20px;
+.homepage .homepage-header h1 {
+  margin: 0;
 }
 
-.icon-large-user {
-    font-size: 80px;
-    color: #aaa;
+.homepage .homepage-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 300;
+  transition: color 0.2s;
 }
 
-.detail-label {
-    grid-column: 2 / 3;
-    font-weight: 400;
-    color: #555;
+.homepage .homepage-nav a:hover {
+  color: #fdd835;
+  text-decoration: none;
 }
 
-.detail-value {
-    grid-column: 3 / 4;
-    font-weight: 600;
-    color: #333;
+/* ===================== 🔹 Footer ===================== */
+.homepage .homepage-footer {
+  padding: 2rem 1rem;
+  background-color: #AFAA98;
+  color: rgb(0, 0, 0);
 }
 
-.address-line {
-    line-height: 1.4;
+.homepage .homepage-footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 3rem;
 }
 
-.order-history-table {
+.homepage .homepage-third-column {
+  margin-left: 0;
+}
+
+.homepage .homepage-footer-section {
+  text-align: left;
+  min-width: 200px;
+}
+
+.homepage .homepage-footer-section p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.homepage .homepage-footer-section strong {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.homepage .homepage-payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.homepage .homepage-image-link {
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.homepage .homepage-image-link img {
+  width: 40px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.homepage .homepage-social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.homepage .homepage-social-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.homepage .homepage-image-link img:hover {
+  transform: scale(1.1);
+}
+
+/* ===================== 🔸 โครงสร้างหลักของหน้าโปรไฟล์ ===================== */
+.hp-profile-main-content {
+  background-color: #F4D58D;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: calc(100vh - 80px - 120px);
+}
+
+.hp-profile-box {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  background-color: #000000;
+  min-height: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 🔹 Sidebar */
+.hp-profile-sidebar {
+  width: 500px;
+  background-color: #ffffff;
+  padding: 40px 0;
+  border-right: 1px solid #e9ecef;
+}
+
+.hp-profile-link {
+  display: block;
+  padding: 12px 30px;
+  margin: 5px 0;
+  color: #495057;
+  text-decoration: none;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.hp-profile-link:hover {
+  background-color: #e9ecef;
+  color: #000;
+}
+
+.hp-profile-link.active {
+  color: #007bff;
+  font-weight: 600;
+  border-right: 3px solid #007bff;
+  background-color: #e3f2fd;
+}
+
+.hp-profile-link.logout {
+  margin-top: 30px;
+  color: #dc3545;
+}
+
+.hp-profile-link.logout:hover {
+  background-color: #f8d7da;
+  color: #dc3545;
+}
+
+/* 🔸 ส่วนข้อมูลผู้ใช้ */
+.hp-profile-info-section {
+  flex-grow: 1;
+  padding: 40px 60px;
+  background-color: #fff;
+}
+
+.hp-profile-section-title {
+  font-size: 24px;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  color: #343a40;
+}
+
+.hp-profile-details-grid {
+  display: grid;
+  grid-template-columns: 100px 150px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.hp-profile-icon {
+  grid-row: 1 / span 5;
+  grid-column: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hp-profile-icon-user {
+  font-size: 80px;
+  color: #6c757d;
+}
+
+.hp-profile-label {
+  grid-column: 2;
+  font-weight: 500;
+  color: #6c757d;
+  padding: 8px 0;
+}
+
+.hp-profile-value {
+  grid-column: 3;
+  font-weight: 600;
+  color: #343a40;
+  padding: 8px 0;
+}
+
+.hp-profile-address {
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 🔸 ตารางประวัติการสั่งซื้อ */
+.hp-profile-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.hp-profile-history-table th {
+  text-align: left;
+  padding: 12px 20px 12px 20px; /* 🔥 เพิ่ม padding-left */
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+  color: #495057;
+  background-color: #f8f9fa;
+}
+
+.hp-profile-history-table th:first-child {
+  padding-left: 30px; /* 🔥 ขยับ "ชื่อ" เข้ามาเพิ่มเติม */
+}
+
+.hp-profile-history-table th:last-child {
+  padding-right: 30px; /* 🔥 ขยับ "ราคา" เข้ามา */
+  text-align: right;
+}
+
+.hp-profile-history-table td {
+  padding: 15px 20px 15px 20px; /* 🔥 เพิ่ม padding-left */
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: middle;
+}
+
+.hp-profile-history-table td:first-child {
+  padding-left: 1px; /* 🔥 ขยับข้อมูลชื่อสินค้าเข้ามา */
+}
+
+.hp-profile-history-table td:last-child {
+  padding-right: 30px; /* 🔥 ขยับข้อมูลราคาเข้ามา */
+  text-align: right;
+  font-weight: 600;
+  color: #28a745;
+}
+
+.hp-profile-history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.hp-profile-item-img {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+  margin-right: 15px;
+  border-radius: 4px;
+}
+
+.hp-profile-item-title {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1.4;
+  color: #343a40;
+  font-weight: 500;
+}
+
+/* ===================== 🔹 Responsive Design ===================== */
+@media (max-width: 1024px) {
+  .hp-profile-box {
+    width: 95%;
+  }
+  
+  .hp-profile-info-section {
+    padding: 30px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .homepage .homepage-footer-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .homepage .homepage-third-column {
+    margin-left: 0;
+  }
+  
+  .homepage .homepage-search-bar {
+    width: 200px;
+  }
+  
+  .hp-profile-box {
+    flex-direction: column;
+    width: 98%;
+    margin: 20px auto;
+  }
+  
+  .hp-profile-sidebar {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    padding: 20px 0;
+  }
+  
+  .hp-profile-info-section {
+    padding: 20px;
+  }
+  
+  .hp-profile-details-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .hp-profile-icon {
+    grid-row: 1;
+    grid-column: 1;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  
+  .hp-profile-label,
+  .hp-profile-value {
+    grid-column: 1;
+    padding: 5px 0;
+  }
+  
+  .hp-profile-history-table th,
+  .hp-profile-history-table td {
+    padding: 10px 20px 10px 0;
+  }
+  
+  .hp-profile-history-table th:last-child,
+  .hp-profile-history-table td:last-child {
+    padding-right: 0;
+  }
 }
 
-.order-history-table th {
-    text-align: left;
-    padding: 10px 0;
-    font-weight: 600;
-    border-bottom: 2px solid #ccc;
-    color: #555;
-}
-
-.order-history-table td {
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-    vertical-align: middle;
-    font-size: 16px;
-}
-
-.order-history-table tr:last-child td {
-    border-bottom: none;
-}
-
-.order-item-img {
-    width: 60px; 
-    height: auto;
-    display: block;
-    float: left;
-    margin-right: 15px;
-}
-
-.order-item-title {
-    display: inline-block;
-    vertical-align: top;
-    line-height: 1.4;
-    color: #333;
+@media (max-width: 480px) {
+  .homepage .homepage-nav {
+    gap: 1rem;
+    margin-left: 1rem;
+  }
+  
+  .homepage .homepage-search-bar {
+    width: 150px;
+  }
+  
+  .hp-profile-info-section {
+    padding: 15px;
+  }
+  
+  .hp-profile-section-title {
+    font-size: 20px;
+  }
+  
+  .hp-profile-history-table {
+    font-size: 0.8rem;
+  }
+  
+  .hp-profile-item-img {
+    width: 40px;
+    height: 60px;
+    margin-right: 10px;
+  }
 }

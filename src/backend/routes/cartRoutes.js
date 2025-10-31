@@ -14,10 +14,11 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
-// ✅ เพิ่มสินค้าเข้าตะกร้า
+// ✅ เพิ่มสินค้าเข้าตะกร้า (แก้ไข)
 router.post("/add", async (req, res) => {
   try {
-    const { userId, bookId, title, price, quantity } = req.body;
+    // 💡 1. ดึง image (URL รูปภาพ) มาจาก req.body
+    const { userId, bookId, title, price, quantity, image } = req.body;
     let cart = await Cart.findOne({ userId });
 
     if (!cart) {
@@ -27,9 +28,17 @@ router.post("/add", async (req, res) => {
     const itemIndex = cart.items.findIndex(i => i.bookId.toString() === bookId);
 
     if (itemIndex > -1) {
+      // ถ้ามีสินค้าอยู่แล้ว ให้อัปเดตจำนวน
       cart.items[itemIndex].quantity += quantity;
+      
+      // 💡 3. (Optional) อัปเดต URL รูปภาพหากยังไม่มี
+      if (!cart.items[itemIndex].image && image) {
+          cart.items[itemIndex].image = image;
+      }
+
     } else {
-      cart.items.push({ bookId, title, price, quantity });
+      // 💡 2. เพิ่ม image เมื่อ push สินค้าใหม่
+      cart.items.push({ bookId, title, price, image, quantity });
     }
 
     cart.total = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -45,7 +54,7 @@ router.delete("/remove/:userId/:bookId", async (req, res) => {
   try {
     const { userId, bookId } = req.params;
     const cart = await Cart.findOne({ userId });
-    if (!cart) return res.status(404).json({ message: "Cart not found" });
+    if (!cart) return res.status(4.04).json({ message: "Cart not found" });
 
     cart.items = cart.items.filter(i => i.bookId.toString() !== bookId);
     cart.total = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -56,5 +65,22 @@ router.delete("/remove/:userId/:bookId", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+// ล้างตะกร้าสินค้าทั้งหมดของผู้ใช้ (Clear Cart)
+router.delete("/user/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    // หาทั้งตะกร้าและลบมันทิ้ง
+    const deletedCart = await Cart.findOneAndDelete({ userId: userId });
+
+    if (!deletedCart) {
+      return res.status(404).json({ message: "ไม่พบตะกร้าสินค้า" });
+    }
+
+    res.json({ message: "ล้างตะกร้าสินค้าสำเร็จ" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 export default router;
+

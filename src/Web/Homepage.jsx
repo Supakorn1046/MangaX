@@ -29,10 +29,11 @@ import xImage from '../assets/x.png';
 
 // URL ฐานของ API
 const API_BASE_URL = 'http://localhost:5000/api/books';
+const API_CART_URL = 'http://localhost:5000/api/cart'; // 💡 URL สำหรับ Cart API
 
 // Mock data (ใช้เป็น Fallback ถ้าดึงข้อมูลไม่ได้)
 const mockBooks = [
-    { _id: 1, title: "Harry Potter", author: "J.K. Rowling", price: 12.99, image: book1, category: 'Fantasy', createdAt: new Date() },
+    { _id: 1, title: "Harry Potter", author: "J.K. Rowling", price: 12.99, image: book1, category: 'Fantasy', createdAt: new Date() },
 ];
 const images = [promo1, promo2, promo3, promo4];
 
@@ -76,7 +77,7 @@ function Homepage() {
         return () => clearInterval(interval);
     }, [images.length]);
 
-    // Navigation handlers (โค้ดเดิม)
+    // Navigation handlers
     const handleCartClick = () => {
         navigate('/buy');
     };
@@ -84,8 +85,11 @@ function Homepage() {
     const handleProfileClick = () => {
         navigate('/HomepageProfile');
     };
+    
+    const handleBookClick = (bookId) => {
+        navigate(`/productdetail/${bookId}`);
+    };
 
-    // 🔑 NEW: ฟังก์ชันสำหรับเปลี่ยนหน้า "ดูทั้งหมด"
     const handleViewAll = (path) => {
         navigate(path);
     };
@@ -110,19 +114,78 @@ function Homepage() {
     };
 
 
-    // Book card component (โค้ดเดิม)
-    const BookCard = ({ book }) => (
-        <div className="homepage-book-card">
-            <img src={book.image || book1} alt={book.title} className="homepage-book-image" /> 
-            <h3 className="homepage-book-title">{book.title}</h3>
-            <p className="homepage-book-author">{book.author}</p>
-            <p className="homepage-book-price">฿{book.price ? book.price.toFixed(2) : 'N/A'}</p> 
-            <button className="homepage-add-to-cart-btn">เพิ่มลงตะกร้า</button>
-        </div>
-    );
+    // ----------------------------------------------------
+    // 💡 Book card component (แก้ไขให้เพิ่มสินค้าลงตะกร้าได้)
+    // ----------------------------------------------------
+    const BookCard = ({ book }) => {
+        
+        // 🔑 ฟังก์ชันสำหรับเพิ่มสินค้าลงตะกร้า
+        const handleAddToCart = async (e) => {
+            e.stopPropagation(); // 💡 ป้องกันไม่ให้ Card หลัก (ที่ไปหน้า Detail) ทำงาน
+            
+            // 1. ดึง User ID จาก localStorage
+            const userInfo = localStorage.getItem('userInfo');
+            if (!userInfo) {
+                alert('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าลงตะกร้า');
+                navigate('/login'); // ส่งไปหน้า Login
+                return;
+            }
+            
+            const user = JSON.parse(userInfo);
+            const userId = user._id; // (ต้องตรงกับ key ที่คุณเก็บตอน Login)
+
+            // 2. เตรียมข้อมูลสำหรับส่งไป API
+            const cartData = {
+                userId: userId,
+                bookId: book._id,
+                title: book.title,
+                price: book.price,
+                image: book.image,
+                quantity: 1 // เพิ่มทีละ 1 ชิ้น
+            };
+
+            // 3. เรียก API POST /api/cart/add
+            try {
+                const response = await fetch(`${API_CART_URL}/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(cartData)
+                });
+
+                if (response.ok) {
+                    alert(`เพิ่ม "${book.title}" ลงตะกร้าสำเร็จ!`);
+                } else {
+                    const errData = await response.json();
+                    alert(`เกิดข้อผิดพลาด: ${errData.message || 'ไม่สามารถเพิ่มสินค้าได้'}`);
+                }
+            } catch (err) {
+                alert('การเชื่อมต่อล้มเหลว ไม่สามารถเพิ่มสินค้าได้');
+                console.error('Add to cart error:', err);
+            }
+        };
+        
+        return (
+            <div className="homepage-book-card" onClick={() => handleBookClick(book._id)} style={{ cursor: 'pointer' }}>
+                <img src={book.image || book1} alt={book.title} className="homepage-book-image" /> 
+                <h3 className="homepage-book-title">{book.title}</h3>
+                <p className="homepage-book-author">{book.author}</p>
+                <p className="homepage-book-price">฿{book.price ? book.price.toFixed(2) : 'N/A'}</p> 
+                
+                {/* 🔑 ผูก onClick เข้ากับปุ่ม */}
+                <button 
+                    className="homepage-add-to-cart-btn" 
+                    onClick={handleAddToCart}
+                >
+                    เพิ่มลงตะกร้า
+                </button>
+            </div>
+        );
+    };
     
-    // Book section component (ปรับให้รับ path)
-    const BookSection = ({ title, isTop10 = false, booksToShow, viewAllPath }) => ( // 🔑 รับ viewAllPath
+    // Book section component (โค้ดเดิม)
+    const BookSection = ({ title, isTop10 = false, booksToShow, viewAllPath }) => (
         <section className="homepage-books-section">
             <h2 className={isTop10 ? "homepage-red-box-top10" : "homepage-red-box"}>
                 {title}
@@ -140,10 +203,9 @@ function Homepage() {
                     )}
                     
                     <div className="homepage-view-all-card">
-                        {/* 🔑 ผูก onClick ด้วย path ที่รับมา */}
                         <button 
                             className="homepage-view-all-btn" 
-                            onClick={() => handleViewAll(viewAllPath)} // 🔑 ใช้งาน handleViewAll
+                            onClick={() => handleViewAll(viewAllPath)}
                         >
                             ดูทั้งหมด
                         </button>
@@ -225,37 +287,36 @@ function Homepage() {
                 <CarouselButtons />
             </section>
 
-            {/* Books Sections (ส่ง path ปลายทาง) */}
+            {/* Books Sections (โค้ดเดิม) */}
             <BookSection 
                 title="มังงะขายดี 10 อันดับ" 
                 isTop10={true} 
                 booksToShow={getTopSellingBooks()}
-                viewAllPath="/SeeAlltop10" // 🔑 Path สำหรับดูทั้งหมด
+                viewAllPath="/SeeAlltop10"
             />
 
             <BookSection 
                 title="ใหม่" 
                 booksToShow={getNewBooks()}
-                viewAllPath="/New" // สามารถกำหนดเป็น /New หรือ /SeeAllNew
+                viewAllPath="/New"
             />
 
             <BookSection 
                 title="ต่อสู้" 
                 booksToShow={getBooksByCategory('Action')}
-                viewAllPath="/Action" // 🔑 Path ตามหมวดหมู่
+                viewAllPath="/Action"
             />
 
             <BookSection 
                 title="กีฬา" 
                 booksToShow={getBooksByCategory('Sport')}
-                viewAllPath="/Sport" // 🔑 Path ตามหมวดหมู่
+                viewAllPath="/Sport"
             />
 
             {/* Footer Section (โค้ดเดิม) */}
             <footer className="homepage-footer">
                 <div className="homepage-footer-content">
-                    
-                    {/* Quick Links */}
+                    {/* ... Footer content ... */}
                     <div className="homepage-footer-section">
                         <p><strong>ทางลัด</strong></p>
                         <p>หนังสือขายดี 10 อันดับ</p>
@@ -264,7 +325,6 @@ function Homepage() {
                         <p>กีฬา</p>
                     </div>
                     
-                    {/* Payment Methods */}
                     <div className="homepage-footer-section">
                         <p><strong>ช่องทางชำระเงิน</strong></p>
                         <div className="homepage-payment-methods">
@@ -274,7 +334,6 @@ function Homepage() {
                         </div>
                     </div>
 
-                    {/* Social Media */}
                     <div className="homepage-footer-section homepage-third-column">
                         <p><strong>ติดตามข่าวสารได้ที่</strong></p>
                         <div className="homepage-social-icons">

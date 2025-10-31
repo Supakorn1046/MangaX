@@ -1,9 +1,12 @@
+// ในไฟล์ orderRoutes.js
+
 import express from "express";
 import Order from "../models/Order.js";
+import Book from "../models/Book.js"; 
 
 const router = express.Router();
 
-// ✅ ดึงคำสั่งซื้อทั้งหมด
+// 💡 (เพิ่ม) GET / (ดึง Order ทั้งหมด)
 router.get("/", async (req, res) => {
   try {
     const orders = await Order.find();
@@ -13,25 +16,73 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ✅ เพิ่มคำสั่งซื้อใหม่
-router.post("/", async (req, res) => {
-  try {
-    const newOrder = new Order(req.body);
-    const savedOrder = await newOrder.save();
-    res.status(201).json(savedOrder);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-// ✅ ดึงคำสั่งซื้อของ userId หนึ่งคน
+// --- ⭐️ นี่คือ Route ที่คุณต้องแก้ไข ⭐️ ---
+// ✅ ดึงประวัติการสั่งซื้อทั้งหมดของผู้ใช้
 router.get("/user/:userId", async (req, res) => {
   try {
-    const orders = await Order.find({ userId: req.params.userId });
+    // ค้นหา Order ทั้งหมดที่ตรงกับ userId
+    const orders = await Order.find({ userId: req.params.userId })
+                              .sort({ createdAt: -1 }); // 👈 (เรียงจากใหม่ไปเก่า)
+
+    if (!orders) {
+      return res.json([]); // 👈 (ส่ง array ว่าง ถ้าไม่เจอ)
+    }
+    
+    // ส่งข้อมูลประวัติการซื้อกลับไป
     res.json(orders);
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+// --- ⭐️ จบส่วนที่แก้ไข ⭐️ ---
+
+
+// --- (โค้ด POST / (ตัดสต็อก) ของคุณอยู่ตรงนี้ - ถูกต้องแล้ว) ---
+router.post("/", async (req, res) => {
+  const { userId, items, total, addressId } = req.body;
+
+  try {
+    // 2. ตรวจสอบสต็อกสินค้าก่อน (Validation)
+    for (const item of items) {
+      const book = await Book.findById(item.bookId);
+      if (!book) {
+        return res.status(404).json({ message: `ไม่พบสินค้า: ${item.title}` });
+      }
+      if (book.stock < item.quantity) {
+        return res.status(400).json({ 
+          message: `สินค้า '${item.title}' มีไม่เพียงพอ (เหลือ ${book.stock} ชิ้น)` 
+        });
+      }
+    }
+
+    // 3. ถ้าสต็อกพอ ให้ทำการ "ตัดสต็อก" (Update)
+    for (const item of items) {
+      await Book.findByIdAndUpdate(item.bookId, { 
+        $inc: { stock: -item.quantity } 
+      });
+    }
+
+    // 4. สร้างคำสั่งซื้อ (Order)
+    const newOrder = new Order({
+      userId,
+      items,
+      total,
+      addressId,
+      paymentMethod: req.body.paymentMethod || "QR Code",
+      paymentStatus: "Paid",
+      orderStatus: "Processing"
+    });
+    
+    const savedOrder = await newOrder.save();
+    
+    // 5. ส่ง Order ที่บันทึกแล้วกลับไป
+    res.status(201).json(savedOrder);
+
+  } catch (error) {
+    res.status(500).json({ message: "เกิดข้อผิดพลาดที่ Server: " + error.message });
+  }
+});
+
 
 export default router;

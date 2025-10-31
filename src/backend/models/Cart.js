@@ -7,6 +7,7 @@ const cartSchema = new mongoose.Schema({
       bookId: { type: mongoose.Schema.Types.ObjectId, ref: "Book" },
       title: String,
       price: Number,
+      image: String, // 💡 เพิ่มฟิลด์นี้
       quantity: { type: Number, default: 1 }
     }
   ],
@@ -14,3 +15,4 @@ const cartSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model("Cart", cartSchema);
+

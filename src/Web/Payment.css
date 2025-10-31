@@ -287,6 +287,23 @@
   transform: scale(1.1);
 }
 
+.payment-total-details {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.payment-total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.payment-total-row span:last-child {
+  font-weight: bold;
+}
 .payment-social-icons {
   display: flex;
   flex-direction: column;

@@ -43,7 +43,7 @@
 }
 
 .sport-header .sport-search-icon {
- position: absolute;
+  position: absolute;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
@@ -106,18 +106,29 @@
   transform: translateY(-5px);
 }
 
-.sport-book-image-placeholder {
+/* 🔑 แก้ไข: สไตล์สำหรับ Image Container */
+.sport-book-image-container {
   width: 100%;
-  height: 250px;
+  height: 200px; /* เดิม 250px → ลดลงเพื่อให้ไม่ใหญ่เกินไป */
   background-color: #333;
   border-radius: 5px;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 0.9rem;
+  overflow: hidden;
 }
+
+.sport-book-image-container .sport-book-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ครอบภาพเต็มกรอบโดยไม่บิดเบี้ยว */
+  border-radius: 5px;
+}
+
+
+/* 🛑 ลบ .sport-book-image-placeholder ออกเพราะถูกแทนที่ด้วย .sport-book-image-container ใน JSX */
+
 
 .sport-book-card h3 {
   font-size: 1.2rem;
