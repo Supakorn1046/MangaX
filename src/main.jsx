@@ -18,7 +18,8 @@ import Detail from './Components/MangaProfileDetails.jsx'
 import Register from './Components/MangaXRegister.jsx'
 import AuthPage from './components/AuthPage.jsx'
 import Top10 from './Web/SeeAlltop10.jsx'
-
+import Action from './Web/Action.jsx'
+import Sport from './Web/Sport.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -30,6 +31,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/new" element={<New />} />
         <Route path="/buy" element={<Buy />} />
         <Route path="/SeeAlltop10" element={<Top10 />} />
+        <Route path="/Action" element={<Action  />} />
+        <Route path="/Sport" element={<Sport />} />
         <Route path="/HomepageProfile" element={<HomepageProfile />} />
         <Route path="/admin_list" element={<AdminList />} />
         <Route path="/admin_edit/:id" element={<AdminEdit />} /> {/* ✅ เพิ่ม Route นี้ */}

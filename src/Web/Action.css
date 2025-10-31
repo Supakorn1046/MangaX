@@ -107,17 +107,27 @@
   transform: translateY(-5px);
 }
 
-.action-book-image-placeholder {
+/* 🔑 แก้ไข: ตั้งค่า Container และรูปภาพจริง */
+.action-book-image-container {
   width: 100%;
-  height: 250px;
+  /* กำหนดความสูงที่แน่นอนเพื่อให้ Grid มีความสูงสม่ำเสมอ */
+  height: 250px; 
   background-color: #333;
   border-radius: 5px;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 0.9rem;
+  overflow: hidden; /* ซ่อนส่วนที่เกินจากกรอบ */
+}
+
+.action-book-image-container .action-book-image {
+  /* 🔑 NEW: สไตล์สำหรับรูปภาพจริง */
+  width: 100%; 
+  height: 100%;
+  /* 💡 สำคัญ: ใช้ object-fit: cover เพื่อปรับขนาดรูปภาพให้เต็มกรอบโดยไม่ยืดเสียสัดส่วน */
+  object-fit: cover; 
+  border-radius: 5px;
 }
 
 .action-book-card h3 {
