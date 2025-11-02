@@ -6,8 +6,6 @@ import { CgProfile } from "react-icons/cg";
 import "./Homepage.css"; 
 import "./HomepageProfile.css";
 import logo from "../assets/logo.png"; 
-
-// (Imports รูปภาพสำหรับ Footer)
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
 import paypalImage from '../assets/paypal.png';
@@ -18,7 +16,6 @@ import ytImage from '../assets/yt1.png';
 import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
 
-// --- ⭐️ ส่วนที่แก้ไข 1: UserInfoContent ---
 const UserInfoContent = ({ user }) => {
   if (!user) {
     return <p>กำลังโหลดข้อมูลผู้ใช้...</p>;
@@ -32,9 +29,6 @@ const UserInfoContent = ({ user }) => {
           <span className="hp-profile-icon-user">👤</span>
         </div>
         <div className="hp-profile-label">ชื่อ</div>
-        {/* แก้ตรงนี้: ให้แสดง firstName + lastName (จาก Address) 
-          ถ้าไม่มี ให้ใช้ displayName (จาก User/localStorage) เป็นค่าสำรอง
-        */}
         <div className="hp-profile-value">
           {(user.firstName && user.lastName) 
             ? `${user.firstName} ${user.lastName}`
@@ -47,15 +41,14 @@ const UserInfoContent = ({ user }) => {
         <div className="hp-profile-label">เบอร์</div>
         <div className="hp-profile-value">{user.phone || '-'}</div>
         <div className="hp-profile-label">ที่อยู่</div>
-        {/* แก้ตรงนี้: user.address จะมีแค่ที่อยู่ (จาก useEffect ที่แก้ไข) */}
         <div className="hp-profile-value hp-profile-address">{user.address || 'ยังไม่ได้ตั้งค่าที่อยู่'}</div>
       </div>
     </section>
   );
 };
-// --- จบส่วนที่แก้ไข 1 ---
 
-// --- ส่วนประวัติการซื้อ (เหมือนเดิม) ---
+
+// ส่วนประวัติการซื้อ
 const OrderHistoryContent = ({ history }) => {
   if (!history || history.length === 0) {
     return (
@@ -93,9 +86,9 @@ const OrderHistoryContent = ({ history }) => {
     </section>
   );
 };
-// --- จบส่วนประวัติการซื้อ ---
 
-// --- (Reusable components สำหรับ Footer - เหมือนเดิม) ---
+
+// Reusable components สำหรับ Footer
 const PaymentIcon = ({ src, alt }) => (
   <div className="homepage-image-link">
     <img src={src} alt={alt} />
@@ -107,7 +100,7 @@ const SocialIcon = ({ src, alt }) => (
   </div>
 );
 
-// --- Component หลัก ---
+// Component หลัก
 const HomepageProfile = () => {
   const [activeTab, setActiveTab] = useState('account');
   const navigate = useNavigate();
@@ -122,7 +115,6 @@ const HomepageProfile = () => {
     : null;
   const userId = userInfo ? userInfo._id : null;
 
-  // --- ⭐️ ส่วนที่แก้ไข 2: useEffect ---
   useEffect(() => {
     if (!userId) {
       setError("ไม่พบข้อมูลผู้ใช้");
@@ -135,41 +127,40 @@ const HomepageProfile = () => {
       setLoading(true);
       setError(null);
       try {
-        // --- 3.1 ดึงข้อมูลที่อยู่ (สำหรับ Phone/Address/FirstName/LastName) ---
         const addrRes = await fetch(`http://localhost:5000/api/address/user/${userId}`);
         let userPhone = '';
         let userAddress = 'ยังไม่ได้ตั้งค่าที่อยู่';
-        let userFirstName = ''; // 👈 เพิ่ม
-        let userLastName = '';  // 👈 เพิ่ม
+        let userFirstName = ''; 
+        let userLastName = '';  
 
         if (addrRes.ok) {
           const addresses = await addrRes.json();
           const defaultAddress = addresses.find(addr => addr.isDefault) || addresses[0];
           if (defaultAddress) {
             userPhone = defaultAddress.phone;
-            userAddress = defaultAddress.address; // 👈 แก้ไข: เอาเฉพาะที่อยู่
-            userFirstName = defaultAddress.firstName; // 👈 เพิ่ม
-            userLastName = defaultAddress.lastName;   // 👈 เพิ่ม
+            userAddress = defaultAddress.address; 
+            userFirstName = defaultAddress.firstName; 
+            userLastName = defaultAddress.lastName;   
           }
         }
 
-        // --- 3.2 รวมข้อมูลผู้ใช้ (จาก localStorage + Address) ---
+        // รวมข้อมูลผู้ใช้ 
         setUserData({
-          displayName: userInfo.name, // 👈 นี่คือ displayName (เช่น "Kornza" หรือ "XXXX")
+          displayName: userInfo.name, 
           email: userInfo.email, 
           phone: userPhone, 
-          address: userAddress,     // 👈 ที่อยู่ (ไม่รวมชื่อ)
-          firstName: userFirstName, // 👈 ส่ง firstName (จาก Address)
-          lastName: userLastName    // 👈 ส่ง lastName (จาก Address)
+          address: userAddress,     
+          firstName: userFirstName, 
+          lastName: userLastName    
         });
 
-        // --- 3.3 ดึงข้อมูลประวัติการซื้อ (Orders) ---
+        //ดึงข้อมูลประวัติการซื้อ
         const orderRes = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
         if (!orderRes.ok) throw new Error('ไม่สามารถดึงประวัติการซื้อได้');
         
         const fetchedOrders = await orderRes.json(); 
         
-        // --- 3.4 แปลงข้อมูล (Flattening) ---
+        // แปลงข้อมูล
         const flatHistory = [];
         for (const order of fetchedOrders) {
           for (const item of order.items) {
@@ -192,13 +183,7 @@ const HomepageProfile = () => {
     };
 
     fetchData();
-  // 💡 ลบ userInfo.name, userInfo.email ออกจาก dependencies
-  // เพราะมันมาจาก localStorage และไม่ควร trigger re-fetch
   }, [userId, navigate]); 
-  // --- จบส่วนที่แก้ไข 2 ---
-
-
-  // (ฟังก์ชัน Navigation & Logout - เหมือนเดิม)
   const handleCartClick = () => navigate('/buy');
   const handleProfileClick = () => navigate('/HomepageProfile');
   const handleHomepageClick = () => navigate('/homepage');
@@ -208,7 +193,6 @@ const HomepageProfile = () => {
     navigate('/login');
   };
 
-  // (renderContent - เหมือนเดิม)
   const renderContent = () => {
     if (loading) {
       return (
@@ -236,7 +220,7 @@ const HomepageProfile = () => {
 
   return (
     <div className="homepage"> 
-      {/* Header (เหมือนเดิม) */}
+      {/* Header */}
       <header className="homepage-header">
         <img src={logo} alt="BookStore Logo" className="homepage-logo" />
         <nav className="homepage-nav">
@@ -263,7 +247,7 @@ const HomepageProfile = () => {
         </div>
       </header>
 
-      {/* Main Content (เหมือนเดิม) */}
+      {/* Main Content  */}
       <main className="hp-profile-main-content"> 
         <div className="hp-profile-box">
           <aside className="hp-profile-sidebar">
@@ -289,7 +273,7 @@ const HomepageProfile = () => {
         </div>
       </main>
 
-      {/* Footer (เหมือนเดิม) */}
+      {/* Footer  */}
       <footer className="homepage-footer">
         <div className="homepage-footer-content">
           

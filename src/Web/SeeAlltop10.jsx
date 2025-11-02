@@ -19,7 +19,7 @@ import xImage from '../assets/x.png';
 const API_BASE_URL = 'http://localhost:5000/api/books';
 const API_CART_URL = 'http://localhost:5000/api/cart';
 
-// ✅ Reusable Components
+// Reusable Components
 const PaymentIcon = ({ src, alt }) => (
     <div className="seealltop10-image-link">
         <img src={src} alt={alt} />
@@ -62,7 +62,7 @@ function Seealltop10() {
     const [filteredBooks, setFilteredBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [searchQuery, setSearchQuery] = useState(''); // State สำหรับค้นหา
+    const [searchQuery, setSearchQuery] = useState(''); 
     const navigate = useNavigate();
 
     // Fetch top books
@@ -77,7 +77,7 @@ function Seealltop10() {
                 }
                 const data = await response.json();
                 setBooks(data);
-                setFilteredBooks(data); // ตั้งค่าเริ่มต้นให้ filteredBooks
+                setFilteredBooks(data); 
             } catch (err) {
                 setError(err.message);
                 setBooks([]);
@@ -99,10 +99,8 @@ function Seealltop10() {
         const query = searchQuery.trim().toLowerCase();
         
         if (query === '') {
-            // ถ้าไม่มีคำค้นหา ให้แสดงหนังสือทั้งหมด
             setFilteredBooks(books);
         } else {
-            // กรองหนังสือตามคำค้นหา
             const filtered = books.filter(book => 
                 book.title.toLowerCase().includes(query) ||
                 (book.author && book.author.toLowerCase().includes(query)) ||
@@ -115,19 +113,6 @@ function Seealltop10() {
     const handleSearchInputChange = (e) => {
         const value = e.target.value;
         setSearchQuery(value);
-        
-        // Real-time search (optional)
-        // ถ้าต้องการให้ค้นหาแบบ real-time ให้เอา comment ออก
-        // if (value.trim() === '') {
-        //     setFilteredBooks(books);
-        // } else {
-        //     const query = value.trim().toLowerCase();
-        //     const filtered = books.filter(book => 
-        //         book.title.toLowerCase().includes(query) ||
-        //         (book.author && book.author.toLowerCase().includes(query))
-        //     );
-        //     setFilteredBooks(filtered);
-        // }
     };
 
     const handleSearchKeyPress = (e) => {
@@ -206,7 +191,7 @@ function Seealltop10() {
                         className="seealltop10-header-icon" 
                         onClick={handleProfileClick}
                     />
-                    {/* แถบค้นหาที่ทำงานได้ */}
+                    {/* แถบค้นหา */}
                     <div className="seealltop10-search-wrapper">
                         <input
                             type="text"

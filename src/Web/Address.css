@@ -169,19 +169,19 @@
   border-radius: 8px;
   border: 1px solid #ddd;
   margin-bottom: 2rem;
-  text-align: left; /* จัดข้อความชิดซ้าย */
+  text-align: left; 
 }
 
 .address-info p {
   margin-bottom: 0.5rem;
   color: #333;
-  text-align: left; /* จัดข้อความชิดซ้าย */
+  text-align: left; 
 }
 
 /* ฟอร์มกรอกที่อยู่ใหม่ */
 .address-form {
   margin-bottom: 2rem;
-  text-align: left; /* จัดฟอร์มทั้งหมดชิดซ้าย */
+  text-align: left; 
 }
 
 .form-row {
@@ -194,14 +194,14 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  text-align: left; /* จัด label และ input ชิดซ้าย */
+  text-align: left; 
 }
 
 .form-group label {
   margin-bottom: 0.5rem;
   font-weight: bold;
   color: #333;
-  text-align: left; /* จัด label ชิดซ้าย */
+  text-align: left; 
 }
 
 .form-group input,
@@ -211,7 +211,7 @@
   border-radius: 5px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
-  text-align: left; /* จัดข้อความใน input ชิดซ้าย */
+  text-align: left; 
 }
 
 .form-group input:focus,
@@ -226,7 +226,7 @@
   min-height: 80px;
 }
 
-/* ในส่วนของปุ่มดำเนินการ */
+
 .address-actions {
   display: flex;
   justify-content: space-between;
@@ -244,8 +244,8 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  text-decoration: none; /* เพิ่มสำหรับ Link */
-  display: inline-block; /* เพิ่มสำหรับ Link */
+  text-decoration: none; 
+  display: inline-block; 
   text-align: center;
 }
 

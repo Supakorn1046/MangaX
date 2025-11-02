@@ -4,8 +4,6 @@ import { CgProfile } from "react-icons/cg";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./Homepage.css";
-
-// Assets imports
 import logo from "../assets/logo.png"; 
 import promo1 from "../assets/promo1.png";
 import promo2 from "../assets/promo2.png";
@@ -42,12 +40,12 @@ function Homepage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null); 
     
-    // 🔥 State สำหรับการค้นหา
+    // State สำหรับการค้นหา
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
 
-    // 🔥 ตรวจสอบการล็อกอินเมื่อ component โหลด
+    // ตรวจสอบการล็อกอิน
     useEffect(() => {
         const checkAuth = () => {
             const token = localStorage.getItem('token');
@@ -80,7 +78,6 @@ function Homepage() {
                 const allBooksData = await allBooksRes.json();
                 setAllBooks(allBooksData);
 
-                // พยายามดึงหนังสือขายดี (มี fallback)
                 try {
                     const topSellingRes = await fetch(`${API_BASE_URL}/bestsellers`);
                     if (topSellingRes.ok) {
@@ -115,7 +112,7 @@ function Homepage() {
         return () => clearInterval(interval);
     }, [images.length]);
 
-    // 🔥 ฟังก์ชันการค้นหาแบบ debounce
+    // ฟังก์ชันการค้นหาแบบ debounce
     useEffect(() => {
         if (searchTerm.trim() === "") {
             setIsSearching(false);
@@ -134,19 +131,19 @@ function Homepage() {
             );
             
             setSearchResults(results);
-        }, 300); // ดีเลย์ 300ms
+        }, 300); 
 
         return () => clearTimeout(searchTimer);
     }, [searchTerm, allBooks]);
 
-    // 🔥 ฟังก์ชันเมื่อกด Enter ในช่องค้นหา
+    //  ฟังก์ชันเมื่อกด Enter ในช่องค้นหา
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             handleSearch();
         }
     };
 
-    // 🔥 ฟังก์ชันค้นหาเมื่อคลิกไอคอน
+    // ฟังก์ชันค้นหาเมื่อคลิกไอคอน
     const handleSearch = () => {
         if (searchTerm.trim() === "") {
             setIsSearching(false);
@@ -164,7 +161,7 @@ function Homepage() {
         setSearchResults(results);
     };
 
-    // 🔥 ฟังก์ชันล้างการค้นหา
+    // ฟังก์ชันล้างการค้นหา
     const handleClearSearch = () => {
         setSearchTerm("");
         setIsSearching(false);
@@ -205,7 +202,7 @@ function Homepage() {
     const handleAddToCart = async (e, book) => {
         e.stopPropagation();
         
-        // 🔥 ตรวจสอบการล็อกอินใหม่ทุกครั้ง
+        // ตรวจสอบการล็อกอินใหม่ทุกครั้ง
         const userInfo = localStorage.getItem('userInfo');
         const token = localStorage.getItem('token');
         
@@ -240,7 +237,6 @@ function Homepage() {
             if (response.ok) {
                 alert(`เพิ่ม "${book.title}" ลงตะกร้าสำเร็จ!`);
             } else if (response.status === 401) {
-                // Token หมดอายุหรือไม่ถูกต้อง
                 localStorage.removeItem('token');
                 localStorage.removeItem('userInfo');
                 alert('เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง');
@@ -255,7 +251,7 @@ function Homepage() {
         }
     };
 
-    // 🔥 ฟังก์ชันออกจากระบบ
+    // ฟังก์ชันออกจากระบบ
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userInfo');
@@ -323,7 +319,7 @@ function Homepage() {
         </section>
     );
 
-    // 🔥 Search Results Section
+    // Search Results Section
     const SearchResultsSection = () => (
         <section className="homepage-books-section">
             <div className="homepage-search-results-header">
@@ -425,10 +421,10 @@ function Homepage() {
                 <CarouselButtons />
             </section>
 
-            {/* 🔥 แสดงผลการค้นหาหากกำลังค้นหา */}
+            {/* แสดงผลการค้นหาหากกำลังค้นหา */}
             {isSearching && <SearchResultsSection />}
 
-            {/* Books Sections - แสดงเฉพาะเมื่อไม่มีการค้นหา */}
+            {/* Books Sections */}
             {!isSearching && (
                 <>
                     <BookSection 

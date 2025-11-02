@@ -28,9 +28,9 @@ function Action() {
     const [filteredBooks, setFilteredBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [searchQuery, setSearchQuery] = useState(''); // ✅ State สำหรับค้นหา
+    const [searchQuery, setSearchQuery] = useState(''); 
 
-    // ✅ ฟังก์ชันดึงข้อมูลหนังสือ
+    //  ฟังก์ชันดึงข้อมูลหนังสือ
     const fetchActionBooks = async () => {
         setLoading(true);
         setError(null);
@@ -46,7 +46,7 @@ function Action() {
             );
             
             setBooks(filteredBooks);
-            setFilteredBooks(filteredBooks); // ✅ ตั้งค่าเริ่มต้นให้ filteredBooks
+            setFilteredBooks(filteredBooks); 
         } catch (err) {
             setError('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์หรือดึงข้อมูลได้');
             console.error('Fetch error:', err);
@@ -59,7 +59,7 @@ function Action() {
         fetchActionBooks();
     }, []);
 
-    // ✅ ฟังก์ชันการค้นหาในหน้านี้
+    //  ฟังก์ชันการค้นหาในหน้านี้
     const handleSearch = (e) => {
         if (e) {
             e.preventDefault();
@@ -100,7 +100,7 @@ function Action() {
     const handleHomepageClick = () => navigate('/homepage');
     const handleBookClick = (bookId) => navigate(`/productdetail/${bookId}`);
 
-    // ✅ ฟังก์ชันเพิ่มลงตะกร้า
+    //  ฟังก์ชันเพิ่มลงตะกร้า
     const handleAddToCart = async (e, book) => {
         e.stopPropagation();
         const userInfo = localStorage.getItem('userInfo');
@@ -141,7 +141,7 @@ function Action() {
         }
     };
 
-    // ✅ BookCard Component
+    //  BookCard Component
     const BookCard = ({ book }) => {
         const bookImage = book.image || bookPlaceholder;
         return (
@@ -170,7 +170,7 @@ function Action() {
         );
     };
 
-    // ✅ Reusable Components
+    //  Reusable Components
     const PaymentIcon = ({ src, alt }) => (
         <div className="action-image-link">
             <img src={src} alt={alt} />
@@ -219,7 +219,7 @@ function Action() {
                         onClick={handleProfileClick}
                         style={{ cursor: 'pointer' }}
                     />
-                    {/* ✅ แถบค้นหาที่ทำงานได้ */}
+                    {/*  แถบค้นหา*/}
                     <div className="action-search-wrapper">
                         <input
                             type="text"
@@ -243,7 +243,7 @@ function Action() {
                 <div className="action-header-section">
                     <h2 className="action-red-box">หมวด: {TARGET_CATEGORY} ({filteredBooks.length} รายการ)</h2>
                     
-                    {/* ✅ แสดงผลการค้นหา */}
+                    {/*  แสดงผลการค้นหา */}
                     {searchQuery && (
                         <div className="action-search-results-info">
                             <p>

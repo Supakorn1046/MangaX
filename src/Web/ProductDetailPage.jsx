@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
-import { CgProfile } from "react-icons/cg"; // ✅ แก้ไข import
+import { CgProfile } from "react-icons/cg"; 
 import "./ProductDetailPage.css";
-
-// Assets imports
 import logo from "../assets/logo.png"; 
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
-import paypalImage from '../assets/paypal.png'; // ✅ เพิ่ม import
+import paypalImage from '../assets/paypal.png'; 
 import fbImage from '../assets/fb.png';
 import igImage from '../assets/ig.png';
 import lineImage from '../assets/line.png';

@@ -1,7 +1,3 @@
-/* Seealltop10.css */
-/* สไตล์เฉพาะสำหรับหน้า Seealltop10 */
-
-/* General Styles */
 .seealltop10-page {
   min-height: 100vh;
   background-color: #F4D58D;
@@ -105,15 +101,14 @@
   transition: transform 0.2s;
   text-align: center;
   width: 100%;
-  max-width: 250px; /* ✅ กำหนดความกว้างสูงสุดให้เท่ากัน */
-  margin: 0 auto; /* ✅ จัดให้อยู่กลาง */
+  max-width: 250px; 
+  margin: 0 auto; 
 }
 
 .seealltop10-book-card:hover {
   transform: translateY(-5px);
 }
 
-/* 🔑 Container และรูปภาพ - อิงจาก action-page */
 .seealltop10-book-image-container {
   width: 100%;
   height: 250px; 
@@ -137,7 +132,7 @@
   font-size: 1.2rem;
   margin: 0.5rem 0;
   color: #f70088;
-  min-height: 3rem; /* ✅ ทำให้ความสูงของชื่อหนังสือเท่ากัน */
+  min-height: 3rem; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,7 +141,7 @@
 .seealltop10-book-card p {
   margin: 0.3rem 0;
   color: #ffffff;
-  min-height: 1.5rem; /* ✅ ทำให้ความสูงของข้อความเท่ากัน */
+  min-height: 1.5rem; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,7 +151,7 @@
   font-weight: bold;
   color: #ffffff;
   font-size: 1.1rem;
-  min-height: 1.5rem; /* ✅ ทำให้ความสูงของราคาเท่ากัน */
+  min-height: 1.5rem; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,7 +166,7 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  min-height: 40px; /* ✅ ทำให้ความสูงของปุ่มเท่ากัน */
+  min-height: 40px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,7 +200,7 @@
   grid-column: 1 / -1;
 }
 
-/* ✅ สไตล์สำหรับการค้นหา */
+/*สไตล์สำหรับการค้นหา */
 .seealltop10-header-section {
   display: flex;
   flex-direction: column;
@@ -261,17 +256,16 @@
   background: #0056b3;
 }
 
-/* ✅ กำหนดให้การ์ดทุกใบมีขนาดเท่ากัน */
 .seealltop10-books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* ✅ ใช้ auto-fill และกำหนดขนาดขั้นต่ำ */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  justify-items: center; /* ✅ จัดการ์ดให้อยู่กลาง */
+  justify-items: center; 
 }
 
-/* ✅ กำหนดขนาดคงที่สำหรับการ์ด */
+
 .seealltop10-book-card {
   background-color: rgb(0, 0, 0);
   padding: 1rem;
@@ -280,13 +274,13 @@
   transition: transform 0.2s;
   text-align: center;
   width: 100%;
-  height: 450px; /* ✅ กำหนดความสูงคงที่ */
+  height: 450px; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* ✅ กำหนดขนาดรูปภาพให้คงที่ */
+
 .seealltop10-book-image-container {
   width: 100%;
   height: 250px; 
@@ -297,7 +291,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  flex-shrink: 0; /* ✅ ป้องกันการหดตัว */
+  flex-shrink: 0; 
 }
 
 .seealltop10-book-image-container .seealltop10-book-image {
@@ -307,7 +301,7 @@
   border-radius: 5px;
 }
 
-/* ✅ เนื้อหาการ์ดจัดวางแบบ flex */
+
 .seealltop10-book-content {
   flex: 1;
   display: flex;
@@ -349,7 +343,7 @@
 }
 
 .seealltop10-book-card button {
-  margin-top: auto; /* ✅ ดันปุ่มไปด้านล่าง */
+  margin-top: auto; 
   padding: 0.5rem 1rem;
   border: none;
   background-color: #2466b3;
@@ -365,7 +359,7 @@
 }
 
 
-/* Footer - อิงจาก action-page */
+/* Footer */
 .seealltop10-footer {
   padding: 2rem 1rem;
   background-color: #AFAA98;
@@ -440,7 +434,7 @@
   height: 30px;
 }
 
-/* Responsive - อิงจาก action-page */
+/* Responsive */
 @media (max-width: 768px) {
   .seealltop10-books-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -448,7 +442,7 @@
   }
   
   .seealltop10-book-card {
-    height: auto; /* ✅ ยืดหยุ่นบนมือถือ */
+    height: auto; 
     min-height: 400px;
   }
   

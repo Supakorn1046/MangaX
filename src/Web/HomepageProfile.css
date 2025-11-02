@@ -1,4 +1,4 @@
-/* ===================== 🔹 Header ===================== */
+/* Header  */
 .homepage .homepage-header {
   display: flex;
   justify-content: space-between;
@@ -81,7 +81,7 @@
   text-decoration: none;
 }
 
-/* ===================== 🔹 Footer ===================== */
+/* Footer */
 .homepage .homepage-footer {
   padding: 2rem 1rem;
   background-color: #AFAA98;
@@ -150,7 +150,7 @@
   transform: scale(1.1);
 }
 
-/* ===================== 🔸 โครงสร้างหลักของหน้าโปรไฟล์ ===================== */
+/* โครงสร้างหลักของหน้าโปรไฟล์ */
 .hp-profile-main-content {
   background-color: #F4D58D;
   padding: 40px 0;
@@ -173,7 +173,7 @@
   overflow: hidden;
 }
 
-/* 🔹 Sidebar */
+/*  Sidebar */
 .hp-profile-sidebar {
   width: 500px;
   background-color: #ffffff;
@@ -219,7 +219,7 @@
   color: #dc3545;
 }
 
-/* 🔸 ส่วนข้อมูลผู้ใช้ */
+/* ส่วนข้อมูลผู้ใช้ */
 .hp-profile-info-section {
   flex-grow: 1;
   padding: 40px 60px;
@@ -275,7 +275,7 @@
   margin: 0;
 }
 
-/* 🔸 ตารางประวัติการสั่งซื้อ */
+/* ตารางประวัติการสั่งซื้อ */
 .hp-profile-history-table {
   width: 100%;
   border-collapse: collapse;
@@ -285,7 +285,7 @@
 
 .hp-profile-history-table th {
   text-align: left;
-  padding: 12px 20px 12px 20px; /* 🔥 เพิ่ม padding-left */
+  padding: 12px 20px 12px 20px; 
   font-weight: 600;
   border-bottom: 2px solid #dee2e6;
   color: #495057;
@@ -293,26 +293,26 @@
 }
 
 .hp-profile-history-table th:first-child {
-  padding-left: 30px; /* 🔥 ขยับ "ชื่อ" เข้ามาเพิ่มเติม */
+  padding-left: 30px; 
 }
 
 .hp-profile-history-table th:last-child {
-  padding-right: 30px; /* 🔥 ขยับ "ราคา" เข้ามา */
+  padding-right: 30px; 
   text-align: right;
 }
 
 .hp-profile-history-table td {
-  padding: 15px 20px 15px 20px; /* 🔥 เพิ่ม padding-left */
+  padding: 15px 20px 15px 20px; 
   border-bottom: 1px solid #e9ecef;
   vertical-align: middle;
 }
 
 .hp-profile-history-table td:first-child {
-  padding-left: 1px; /* 🔥 ขยับข้อมูลชื่อสินค้าเข้ามา */
+  padding-left: 1px; 
 }
 
 .hp-profile-history-table td:last-child {
-  padding-right: 30px; /* 🔥 ขยับข้อมูลราคาเข้ามา */
+  padding-right: 30px; 
   text-align: right;
   font-weight: 600;
   color: #28a745;
@@ -339,7 +339,7 @@
   font-weight: 500;
 }
 
-/* ===================== 🔹 Responsive Design ===================== */
+/* Responsive Design */
 @media (max-width: 1024px) {
   .hp-profile-box {
     width: 95%;

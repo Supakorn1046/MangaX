@@ -1,18 +1,16 @@
-/* 🎯 พื้นหลังหลักของหน้า */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #F4D58D;
 }
 
-/* === Layout หลักของหน้า === */
 .pdetail-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* === Header === */
+/* Header */
 .pdetail-header {
   display: flex;
   justify-content: space-between;
@@ -74,7 +72,7 @@ body {
   pointer-events: none;
 }
 
-/* === ส่วนรายละเอียดสินค้า === */
+/* ส่วนรายละเอียดสินค้า */
 .pdetail-container {
   flex-grow: 1;
   padding: 3rem 2rem;
@@ -104,7 +102,6 @@ body {
   gap: 3rem;
 }
 
-/* --- ซ้าย: รูปสินค้า + ปุ่ม --- */
 .pdetail-left {
   display: flex;
   flex-direction: column;
@@ -138,7 +135,6 @@ body {
   background-color: #0b5ed7;
 }
 
-/* --- ขวา: ข้อมูลสินค้า --- */
 .pdetail-right {
   flex-basis: 45%;
   display: flex;
@@ -232,7 +228,7 @@ body {
   cursor: not-allowed;
 }
 
-/* === Footer === */
+/*  Footer  */
 .pdetail-footer {
   padding: 1rem;
   background-color: #AFAA98;
@@ -276,7 +272,7 @@ body {
   justify-content: flex-start;
 }
 
-/* === Responsive (มือถือ) === */
+/* Responsive */
 @media (max-width: 900px) {
   .pdetail-content {
     flex-direction: column;

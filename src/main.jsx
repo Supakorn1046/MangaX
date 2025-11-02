@@ -28,7 +28,6 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<AuthPage />} />
         
-        {/* ตัวอย่างใช้ ProtectedRoute */}
         <Route path="/homepage" element={
           <ProtectedRoute>
             <Homepage />

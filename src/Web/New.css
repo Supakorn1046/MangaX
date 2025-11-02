@@ -1,6 +1,3 @@
-/* New.css */
-/* สไตล์เฉพาะสำหรับหน้า New */
-
 /* General Styles */
 .new-page {
   min-height: 100vh;
@@ -100,7 +97,7 @@
   font-weight: bold;
 }
 
-/* ✅ Grid Layout สำหรับการ์ด */
+/* Grid Layout  */
 .new-books-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -110,7 +107,7 @@
   justify-items: center;
 }
 
-/* ✅ การ์ดหนังสือ - กำหนดขนาดเท่ากัน */
+
 .new-book-card {
   background-color: rgb(0, 0, 0);
   padding: 1rem;
@@ -120,7 +117,7 @@
   text-align: center;
   width: 100%;
   max-width: 200px;
-  height: 380px; /* ✅ กำหนดความสูงคงที่ */
+  height: 380px; 
   display: flex;
   flex-direction: column;
 }
@@ -129,10 +126,9 @@
   transform: translateY(-5px);
 }
 
-/* ✅ Container และรูปภาพ - ขนาดเท่ากัน */
 .new-book-image-container {
   width: 100%;
-  height: 200px; /* ✅ ความสูงคงที่ */
+  height: 200px; 
   background-color: #333;
   border-radius: 5px;
   margin-bottom: 1rem;
@@ -140,7 +136,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  flex-shrink: 0; /* ✅ ป้องกันการหดตัว */
+  flex-shrink: 0; 
 }
 
 .new-book-image-container .new-book-image {
@@ -154,7 +150,7 @@
   font-size: 1rem;
   margin: 0.5rem 0;
   color: #f70088;
-  min-height: 2.5rem; /* ✅ ความสูงเท่ากันสำหรับชื่อ */
+  min-height: 2.5rem; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,7 +159,7 @@
 .new-book-card p {
   margin: 0.3rem 0;
   color: #ffffff;
-  min-height: 1.2rem; /* ✅ ความสูงเท่ากัน */
+  min-height: 1.2rem; 
   font-size: 0.9rem;
 }
 
@@ -171,11 +167,11 @@
   font-weight: bold;
   color: #ffffff;
   font-size: 1.1rem;
-  min-height: 1.2rem; /* ✅ ความสูงเท่ากัน */
+  min-height: 1.2rem; 
 }
 
 .new-book-card .new-add-to-cart-btn {
-  margin-top: auto; /* ✅ ดันปุ่มไปด้านล่าง */
+  margin-top: auto; 
   padding: 0.5rem 1rem;
   border: none;
   background-color: #2466b3;
@@ -183,7 +179,7 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  min-height: 40px; /* ✅ ความสูงปุ่มเท่ากัน */
+  min-height: 40px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -193,7 +189,6 @@
   background-color: #0356f19f;
 }
 
-/* ✅ สไตล์สำหรับการค้นหา */
 .new-search-results-info {
   background: #f8f9fa;
   padding: 10px 20px;
@@ -240,7 +235,7 @@
   background: #0056b3;
 }
 
-/* Loading and Error States */
+
 .loading-screen,
 .error-screen {
   display: flex;

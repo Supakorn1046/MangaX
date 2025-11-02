@@ -4,8 +4,6 @@ import { FaSearch } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import "./New.css";
-
-// Assets imports
 import logo from "../assets/logo.png";
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
@@ -29,9 +27,9 @@ function New() {
     const [filteredBooks, setFilteredBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [searchQuery, setSearchQuery] = useState(''); // ✅ State สำหรับค้นหา
+    const [searchQuery, setSearchQuery] = useState(''); 
 
-    // ✅ ฟังก์ชันดึงข้อมูลหนังสือ
+    // ฟังก์ชันดึงข้อมูลหนังสือ
     const fetchNewBooks = async () => {
         setLoading(true);
         setError(null);
@@ -41,14 +39,12 @@ function New() {
                 throw new Error('Failed to fetch all books');
             }
             const allData = await response.json();
-
-            // จัดเรียงจากใหม่สุดไปเก่าสุด
             const sortedBooks = [...allData].sort((a, b) => 
                 new Date(b.createdAt) - new Date(a.createdAt)
             );
             
             setBooks(sortedBooks);
-            setFilteredBooks(sortedBooks); // ✅ ตั้งค่าเริ่มต้นให้ filteredBooks
+            setFilteredBooks(sortedBooks); 
         } catch (err) {
             setError('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์หรือดึงข้อมูลได้');
             console.error('Fetch error:', err);
@@ -61,7 +57,7 @@ function New() {
         fetchNewBooks();
     }, []);
 
-    // ✅ ฟังก์ชันการค้นหาในหน้านี้
+    // ฟังก์ชันการค้นหาในหน้านี้
     const handleSearch = (e) => {
         if (e) {
             e.preventDefault();
@@ -102,7 +98,7 @@ function New() {
     const handleHomepageClick = () => navigate('/homepage');
     const handleBookClick = (bookId) => navigate(`/productdetail/${bookId}`);
 
-    // ✅ ฟังก์ชันเพิ่มลงตะกร้า
+    // ฟังก์ชันเพิ่มลงตะกร้า
     const handleAddToCart = async (e, book) => {
         e.stopPropagation();
         const userInfo = localStorage.getItem('userInfo');
@@ -143,7 +139,7 @@ function New() {
         }
     };
 
-    // ✅ BookCard Component
+    // BookCard Component
     const BookCard = ({ book }) => {
         const bookImage = book.image || bookPlaceholder;
         return (
@@ -172,7 +168,7 @@ function New() {
         );
     };
 
-    // ✅ Reusable Components
+    // Reusable Components
     const PaymentIcon = ({ src, alt }) => (
         <div className="new-image-link">
             <img src={src} alt={alt} />
@@ -221,7 +217,6 @@ function New() {
                         onClick={handleProfileClick}
                         style={{ cursor: 'pointer' }}
                     />
-                    {/* ✅ แถบค้นหาที่ทำงานได้ */}
                     <div className="new-search-wrapper">
                         <input
                             type="text"
@@ -245,7 +240,7 @@ function New() {
                 <div className="new-header-section">
                     <h2 className="new-red-box">ใหม่ล่าสุด ({filteredBooks.length} รายการ)</h2>
                     
-                    {/* ✅ แสดงผลการค้นหา */}
+                    {/* แสดงผลการค้นหา */}
                     {searchQuery && (
                         <div className="new-search-results-info">
                             <p>

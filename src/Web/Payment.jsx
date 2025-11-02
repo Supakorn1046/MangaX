@@ -4,8 +4,6 @@ import { FaSearch } from "react-icons/fa";
 import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import "./Payment.css";
-
-// --- Import รูปภาพ ---
 import logo from "../assets/logo.png";
 import qrCodeImage from '../assets/qrcode.png'; 
 import visaImage from '../assets/visa.png';
@@ -17,28 +15,27 @@ import lineImage from '../assets/line.png';
 import ytImage from '../assets/yt1.png';
 import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
-// --- จบ Import รูปภาพ ---
 
 function Payment() {
-  // --- States สำหรับราคา ---
+  // States สำหรับราคา 
   const [subtotal, setSubtotal] = useState(0); 
   const shippingFee = 50; 
   const [total, setTotal] = useState(shippingFee); 
   
-  // --- States สำหรับการทำงาน ---
+  // States สำหรับการทำงาน
   const [cartItems, setCartItems] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // --- ดึงข้อมูล User ---
+  // ดึงข้อมูล User 
   const userInfo = localStorage.getItem('userInfo') 
     ? JSON.parse(localStorage.getItem('userInfo')) 
     : null;
   const userId = userInfo ? userInfo._id : null;
 
-  // --- ดึงข้อมูลตะกร้าและที่อยู่ ---
+  // ดึงข้อมูลตะกร้าและที่อยู่ 
   useEffect(() => {
     if (!userId) {
       setError("ไม่พบข้อมูลผู้ใช้ กรุณาเข้าสู่ระบบ");
@@ -51,7 +48,7 @@ function Payment() {
       try {
         setLoading(true);
 
-        // 1. ดึงข้อมูลตะกร้า (Cart)
+        // ดึงข้อมูลตะกร้า
         const cartRes = await fetch(`http://localhost:5000/api/cart/user/${userId}`);
         if (!cartRes.ok) throw new Error('ไม่สามารถดึงข้อมูลตะกร้าได้');
         const cartData = await cartRes.json();
@@ -61,7 +58,7 @@ function Payment() {
         setTotal(cartTotal + shippingFee);
         setCartItems(cartData.items || []);
 
-        // 2. ดึงข้อมูลที่อยู่ (Address)
+        // ดึงข้อมูลที่อยู่ 
         const addrRes = await fetch(`http://localhost:5000/api/address/user/${userId}`);
         if (!addrRes.ok) throw new Error('ไม่สามารถดึงข้อมูลที่อยู่ได้');
         const addresses = await addrRes.json();
@@ -82,7 +79,7 @@ function Payment() {
     fetchData();
   }, [userId, navigate, shippingFee]);
 
-  // --- ฟังก์ชันยืนยันการชำระเงิน ---
+  // ฟังก์ชันยืนยันการชำระเงิน
   const handleConfirm = async () => {
     if (!userId || !selectedAddressId || cartItems.length === 0) {
       alert("ข้อมูลการสั่งซื้อไม่ครบถ้วน (ผู้ใช้, ที่อยู่, หรือสินค้า)");
@@ -105,7 +102,6 @@ function Payment() {
       });
 
       if (response.ok) {
-        // --- ล้างตะกร้าสินค้า (ไม่บล็อก) ---
         try {
           await fetch(`http://localhost:5000/api/cart/user/${userId}`, {
             method: 'DELETE'

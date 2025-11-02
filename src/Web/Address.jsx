@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
 import "./Address.css";
-
-// --- Import รูปภาพ ---
 import logo from "../assets/logo.png";
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
@@ -16,7 +14,7 @@ import ytImage from '../assets/yt1.png';
 import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
 import { CgProfile } from "react-icons/cg";
-// --- จบ Import รูปภาพ ---
+
 
 function Address() {
   const [addressOption, setAddressOption] = useState("user");
@@ -25,28 +23,24 @@ function Address() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // --- ดึงข้อมูลผู้ใช้จาก Local Storage ---
+  // ดึงข้อมูลผู้ใช้จาก Local Storage 
   const userInfo = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null;
 
   const userId = userInfo ? userInfo._id : null;
-  // ‼️ เรายังเก็บ userProfileName ไว้ใช้ "แสดงผล" ในที่อยู่เดิม
   const userProfileName = userInfo ? userInfo.name : ""; 
 
-  // --- (เราไม่จำเป็นต้องคำนวณ initialFirstName, initialLastName แล้ว) ---
-  
-  // ⭐️ ส่วนที่แก้ไข:
-  // เปลี่ยนค่าเริ่มต้นของ firstName และ lastName ให้เป็นค่าว่าง
+
   const [addressForm, setAddressForm] = useState({
-    firstName: "", // 👈 แก้ไขจาก initialFirstName
-    lastName: "",  // 👈 แก้ไขจาก initialLastName
+    firstName: "", 
+    lastName: "",  
     address: "",
     phone: ""
   });
-  // --- จบส่วนที่แก้ไข ---
 
-  // --- ดึงข้อมูลที่อยู่ผู้ใช้จาก Backend ---
+
+  // ดึงข้อมูลที่อยู่ผู้ใช้จาก Backend
   useEffect(() => {
     const fetchAddress = async () => {
       if (!userId) { 
@@ -81,7 +75,7 @@ function Address() {
     fetchAddress();
   }, [userId]);
 
-  // --- Handlers ---
+  // Handlers
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAddressForm(prev => ({
@@ -138,7 +132,7 @@ function Address() {
           <CgProfile
             className="address-header-icon" 
             style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/HomepageProfile')} // คลิกไปหน้า Login
+            onClick={() => navigate('/HomepageProfile')} 
           />
           <input type="text" placeholder="ค้นหาหนังสือ" className="address-search-bar" />
           <FaSearch className="address-search-icon" />
@@ -200,7 +194,6 @@ function Address() {
               {addressOption === "user" && fetchedUserAddress ? (
                 <div className="user-address-display">
                   <div className="address-info">
-                      {/* ส่วนนี้ยังทำงานเหมือนเดิม คือดึงชื่อจาก Profile มาแสดงถ้า Address ไม่มีชื่อ */}
                     <p><strong>ชื่อ-นามสกุล:</strong> {fetchedUserAddress.firstName && fetchedUserAddress.lastName ? `${fetchedUserAddress.firstName} ${fetchedUserAddress.lastName}` : userProfileName}</p>
                     <p><strong>ที่อยู่:</strong> {fetchedUserAddress.address}</p>
                     <p><strong>เบอร์โทรศัพท์:</strong> {fetchedUserAddress.phone}</p>
@@ -213,12 +206,10 @@ function Address() {
                     <div className="form-row">
                       <div className="form-group">
                         <label htmlFor="firstName">ชื่อ</label>
-                            {/* value จะเป็นค่าว่าง "" ตามที่ setAddressForm ไว้ */}
                         <input type="text" id="firstName" name="firstName" value={addressForm.firstName} onChange={handleInputChange} required />
                       </div>
                       <div className="form-group">
                         <label htmlFor="lastName">นามสกุล</label>
-                            {/* value จะเป็นค่าว่าง "" ตามที่ setAddressForm ไว้ */}
                         <input type="text" id="lastName" name="lastName" value={addressForm.lastName} onChange={handleInputChange} required />
                       </div>
                   </div>

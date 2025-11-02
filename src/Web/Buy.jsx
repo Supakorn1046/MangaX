@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // 💡 เพิ่ม useNavigate
+import { Link, useNavigate } from "react-router-dom"; 
 import { FaSearch } from "react-icons/fa";
 import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
 import "./Buy.css";
 import logo from "../assets/logo.png";
-import book1 from "../assets/book1.png"; // (ใช้เป็น Fallback)
-// (Imports รูปภาพ Footer คงเดิม)
+import book1 from "../assets/book1.png"; 
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
 import paypalImage from '../assets/paypal.png';
@@ -17,21 +16,19 @@ import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
 import { CgProfile } from "react-icons/cg";
 
-// 💡 URL ฐานของ API Cart
+// URL ฐานของ API Cart
 const API_CART_URL = 'http://localhost:5000/api/cart';
 
 function Buy() {
   const navigate = useNavigate();
   
-  // 💡 State สำหรับเก็บข้อมูลตะกร้าจาก API
+  // State สำหรับเก็บข้อมูลตะกร้าจาก API
   const [cart, setCart] = useState({ items: [], total: 0 });
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // ----------------------------------------------------
-  // 💡 1. ดึงข้อมูลผู้ใช้ (User ID) เมื่อโหลดหน้า
-  // ----------------------------------------------------
+  //  ดึงข้อมูลผู้ใช้ (User ID) เมื่อโหลดหน้า
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
     if (!userInfo) {
@@ -39,13 +36,12 @@ function Buy() {
       navigate('/login');
     } else {
       const user = JSON.parse(userInfo);
-      setUserId(user._id); // เก็บ User ID ไว้ใน State
+      setUserId(user._id); 
     }
   }, [navigate]);
 
-  // ----------------------------------------------------
-  // 💡 2. ฟังก์ชันสำหรับดึงข้อมูลตะกร้า (Fetch Cart)
-  // ----------------------------------------------------
+ 
+  // ฟังก์ชันสำหรับดึงข้อมูลตะกร้า (Fetch Cart)
   const fetchCart = async (currentUserId) => {
     if (!currentUserId) return;
     
@@ -66,25 +62,21 @@ function Buy() {
     }
   };
 
-  // 💡 3. เรียก fetchCart เมื่อ User ID พร้อมใช้งาน
+  // เรียก fetchCart เมื่อ User ID พร้อมใช้งาน
   useEffect(() => {
     if (userId) {
       fetchCart(userId);
     }
   }, [userId]);
 
-  // ----------------------------------------------------
-  // 💡 4. ฟังก์ชันจัดการตะกร้า (เชื่อม Backend)
-  // ----------------------------------------------------
-
-  // 🔑 ฟังก์ชันลบสินค้า (DELETE /api/cart/remove/:userId/:bookId)
+  // ฟังก์ชันจัดการตะกร้า (เชื่อม Backend)
   const removeItem = async (bookId) => {
     try {
       const response = await fetch(`${API_CART_URL}/remove/${userId}/${bookId}`, {
         method: 'DELETE'
       });
       if (response.ok) {
-        fetchCart(userId); // 💡 ดึงข้อมูลตะกร้าใหม่
+        fetchCart(userId); 
       } else {
         alert('เกิดข้อผิดพลาดในการลบสินค้า');
       }
@@ -94,8 +86,7 @@ function Buy() {
     }
   };
 
-  // 🔑 ฟังก์ชันอัปเดตจำนวน (POST /api/cart/add)
-  // (Backend API [cite: cartRoutes.js] ของคุณใช้ /add เพื่อบวก/ลบ จำนวน)
+  //  ฟังก์ชันอัปเดตจำนวน (POST /api/cart/add)
   const updateQuantity = async (book, quantityChange) => {
     try {
       const response = await fetch(`${API_CART_URL}/add`, {
@@ -106,11 +97,11 @@ function Buy() {
           bookId: book.bookId,
           title: book.title,
           price: book.price,
-          quantity: quantityChange // 💡 ส่งแค่ส่วนต่าง (1 หรือ -1)
+          quantity: quantityChange 
         })
       });
       if (response.ok) {
-        fetchCart(userId); // 💡 ดึงข้อมูลตะกร้าใหม่
+        fetchCart(userId); 
       } else {
         alert('เกิดข้อผิดพลาดในการอัปเดตจำนวน');
       }
@@ -122,13 +113,11 @@ function Buy() {
 
   // คำนวณราคารวม (ใช้ข้อมูลจาก state)
   const subtotal = cart.total;
-  const shipping = 50; // ค่าจัดส่ง
+  const shipping = 50; 
   const total = subtotal + shipping;
 
-  // ----------------------------------------------------
-  // 💡 5. การแสดงผล (Render)
-  // ----------------------------------------------------
 
+  // การแสดงผล (Render)
   if (loading) {
     return <div className="loading-screen">กำลังโหลดตะกร้า...</div>;
   }
@@ -139,7 +128,6 @@ function Buy() {
 
   return (
     <div className="buy-page">
-      {/* Header (💡 เพิ่ม onClick ให้ Icons) */}
       <header className="buy-header">
         <img src={logo} alt="BookStore Logo" className="buy-logo" />
         <nav>
@@ -150,12 +138,12 @@ function Buy() {
           <MdOutlineShoppingCart 
             className="buy-header-icon" 
             style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/buy')} // คลิกไปหน้าตะกร้า (หน้าเดิม)
+            onClick={() => navigate('/buy')} 
           />
           <CgProfile
             className="buy-header-icon" 
             style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/HomepageProfile')} // คลิกไปหน้า Login
+            onClick={() => navigate('/HomepageProfile')} 
           />
           <input
             type="text"
@@ -166,9 +154,7 @@ function Buy() {
         </div>
       </header>
 
-      {/* เนื้อหาหลัก */}
       <main className="buy-main">
-        {/* ... (ส่วน buy-steps คงเดิม) ... */}
         <section className="buy-steps">
           <div className="buy-step active">
             <div className="buy-step-number">1</div>
@@ -199,12 +185,11 @@ function Buy() {
                   <div className="buy-header-item">จัดการ</div>
                 </div>
                 
-                {/* 💡 วนลูปจาก cart.items ที่มาจาก API */}
                 {cart.items.length > 0 ? cart.items.map((item) => (
                   <div key={item.bookId} className="buy-table-row">
                     <div className="buy-table-cell buy-product-info">
                       <img 
-                        src={item.image || book1} // 💡 ใช้ book1 เป็น fallback
+                        src={item.image || book1} 
                         alt={item.title} 
                         className="buy-product-image" 
                       />
@@ -217,7 +202,7 @@ function Buy() {
                       <div className="buy-quantity-controls">
                         <button 
                           className="buy-quantity-btn"
-                          onClick={() => updateQuantity(item, -1)} // 💡 เรียก API
+                          onClick={() => updateQuantity(item, -1)} 
                           disabled={item.quantity <= 1}
                         >
                           -
@@ -225,7 +210,7 @@ function Buy() {
                         <span className="buy-quantity-number">{item.quantity}</span>
                         <button 
                           className="buy-quantity-btn"
-                          onClick={() => updateQuantity(item, 1)} // 💡 เรียก API
+                          onClick={() => updateQuantity(item, 1)} 
                         >
                           +
                         </button>
@@ -237,7 +222,7 @@ function Buy() {
                     <div className="buy-table-cell buy-actions">
                       <button 
                         className="buy-remove-btn"
-                        onClick={() => removeItem(item.bookId)} // 💡 เรียก API
+                        onClick={() => removeItem(item.bookId)} 
                       >
                         ลบ
                       </button>
@@ -251,7 +236,7 @@ function Buy() {
               </div>
             </div>
 
-            {/* สรุปรายการสั่งซื้อ (ใช้ subtotal และ total จาก state) */}
+            {/* สรุปรายการสั่งซื้อ */}
             <div className="buy-summary-section">
               <h2 className="buy-section-title">สรุปรายการสั่งซื้อ</h2>
               <div className="buy-summary-card">
@@ -268,7 +253,6 @@ function Buy() {
                   <span>รวมทั้งหมด</span>
                   <span>฿{total.toFixed(2)}</span>
                 </div>
-                {/* 💡 ปิดปุ่มถ้าไม่มีสินค้า */}
                 <Link to="/address" style={{ pointerEvents: cart.items.length === 0 ? 'none' : 'auto' }}>
                   <button 
                     className="buy-checkout-btn" 
@@ -283,7 +267,7 @@ function Buy() {
         </section>
       </main>
 
-      {/* Footer (โค้ดเดิม) */}
+      {/* Footer */}
       <footer className="buy-footer">
         <div className="buy-footer-content">
           <div className="buy-footer-section">
