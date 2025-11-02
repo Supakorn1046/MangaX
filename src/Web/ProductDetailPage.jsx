@@ -162,8 +162,8 @@ function ProductDetailPage() {
       <header className="pdetail-header">
         <img src={logo} alt="BookStore Logo" className="pdetail-logo" />
         <nav className="pdetail-nav">
-          <a href="/">หน้าแรก</a>
-          <a href="#shop">10 อันดับ</a>
+          <a href="/homepage">หน้าแรก</a>
+          <a href="/SeeAlltop10">10 อันดับ</a>
         </nav>
         <div className="pdetail-search-container">
           <MdOutlineShoppingCart 

@@ -15,6 +15,7 @@ import lineImage from '../assets/line.png';
 import ytImage from '../assets/yt1.png';
 import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
+import { CgProfile } from "react-icons/cg";
 // --- จบ Import รูปภาพ ---
 
 function Address() {
@@ -129,12 +130,16 @@ function Address() {
       <header className="address-header">
         <img src={logo} alt="BookStore Logo" className="address-logo" />
         <nav>
-          <a href="/">หน้าแรก</a>
-          <a href="#shop">10 อันดับ</a>
+          <a href="/homepage">หน้าแรก</a>
+          <a href="/SeeAlltop10">10 อันดับ</a>
         </nav>
         <div className="address-search-container">
           <MdOutlineShoppingCart className="address-header-icon" />
-          <MdLogin className="address-header-icon" />
+          <CgProfile
+            className="address-header-icon" 
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/HomepageProfile')} // คลิกไปหน้า Login
+          />
           <input type="text" placeholder="ค้นหาหนังสือ" className="address-search-bar" />
           <FaSearch className="address-search-icon" />
         </div>

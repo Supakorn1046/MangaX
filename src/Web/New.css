@@ -24,16 +24,21 @@
   align-items: center;
   gap: 10px;
   margin-left: auto;
+}
+
+.new-header .new-search-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .new-header .new-search-bar {
-  padding: 0.5rem 2.5rem 0.5rem 0.3rem;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
   border-radius: 3px;
   border: none;
   font-size: 0.8rem;
   outline: none;
-  width: 200px;
+  width: 250px;
 }
 
 .new-header .new-header-icon {
@@ -48,11 +53,9 @@
 
 .new-header .new-search-icon {
   position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 10px;
   color: #888;
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .new-header .new-logo {
@@ -78,25 +81,36 @@
   text-align: center;
 }
 
+.new-header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
 .new-red-box {
   display: inline-block; 
   background-color: #e53935;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 10px;
-  margin: 0 0 2rem 0;
+  margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
+/* ✅ Grid Layout สำหรับการ์ด */
 .new-books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  justify-items: center;
 }
 
+/* ✅ การ์ดหนังสือ - กำหนดขนาดเท่ากัน */
 .new-book-card {
   background-color: rgb(0, 0, 0);
   padding: 1rem;
@@ -104,16 +118,21 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s;
   text-align: center;
+  width: 100%;
+  max-width: 200px;
+  height: 380px; /* ✅ กำหนดความสูงคงที่ */
+  display: flex;
+  flex-direction: column;
 }
 
 .new-book-card:hover {
   transform: translateY(-5px);
 }
 
-/* 🔑 Container และรูปภาพ - อิงจากขนาดก่อนหน้า */
+/* ✅ Container และรูปภาพ - ขนาดเท่ากัน */
 .new-book-image-container {
   width: 100%;
-  height: 250px; 
+  height: 200px; /* ✅ ความสูงคงที่ */
   background-color: #333;
   border-radius: 5px;
   margin-bottom: 1rem;
@@ -121,6 +140,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  flex-shrink: 0; /* ✅ ป้องกันการหดตัว */
 }
 
 .new-book-image-container .new-book-image {
@@ -131,24 +151,31 @@
 }
 
 .new-book-card h3 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 0.5rem 0;
   color: #f70088;
+  min-height: 2.5rem; /* ✅ ความสูงเท่ากันสำหรับชื่อ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .new-book-card p {
   margin: 0.3rem 0;
   color: #ffffff;
+  min-height: 1.2rem; /* ✅ ความสูงเท่ากัน */
+  font-size: 0.9rem;
 }
 
 .new-book-card .new-price {
   font-weight: bold;
   color: #ffffff;
   font-size: 1.1rem;
+  min-height: 1.2rem; /* ✅ ความสูงเท่ากัน */
 }
 
-.new-book-card button {
-  margin-top: 0.5rem;
+.new-book-card .new-add-to-cart-btn {
+  margin-top: auto; /* ✅ ดันปุ่มไปด้านล่าง */
   padding: 0.5rem 1rem;
   border: none;
   background-color: #2466b3;
@@ -156,37 +183,78 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+  min-height: 40px; /* ✅ ความสูงปุ่มเท่ากัน */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.new-book-card button:hover {
+.new-book-card .new-add-to-cart-btn:hover {
   background-color: #0356f19f;
 }
 
-/* Loading and Error States */
-.new-loading-text {
-  font-size: 1.2rem;
-  color: #333;
-  margin: 2rem 0;
+/* ✅ สไตล์สำหรับการค้นหา */
+.new-search-results-info {
+  background: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+  text-align: center;
 }
 
-.new-error-text {
-  font-size: 1.1rem;
-  color: #e53935;
-  margin: 2rem 0;
-  padding: 1rem;
-  background-color: #ffebee;
-  border-radius: 5px;
-  display: inline-block;
+.new-clear-search {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 12px;
 }
 
-.new-no-books {
+.new-clear-search:hover {
+  background: #5a6268;
+}
+
+.new-no-books-found {
   font-size: 1.1rem;
   color: #666;
   margin: 2rem 0;
   grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
 }
 
-/* Footer - อิงจากขนาดก่อนหน้า */
+.new-clear-search-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.new-clear-search-btn:hover {
+  background: #0056b3;
+}
+
+/* Loading and Error States */
+.loading-screen,
+.error-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+}
+
+.error-screen {
+  color: #e53935;
+}
+
+/* Footer */
 .new-footer {
   padding: 2rem 1rem;
   background-color: #AFAA98;
@@ -261,11 +329,20 @@
   height: 30px;
 }
 
-/* Responsive - อิงจากขนาดก่อนหน้า */
+/* Responsive */
 @media (max-width: 768px) {
   .new-books-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
+  }
+  
+  .new-book-card {
+    height: 360px;
+    max-width: 160px;
+  }
+  
+  .new-book-image-container {
+    height: 180px;
   }
   
   .new-footer-content {
@@ -280,10 +357,6 @@
   .new-header .new-search-bar {
     width: 200px;
   }
-  
-  .new-book-image-container {
-    height: 200px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -294,14 +367,21 @@
   
   .new-book-card {
     padding: 0.8rem;
+    height: 340px;
+    max-width: 140px;
   }
   
   .new-book-image-container {
-    height: 180px;
+    height: 150px;
   }
   
   .new-red-box {
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
+  }
+  
+  .new-book-card h3 {
+    font-size: 0.9rem;
+    min-height: 2.2rem;
   }
 }

@@ -1,5 +1,5 @@
 import { FaSearch } from "react-icons/fa";
-import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +12,6 @@ import promo2 from "../assets/promo2.png";
 import promo3 from "../assets/promo3.png";
 import promo4 from "../assets/promo4.png";
 import book1 from "../assets/book1.png";
-import book2 from "../assets/book2.png";
-import book3 from "../assets/book3.gif";
-import book4 from "../assets/book4.png";
-import book5 from "../assets/book5.png";
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
 import paypalImage from '../assets/paypal.png';
@@ -45,6 +41,11 @@ function Homepage() {
     const [topSellingBooks, setTopSellingBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null); 
+    
+    // 🔥 เพิ่ม state สำหรับการค้นหา
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -66,24 +67,20 @@ function Homepage() {
                     const topSellingRes = await fetch(`${API_BASE_URL}/bestsellers`);
                     if (topSellingRes.ok) {
                         const topSellingData = await topSellingRes.json();
-                        // --- ⭐️ ส่วนที่แก้ไข 1 ⭐️ ---
-                        setTopSellingBooks(topSellingData.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+                        setTopSellingBooks(topSellingData.slice(0, 5));
                     } else {
-                        // ถ้าไม่มี endpoint นี้ ให้ใช้หนังสือทั้งหมดเป็น fallback
-                        // --- ⭐️ ส่วนที่แก้ไข 2 ⭐️ ---
-                        setTopSellingBooks(allBooksData.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+                        setTopSellingBooks(allBooksData.slice(0, 5));
                     }
                 } catch (bestsellerError) {
                     console.warn('Bestsellers endpoint not available, using fallback');
-                    // --- ⭐️ ส่วนที่แก้ไข 2 (ซ้ำ) ⭐️ ---
-                    setTopSellingBooks(allBooksData.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+                    setTopSellingBooks(allBooksData.slice(0, 5));
                 }
 
             } catch (error) {
                 console.error("Error fetching data:", error);
                 setError(error.message);
                 setAllBooks(mockBooks); 
-                setTopSellingBooks(mockBooks.slice(0, 5)); // 👈 แก้จาก 10 เป็น 5
+                setTopSellingBooks(mockBooks.slice(0, 5));
             } finally {
                 setLoading(false);
             }
@@ -92,7 +89,7 @@ function Homepage() {
         fetchAllData();
     }, []);
 
-    // (Carousel effect - เหมือนเดิม)
+    // Carousel effect
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrent((prev) => (prev + 1) % images.length);
@@ -100,7 +97,41 @@ function Homepage() {
         return () => clearInterval(interval);
     }, [images.length]);
 
-    // (Navigation handlers - เหมือนเดิม)
+    // 🔥 เพิ่มฟังก์ชันการค้นหา
+    const handleSearch = () => {
+        if (searchTerm.trim() === "") {
+            setIsSearching(false);
+            setSearchResults([]);
+            return;
+        }
+
+        setIsSearching(true);
+        
+        // ค้นหาจากข้อมูลหนังสือทั้งหมด
+        const results = allBooks.filter(book => 
+            book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (book.author && book.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (book.category && book.category.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+        
+        setSearchResults(results);
+    };
+
+    // 🔥 เพิ่มฟังก์ชันเมื่อกด Enter ในช่องค้นหา
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
+    // 🔥 เพิ่มฟังก์ชันล้างการค้นหา
+    const handleClearSearch = () => {
+        setSearchTerm("");
+        setIsSearching(false);
+        setSearchResults([]);
+    };
+
+    // Navigation handlers
     const handleCartClick = () => {
         navigate('/buy');
     };
@@ -114,7 +145,7 @@ function Homepage() {
         navigate(path);
     };
     
-    // (Filter functions - เหมือนเดิม)
+    // Filter functions
     const getNewBooks = () => {
         return [...allBooks]
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -126,7 +157,7 @@ function Homepage() {
             .slice(0, 5);
     };
     
-    // (Add to cart function - เหมือนเดิม)
+    // Add to cart function
     const handleAddToCart = async (e, book) => {
         e.stopPropagation();
         const userInfo = localStorage.getItem('userInfo');
@@ -163,7 +194,7 @@ function Homepage() {
         }
     };
 
-    // (BookCard component - เหมือนเดิม)
+    // BookCard component - ✅ ปรับให้มีขนาดเท่ากัน
     const BookCard = ({ book }) => {
         const bookImage = book.image || book1;
         return (
@@ -172,7 +203,9 @@ function Homepage() {
                 onClick={() => handleBookClick(book._id)} 
                 style={{ cursor: 'pointer' }}
             >
-                <img src={bookImage} alt={book.title} className="homepage-book-image" />
+                <div className="homepage-book-image-container">
+                    <img src={bookImage} alt={book.title} className="homepage-book-image" />
+                </div>
                 <h3 className="homepage-book-title">{book.title}</h3>
                 <p className="homepage-book-author">{book.author || 'ไม่ทราบผู้แต่ง'}</p>
                 <p className="homepage-book-price">
@@ -188,16 +221,16 @@ function Homepage() {
         );
     };
     
-    // (BookSection component - เหมือนเดิม)
+    // BookSection component
     const BookSection = ({ title, isTop10 = false, booksToShow = [], viewAllPath }) => (
         <section className="homepage-books-section">
             <h2 className={isTop10 ? "homepage-red-box-top10" : "homepage-red-box"}>
                 {title}
             </h2>
             {loading ? (
-                <div className="loading-text">กำลังโหลดหนังสือ...</div>
+                <div className="homepage-loading-text">กำลังโหลดหนังสือ...</div>
             ) : error ? (
-                <div className="error-text">เกิดข้อผิดพลาด: {error}</div>
+                <div className="homepage-error-text">เกิดข้อผิดพลาด: {error}</div>
             ) : (
                 <div className="homepage-books-grid">
                     {booksToShow && booksToShow.length > 0 ? (
@@ -205,7 +238,7 @@ function Homepage() {
                             <BookCard key={book._id} book={book} />
                         ))
                     ) : (
-                        <div className="no-books-found">ไม่พบหนังสือในหมวดหมู่นี้</div>
+                        <div className="homepage-no-books-found">ไม่พบหนังสือในหมวดหมู่นี้</div>
                     )}
                     
                     <div className="homepage-view-all-card">
@@ -221,7 +254,35 @@ function Homepage() {
         </section>
     );
 
-    // (Reusable components - เหมือนเดิม)
+    // 🔥 เพิ่ม Search Results Section
+    const SearchResultsSection = () => (
+        <section className="homepage-books-section">
+            <div className="homepage-search-results-header">
+                <h2 className="homepage-red-box">
+                    ผลการค้นหา: "{searchTerm}"
+                </h2>
+                <button 
+                    className="homepage-clear-search-btn"
+                    onClick={handleClearSearch}
+                >
+                    ล้างการค้นหา
+                </button>
+            </div>
+            <div className="homepage-books-grid">
+                {searchResults.length > 0 ? (
+                    searchResults.map((book) => (
+                        <BookCard key={book._id} book={book} />
+                    ))
+                ) : (
+                    <div className="homepage-no-books-found">
+                        ไม่พบหนังสือที่ตรงกับการค้นหา "{searchTerm}"
+                    </div>
+                )}
+            </div>
+        </section>
+    );
+
+    // Reusable components
     const CarouselButtons = () => (
         <div className="homepage-hero-buttons">
             {images.map((_, index) => (
@@ -246,12 +307,12 @@ function Homepage() {
 
     return (
         <div className="homepage">
-            {/* Header Section (เหมือนเดิม) */}
+            {/* Header Section */}
             <header className="homepage-header">
                 <img src={logo} alt="BookStore Logo" className="homepage-logo" />
                 <nav className="homepage-nav">
-                    <a href="#home">หน้าแรก</a>
-                    <a href="#shop">10 อันดับ</a>
+                    <a href="/homepage">หน้าแรก</a>
+                    <a href="/SeeAlltop10">10 อันดับ</a>
                 </nav>
                 <div className="homepage-search-container">
                     <MdOutlineShoppingCart 
@@ -264,16 +325,25 @@ function Homepage() {
                         onClick={handleProfileClick} 
                         style={{ cursor: 'pointer' }} 
                     />
-                    <input
-                        type="text"
-                        placeholder="ค้นหาหนังสือตามชื่อเรื่อง"
-                        className="homepage-search-bar"
-                    />
-                    <FaSearch className="homepage-search-icon" />
+                    <div className="homepage-search-wrapper">
+                        <input
+                            type="text"
+                            placeholder="ค้นหาหนังสือตามชื่อเรื่อง, ผู้แต่ง, หมวดหมู่"
+                            className="homepage-search-bar"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                        />
+                        <FaSearch 
+                            className="homepage-search-icon" 
+                            onClick={handleSearch}
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </div>
                 </div>
             </header>
 
-            {/* Hero Carousel Section (เหมือนเดิม) */}
+            {/* Hero Carousel Section */}
             <section className="homepage-hero">
                 <img 
                     src={images[current]} 
@@ -283,34 +353,40 @@ function Homepage() {
                 <CarouselButtons />
             </section>
 
-            {/* Books Sections */}
-            {/* --- ⭐️ ส่วนที่แก้ไข 3 ⭐️ --- */}
-            <BookSection 
-                title="มังงะขายดี 10 อันดับ" // 👈 เปลี่ยน Title
-                isTop10={true} 
-                booksToShow={topSellingBooks} // 👈 (State นี้ถูก slice เหลือ 5 แล้ว)
-                viewAllPath="/SeeAlltop10"
-            />
+            {/* 🔥 แสดงผลการค้นหาหากกำลังค้นหา */}
+            {isSearching && <SearchResultsSection />}
 
-            <BookSection 
-                title="ใหม่" 
-                booksToShow={getNewBooks()}
-                viewAllPath="/New"
-            />
+            {/* Books Sections - แสดงเฉพาะเมื่อไม่มีการค้นหา */}
+            {!isSearching && (
+                <>
+                    <BookSection 
+                        title="มังงะขายดี 10 อันดับ"
+                        isTop10={true} 
+                        booksToShow={topSellingBooks}
+                        viewAllPath="/SeeAlltop10"
+                    />
 
-            <BookSection 
-                title="ต่อสู้" 
-                booksToShow={getBooksByCategory('Action')}
-                viewAllPath="/Action"
-            />
+                    <BookSection 
+                        title="ใหม่" 
+                        booksToShow={getNewBooks()}
+                        viewAllPath="/New"
+                    />
 
-            <BookSection 
-                title="กีฬา" 
-                booksToShow={getBooksByCategory('Sport')}
-                viewAllPath="/Sport"
-            />
+                    <BookSection 
+                        title="ต่อสู้" 
+                        booksToShow={getBooksByCategory('Action')}
+                        viewAllPath="/Action"
+                    />
 
-            {/* Footer Section (เหมือนเดิม) */}
+                    <BookSection 
+                        title="กีฬา" 
+                        booksToShow={getBooksByCategory('Sport')}
+                        viewAllPath="/Sport"
+                    />
+                </>
+            )}
+
+            {/* Footer Section */}
             <footer className="homepage-footer">
                 <div className="homepage-footer-content">
                     <div className="homepage-footer-section">

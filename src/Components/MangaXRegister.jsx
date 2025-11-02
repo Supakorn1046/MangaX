@@ -109,7 +109,7 @@ const MangaXRegister = ({ onBackToLogin, onNextToProfile }) => {
 
                 <p className={styles.orText} style={{ textAlign: 'left', marginBottom: '5px' }}>กรอกรหัสผ่านซ้ำอีกครั้ง</p>
                 <div className={styles.inputGroup}>
-                    <input type="password" placeholder="" required 
+                    <input type="password" placeholder="อย่างน้อย 8 อักขระ" required 
                             name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
                 </div>
 

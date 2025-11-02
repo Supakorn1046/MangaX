@@ -1,3 +1,4 @@
+/* Action.css */
 /* General Styles */
 .action-page {
   min-height: 100vh;
@@ -21,16 +22,21 @@
   align-items: center;
   gap: 10px;
   margin-left: auto;
+}
+
+.action-header .action-search-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .action-header .action-search-bar {
-  padding: 0.5rem 2.5rem 0.5rem 0.3rem;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
   border-radius: 3px;
   border: none;
   font-size: 0.8rem;
   outline: none;
-  width: 200px;
+  width: 250px;
 }
 
 .action-header .action-header-icon {
@@ -45,11 +51,9 @@
 
 .action-header .action-search-icon {
   position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 10px;
   color: #888;
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .action-header .action-logo {
@@ -75,25 +79,36 @@
   text-align: center;
 }
 
+.action-header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
 .action-red-box {
   display: inline-block; 
   background-color: #e53935;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 10px;
-  margin: 0 0 2rem 0;
+  margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
+/* ✅ Grid Layout สำหรับการ์ด */
 .action-books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  justify-items: center;
 }
 
+/* ✅ การ์ดหนังสือ - กำหนดขนาดเท่ากัน */
 .action-book-card {
   background-color: rgb(0, 0, 0);
   padding: 1rem;
@@ -101,54 +116,64 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s;
   text-align: center;
+  width: 100%;
+  max-width: 200px;
+  height: 380px; /* ✅ กำหนดความสูงคงที่ */
+  display: flex;
+  flex-direction: column;
 }
 
 .action-book-card:hover {
   transform: translateY(-5px);
 }
 
-/* 🔑 แก้ไข: ตั้งค่า Container และรูปภาพจริง */
+/* ✅ Container และรูปภาพ - ขนาดเท่ากัน */
 .action-book-image-container {
   width: 100%;
-  /* กำหนดความสูงที่แน่นอนเพื่อให้ Grid มีความสูงสม่ำเสมอ */
-  height: 250px; 
+  height: 200px; /* ✅ ความสูงคงที่ */
   background-color: #333;
   border-radius: 5px;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* ซ่อนส่วนที่เกินจากกรอบ */
+  overflow: hidden;
+  flex-shrink: 0; /* ✅ ป้องกันการหดตัว */
 }
 
 .action-book-image-container .action-book-image {
-  /* 🔑 NEW: สไตล์สำหรับรูปภาพจริง */
   width: 100%; 
   height: 100%;
-  /* 💡 สำคัญ: ใช้ object-fit: cover เพื่อปรับขนาดรูปภาพให้เต็มกรอบโดยไม่ยืดเสียสัดส่วน */
   object-fit: cover; 
   border-radius: 5px;
 }
 
 .action-book-card h3 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 0.5rem 0;
   color: #f70088;
+  min-height: 2.5rem; /* ✅ ความสูงเท่ากันสำหรับชื่อ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .action-book-card p {
   margin: 0.3rem 0;
   color: #ffffff;
+  min-height: 1.2rem; /* ✅ ความสูงเท่ากัน */
+  font-size: 0.9rem;
 }
 
 .action-book-card .action-price {
   font-weight: bold;
   color: #ffffff;
   font-size: 1.1rem;
+  min-height: 1.2rem; /* ✅ ความสูงเท่ากัน */
 }
 
-.action-book-card button {
-  margin-top: 0.5rem;
+.action-book-card .action-add-to-cart-btn {
+  margin-top: auto; /* ✅ ดันปุ่มไปด้านล่าง */
   padding: 0.5rem 1rem;
   border: none;
   background-color: #2466b3;
@@ -156,10 +181,75 @@
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
+  min-height: 40px; /* ✅ ความสูงปุ่มเท่ากัน */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.action-book-card button:hover {
+.action-book-card .action-add-to-cart-btn:hover {
   background-color: #0356f19f;
+}
+
+/* ✅ สไตล์สำหรับการค้นหา */
+.action-search-results-info {
+  background: #f8f9fa;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+  text-align: center;
+}
+
+.action-clear-search {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.action-clear-search:hover {
+  background: #5a6268;
+}
+
+.action-no-books-found {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 2rem 0;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+}
+
+.action-clear-search-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.action-clear-search-btn:hover {
+  background: #0056b3;
+}
+
+/* Loading and Error States */
+.loading-screen,
+.error-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+}
+
+.error-screen {
+  color: #e53935;
 }
 
 /* Footer */
@@ -171,12 +261,12 @@
 }
 
 .action-footer-content {
-    display: flex;
+  display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-  gap: 1rem; 
+  gap: 1rem;
 }
 
 .action-third-column {
@@ -240,8 +330,17 @@
 /* Responsive */
 @media (max-width: 768px) {
   .action-books-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
+  }
+  
+  .action-book-card {
+    height: 360px;
+    max-width: 160px;
+  }
+  
+  .action-book-image-container {
+    height: 180px;
   }
   
   .action-footer-content {
@@ -255,5 +354,32 @@
   
   .action-header .action-search-bar {
     width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+  
+  .action-book-card {
+    padding: 0.8rem;
+    height: 340px;
+    max-width: 140px;
+  }
+  
+  .action-book-image-container {
+    height: 150px;
+  }
+  
+  .action-red-box {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .action-book-card h3 {
+    font-size: 0.9rem;
+    min-height: 2.2rem;
   }
 }

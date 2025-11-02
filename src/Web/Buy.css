@@ -317,14 +317,14 @@
 .buy-footer-content {
   display: flex;
   justify-content: flex-start;
-  gap: 4rem;
+  gap: 3rem;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .buy-third-column {
-  margin-left: 35rem;
+  margin-left: 30rem;
 }
 
 .buy-footer-section {

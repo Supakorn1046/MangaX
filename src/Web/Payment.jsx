@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import "./Payment.css";
 
 // --- Import รูปภาพ ---
@@ -132,12 +133,12 @@ function Payment() {
       <header className="payment-header">
         <img src={logo} alt="BookStore Logo" className="payment-logo" />
         <nav>
-          <a href="/">หน้าแรก</a>
-          <a href="#shop">10 อันดับ</a>
+          <a href="/homepage">หน้าแรก</a>
+          <a href="/SeeAlltop10">10 อันดับ</a>
         </nav>
         <div className="payment-search-container">
           <MdOutlineShoppingCart className="payment-header-icon" />
-          <MdLogin className="payment-header-icon" />
+          <CgProfile onClick={() => navigate('/HomepageProfile')} />
           <input type="text" placeholder="ค้นหาหนังสือตามชื่อเรื่อง" className="payment-search-bar" />
           <FaSearch className="payment-search-icon" />
         </div>

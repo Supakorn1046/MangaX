@@ -15,6 +15,7 @@ import lineImage from '../assets/line.png';
 import ytImage from '../assets/yt1.png';
 import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
+import { CgProfile } from "react-icons/cg";
 
 // 💡 URL ฐานของ API Cart
 const API_CART_URL = 'http://localhost:5000/api/cart';
@@ -151,10 +152,10 @@ function Buy() {
             style={{ cursor: 'pointer' }}
             onClick={() => navigate('/buy')} // คลิกไปหน้าตะกร้า (หน้าเดิม)
           />
-          <MdLogin 
+          <CgProfile
             className="buy-header-icon" 
             style={{ cursor: 'pointer' }}
-            onClick={() => navigate('/login')} // คลิกไปหน้า Login
+            onClick={() => navigate('/HomepageProfile')} // คลิกไปหน้า Login
           />
           <input
             type="text"

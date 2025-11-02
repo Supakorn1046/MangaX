@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
-import { MdLogin, MdOutlineShoppingCart } from "react-icons/md";
-import { CgProfile } from "react-icons/cg"; // ✅ แก้ไข import
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import "./Seealltop10.css";
 import logo from "../assets/logo.png";
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
-import paypalImage from '../assets/paypal.png'; // ✅ เพิ่ม import
+import paypalImage from '../assets/paypal.png';
 import fbImage from '../assets/fb.png';
 import igImage from '../assets/ig.png';
 import lineImage from '../assets/line.png';
@@ -19,7 +19,7 @@ import xImage from '../assets/x.png';
 const API_BASE_URL = 'http://localhost:5000/api/books';
 const API_CART_URL = 'http://localhost:5000/api/cart';
 
-// ✅ เพิ่ม Reusable Components
+// ✅ Reusable Components
 const PaymentIcon = ({ src, alt }) => (
     <div className="seealltop10-image-link">
         <img src={src} alt={alt} />
@@ -59,8 +59,10 @@ const BookCard = ({ book, onBookClick, onAddToCart }) => {
 
 function Seealltop10() {
     const [books, setBooks] = useState([]);
+    const [filteredBooks, setFilteredBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState(''); // State สำหรับค้นหา
     const navigate = useNavigate();
 
     // Fetch top books
@@ -75,9 +77,11 @@ function Seealltop10() {
                 }
                 const data = await response.json();
                 setBooks(data);
+                setFilteredBooks(data); // ตั้งค่าเริ่มต้นให้ filteredBooks
             } catch (err) {
                 setError(err.message);
                 setBooks([]);
+                setFilteredBooks([]);
             } finally {
                 setLoading(false);
             }
@@ -85,6 +89,57 @@ function Seealltop10() {
 
         fetchTopBooks();
     }, []);
+
+    // ฟังก์ชันการค้นหาในหน้านี้
+    const handleSearch = (e) => {
+        if (e) {
+            e.preventDefault();
+        }
+        
+        const query = searchQuery.trim().toLowerCase();
+        
+        if (query === '') {
+            // ถ้าไม่มีคำค้นหา ให้แสดงหนังสือทั้งหมด
+            setFilteredBooks(books);
+        } else {
+            // กรองหนังสือตามคำค้นหา
+            const filtered = books.filter(book => 
+                book.title.toLowerCase().includes(query) ||
+                (book.author && book.author.toLowerCase().includes(query)) ||
+                (book.category && book.category.toLowerCase().includes(query))
+            );
+            setFilteredBooks(filtered);
+        }
+    };
+
+    const handleSearchInputChange = (e) => {
+        const value = e.target.value;
+        setSearchQuery(value);
+        
+        // Real-time search (optional)
+        // ถ้าต้องการให้ค้นหาแบบ real-time ให้เอา comment ออก
+        // if (value.trim() === '') {
+        //     setFilteredBooks(books);
+        // } else {
+        //     const query = value.trim().toLowerCase();
+        //     const filtered = books.filter(book => 
+        //         book.title.toLowerCase().includes(query) ||
+        //         (book.author && book.author.toLowerCase().includes(query))
+        //     );
+        //     setFilteredBooks(filtered);
+        // }
+    };
+
+    const handleSearchKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
+    const handleClearSearch = () => {
+        setSearchQuery('');
+        setFilteredBooks(books);
+    };
 
     // Navigation handlers
     const handleCartClick = () => navigate('/buy');
@@ -139,8 +194,8 @@ function Seealltop10() {
             <header className="seealltop10-header">
                 <img src={logo} alt="BookStore Logo" className="seealltop10-logo" />
                 <nav className="seealltop10-nav">
-                    <a href="/">หน้าแรก</a>
-                    <a href="#shop">10 อันดับ</a>
+                    <a href="/homepage">หน้าแรก</a>
+                    <a href="/SeeAlltop10">10 อันดับ</a>
                 </nav>
                 <div className="seealltop10-search-container">
                     <MdOutlineShoppingCart 
@@ -151,25 +206,53 @@ function Seealltop10() {
                         className="seealltop10-header-icon" 
                         onClick={handleProfileClick}
                     />
-                    <input
-                        type="text"
-                        placeholder="ค้นหาหนังสือตามชื่อเรื่อง"
-                        className="seealltop10-search-bar"
-                    />
-                    <FaSearch className="seealltop10-search-icon" />
+                    {/* แถบค้นหาที่ทำงานได้ */}
+                    <div className="seealltop10-search-wrapper">
+                        <input
+                            type="text"
+                            placeholder="ค้นหาหนังสือตามชื่อเรื่อง, ผู้แต่ง, หมวดหมู่"
+                            className="seealltop10-search-bar"
+                            value={searchQuery}
+                            onChange={handleSearchInputChange}
+                            onKeyPress={handleSearchKeyPress}
+                        />
+                        <FaSearch 
+                            className="seealltop10-search-icon" 
+                            onClick={handleSearch}
+                            style={{ cursor: 'pointer' }}
+                        />
+                    </div>
                 </div>
             </header>
 
             {/* Main Content */}
             <section className="seealltop10-books-section">
-                <h2 className="seealltop10-red-box-top10">มังงะขายดี 10 อันดับ</h2>
+                <div className="seealltop10-header-section">
+                    <h2 className="seealltop10-red-box-top10">มังงะขายดี 10 อันดับ</h2>
+                    
+                    {/* แสดงผลการค้นหา */}
+                    {searchQuery && (
+                        <div className="seealltop10-search-results-info">
+                            <p>
+                                ผลการค้นหาสำหรับ: "<strong>{searchQuery}</strong>" 
+                                ({filteredBooks.length} รายการ)
+                                <button 
+                                    className="seealltop10-clear-search"
+                                    onClick={handleClearSearch}
+                                >
+                                    ล้างการค้นหา
+                                </button>
+                            </p>
+                        </div>
+                    )}
+                </div>
                 
                 {loading && <p className="seealltop10-loading-text">กำลังโหลดข้อมูล...</p>}
                 {error && <p className="seealltop10-error-text">เกิดข้อผิดพลาด: {error}</p>}
 
                 <div className="seealltop10-books-grid">
-                    {!loading && !error && books.length > 0 && (
-                        books.map((book) => (
+                    {!loading && !error && filteredBooks.length > 0 && (
+                        filteredBooks.map((book) => (
                             <BookCard 
                                 key={book._id} 
                                 book={book} 
@@ -178,7 +261,18 @@ function Seealltop10() {
                             />
                         ))
                     )}
-                    {!loading && !error && books.length === 0 && (
+                    {!loading && !error && filteredBooks.length === 0 && searchQuery && (
+                        <div className="seealltop10-no-results">
+                            <p>ไม่พบหนังสือที่ตรงกับการค้นหา "<strong>{searchQuery}</strong>"</p>
+                            <button 
+                                className="seealltop10-clear-search-btn"
+                                onClick={handleClearSearch}
+                            >
+                                แสดงหนังสือทั้งหมด
+                            </button>
+                        </div>
+                    )}
+                    {!loading && !error && filteredBooks.length === 0 && !searchQuery && (
                         <p className="seealltop10-no-books">ไม่พบข้อมูลหนังสือขายดี</p>
                     )}
                 </div>
