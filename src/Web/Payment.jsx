@@ -49,7 +49,7 @@ function Payment() {
         setLoading(true);
 
         // ดึงข้อมูลตะกร้า
-        const cartRes = await fetch(`http://localhost:5000/api/cart/user/${userId}`);
+        const cartRes = await fetch(`https://mangax.onrender.com/api/cart/user/${userId}`);
         if (!cartRes.ok) throw new Error('ไม่สามารถดึงข้อมูลตะกร้าได้');
         const cartData = await cartRes.json();
 
@@ -59,7 +59,7 @@ function Payment() {
         setCartItems(cartData.items || []);
 
         // ดึงข้อมูลที่อยู่ 
-        const addrRes = await fetch(`http://localhost:5000/api/address/user/${userId}`);
+        const addrRes = await fetch(`https://mangax.onrender.com/api/address/user/${userId}`);
         if (!addrRes.ok) throw new Error('ไม่สามารถดึงข้อมูลที่อยู่ได้');
         const addresses = await addrRes.json();
         
@@ -95,7 +95,7 @@ function Payment() {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const response = await fetch('https://mangax.onrender.com/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData)
@@ -103,7 +103,7 @@ function Payment() {
 
       if (response.ok) {
         try {
-          await fetch(`http://localhost:5000/api/cart/user/${userId}`, {
+          await fetch(`https://mangax.onrender.com/api/cart/user/${userId}`, {
             method: 'DELETE'
           });
         } catch (cartErr) {

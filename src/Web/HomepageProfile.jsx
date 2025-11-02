@@ -127,7 +127,7 @@ const HomepageProfile = () => {
       setLoading(true);
       setError(null);
       try {
-        const addrRes = await fetch(`http://localhost:5000/api/address/user/${userId}`);
+        const addrRes = await fetch(`https://mangax.onrender.com/api/address/user/${userId}`);
         let userPhone = '';
         let userAddress = 'ยังไม่ได้ตั้งค่าที่อยู่';
         let userFirstName = ''; 
@@ -155,7 +155,7 @@ const HomepageProfile = () => {
         });
 
         //ดึงข้อมูลประวัติการซื้อ
-        const orderRes = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
+        const orderRes = await fetch(`https://mangax.onrender.com/api/orders/user/${userId}`);
         if (!orderRes.ok) throw new Error('ไม่สามารถดึงประวัติการซื้อได้');
         
         const fetchedOrders = await orderRes.json(); 

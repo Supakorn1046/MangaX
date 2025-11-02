@@ -17,8 +17,8 @@ import xImage from '../assets/x.png';
 import bookPlaceholder from "../assets/book1.png";
 
 // URL ฐานของ API
-const API_BASE_URL = 'http://localhost:5000/api/books';
-const API_CART_URL = 'http://localhost:5000/api/cart';
+const API_BASE_URL = 'https://mangax.onrender.com/api/books';
+const API_CART_URL = 'https://mangax.onrender.com/api/cart';
 
 function New() {
     const navigate = useNavigate();

@@ -21,8 +21,8 @@ import ttImage from '../assets/tt.png';
 import xImage from '../assets/x.png';
 
 // URL ฐานของ API
-const API_BASE_URL = 'http://localhost:5000/api/books';
-const API_CART_URL = 'http://localhost:5000/api/cart'; 
+const API_BASE_URL = 'https://mangax.onrender.com/api/books';
+const API_CART_URL = 'https://mangax.onrender.com/api/cart'; 
 
 // Mock data
 const mockBooks = [

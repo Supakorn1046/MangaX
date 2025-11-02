@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 import { CartIcon, LogoutIcon, AddIcon } from './admin_icon.jsx'; 
 
 // URL ฐานของ API
-const API_BASE_URL = 'http://localhost:5000/api/books';
+const API_BASE_URL = 'https://mangax.onrender.com/api/books';
 
 function AdminAdd() {
     const navigate = useNavigate();

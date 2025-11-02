@@ -52,7 +52,7 @@ function Address() {
 
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:5000/api/address/user/${userId}`);
+        const response = await fetch(`https://mangax.onrender.com/api/address/user/${userId}`);
         if (!response.ok) throw new Error('ไม่สามารถดึงข้อมูลที่อยู่ได้');
 
         const addresses = await response.json();
@@ -101,7 +101,7 @@ function Address() {
           isDefault: !fetchedUserAddress
         };
 
-        const response = await fetch('http://localhost:5000/api/address', {
+        const response = await fetch('https://mangax.onrender.com/api/address', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newAddressData),

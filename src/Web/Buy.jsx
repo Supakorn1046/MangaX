@@ -17,7 +17,7 @@ import xImage from '../assets/x.png';
 import { CgProfile } from "react-icons/cg";
 
 // URL ฐานของ API Cart
-const API_CART_URL = 'http://localhost:5000/api/cart';
+const API_CART_URL = 'https://mangax.onrender.com/api/cart';
 
 function Buy() {
   const navigate = useNavigate();

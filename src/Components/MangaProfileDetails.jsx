@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './MangaXLogin.module.css'; 
 
 // URL ฐานของ API Address
-const API_ADDRESS_URL = 'http://localhost:5000/api/address';
+const API_ADDRESS_URL = 'https://mangax.onrender.com/api/address';
 
 const MangaXProfileDetails = ({ onBackToRegister, onRegistrationComplete }) => { 
     
