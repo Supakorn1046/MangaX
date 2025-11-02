@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import "./Seealltop10.css";
+import "./SeeAlltop10.css";
 import logo from "../assets/logo.png";
 import visaImage from '../assets/visa.png';
 import mastercardImage from '../assets/mastercard.png';
