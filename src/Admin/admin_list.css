@@ -2,7 +2,7 @@
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
-  background-color: #f8f9fa; /* สีเทาอ่อน */
+  background-color: #f8f9fa; 
 }
 
 .layout-container {
@@ -13,10 +13,10 @@ body {
 /* === 2. Sidebar (แถบซ้าย) === */
 .sidebar {
   width: 250px;
-  background-color: #343a40; /* สีเทาเข้ม */
+  background-color: #343a40;
   color: #fff;
   padding: 20px;
-  flex-shrink: 0; /* ป้องกันแถบซ้ายหด */
+  flex-shrink: 0; 
 }
 
 .sidebar-logo {
@@ -48,7 +48,7 @@ body {
   gap: 12px;
   padding: 15px 10px;
   text-decoration: none;
-  color: #adb5bd; /* สีเทาอ่อน */
+  color: #adb5bd; 
   border-radius: 6px;
   font-size: 16px;
 }
@@ -59,14 +59,14 @@ body {
 }
 
 .nav-link.active {
-  background-color: #0d6efd; /* สีน้ำเงิน */
+  background-color: #0d6efd; 
   color: #fff;
   font-weight: bold;
 }
 
 /* === 3. Main Content (เนื้อหาขวา) === */
 .main-content {
-  flex-grow: 1; /* ขยายเต็มพื้นที่ */
+  flex-grow: 1; 
   padding: 30px;
 }
 
@@ -92,7 +92,7 @@ body {
 
 .search-wrapper {
   position: relative;
-  max-width: 400px; /* จำกัดความกว้างช่องค้นหา */
+  max-width: 400px; 
 }
 
 .search-icon {
@@ -100,12 +100,12 @@ body {
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #6c757d; /* สีเทา */
+  color: #6c757d; 
 }
 
 .search-input {
   width: 100%;
-  padding: 12px 15px 12px 45px; /* เว้นที่ให้ไอคอน */
+  padding: 12px 15px 12px 45px; 
   font-size: 16px;
   border: 1px solid #ced4da;
   border-radius: 6px;
@@ -117,8 +117,8 @@ body {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  overflow: hidden; /* ทำให้ขอบมนสวยงาม */
-  overflow-x: auto; /* ถ้าตารางล้น ให้สไลด์ได้ */
+  overflow: hidden; 
+  overflow-x: auto; 
 }
 
 .product-table {
@@ -147,7 +147,7 @@ body {
 }
 
 .product-desc {
-  max-width: 300px; /* จำกัดความกว้างรายละเอียด */
+  max-width: 300px; 
   font-size: 14px;
   color: #6c757d;
 }
@@ -169,7 +169,7 @@ body {
 
 /* === 7. Buttons (ปุ่ม) === */
 .btn {
-  display: inline-flex; /* ทำให้ไอคอนกับข้อความอยู่กลาง */
+  display: inline-flex; 
   align-items: center;
   gap: 8px;
   padding: 10px 15px;
@@ -179,11 +179,11 @@ body {
   cursor: pointer;
   font-weight: 600;
   text-decoration: none;
-  white-space: nowrap; /* ป้องกันปุ่มตกบรรทัด */
+  white-space: nowrap; 
 }
 
 .btn-primary {
-  background-color: #0d6efd; /* สีน้ำเงิน */
+  background-color: #0d6efd; 
   color: white;
 }
 .btn-primary:hover {
@@ -191,7 +191,7 @@ body {
 }
 
 .btn-edit {
-  background-color: #198754; /* สีเขียว */
+  background-color: #198754; 
   color: white;
 }
 .btn-edit:hover {
@@ -199,7 +199,7 @@ body {
 }
 
 .btn-delete {
-  background-color: #dc3545; /* สีแดง */
+  background-color: #dc3545; 
   color: white;
 }
 .btn-delete:hover {

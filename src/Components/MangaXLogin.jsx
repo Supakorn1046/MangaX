@@ -8,7 +8,7 @@ const MangaXLogin = ({ onRegisterClick }) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    // 🔥 ตรวจสอบว่าล็อกอินอยู่แล้วหรือไม่
+    // ตรวจสอบว่าล็อกอินอยู่แล้วหรือไม่
     React.useEffect(() => {
         const token = localStorage.getItem('token');
         const isAdmin = localStorage.getItem('isAdmin');
@@ -36,7 +36,7 @@ const MangaXLogin = ({ onRegisterClick }) => {
             return;
         }
 
-        // 🔑 1. ตรวจสอบเงื่อนไข Admin Login (Hardcoded)
+        // 1. ตรวจสอบเงื่อนไข Admin Login (Hardcoded)
         if (email === 'Admin123123' && password === 'Admin123123') {
             alert('Admin Login สำเร็จ!');
             // เก็บข้อมูลใน localStorage
@@ -69,7 +69,7 @@ const MangaXLogin = ({ onRegisterClick }) => {
             if (response.ok) {
                 alert('เข้าสู่ระบบสำเร็จ!');
                 
-                // 🔥 เก็บข้อมูลทั้งหมดที่จำเป็น
+                // เก็บข้อมูลทั้งหมดที่จำเป็น
                 localStorage.setItem('userInfo', JSON.stringify(data));
                 localStorage.setItem('token', data.token || 'user-token-' + Date.now());
                 localStorage.setItem('isAdmin', 'false');
@@ -150,7 +150,7 @@ const MangaXLogin = ({ onRegisterClick }) => {
                         </button>
                     </div>
 
-                    {/* 🔥 ข้อมูลสำหรับทดสอบ */}
+                    {/* ข้อมูลสำหรับทดสอบ */}
                     <div style={{
                         marginTop: '20px',
                         padding: '10px',

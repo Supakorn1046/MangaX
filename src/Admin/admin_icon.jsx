@@ -17,7 +17,7 @@ export const SearchIcon = () => (
     <svg className="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
 );
 
-// ✅ เพิ่มไอคอนใหม่สำหรับหน้า Edit
+// เพิ่มไอคอนใหม่สำหรับหน้า Edit
 export const SaveIcon = () => (
     <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
@@ -30,7 +30,7 @@ export const CancelIcon = () => (
     </svg>
 );
 
-// ✅ ไอคอนเพิ่มเติมอื่นๆ (ถ้าต้องการ)
+// ไอคอนเพิ่มเติมอื่นๆ (ถ้าต้องการ)
 export const EditIcon = () => (
     <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>

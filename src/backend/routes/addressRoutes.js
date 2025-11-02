@@ -3,7 +3,7 @@ import Address from "../models/Address.js";
 
 const router = express.Router();
 
-// ✅ ดึงที่อยู่ทั้งหมดของผู้ใช้
+// ดึงที่อยู่ทั้งหมดของผู้ใช้
 router.get("/user/:userId", async (req, res) => {
   try {
     const addresses = await Address.find({ userId: req.params.userId });
@@ -13,7 +13,7 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
-// ✅ เพิ่มที่อยู่ใหม่
+// เพิ่มที่อยู่ใหม่
 router.post("/", async (req, res) => {
   try {
     const newAddress = new Address(req.body);
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ✅ อัปเดตที่อยู่
+// อัปเดตที่อยู่
 router.put("/:id", async (req, res) => {
   try {
     const updatedAddress = await Address.findByIdAndUpdate(
@@ -38,7 +38,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// ✅ ลบที่อยู่
+// ลบที่อยู่
 router.delete("/:id", async (req, res) => {
   try {
     await Address.findByIdAndDelete(req.params.id);

@@ -1,12 +1,10 @@
-// ในไฟล์ orderRoutes.js
-
 import express from "express";
 import Order from "../models/Order.js";
 import Book from "../models/Book.js"; 
 
 const router = express.Router();
 
-// 💡 (เพิ่ม) GET / (ดึง Order ทั้งหมด)
+// (เพิ่ม) GET / (ดึง Order ทั้งหมด)
 router.get("/", async (req, res) => {
   try {
     const orders = await Order.find();
@@ -16,16 +14,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-// --- ⭐️ นี่คือ Route ที่คุณต้องแก้ไข ⭐️ ---
-// ✅ ดึงประวัติการสั่งซื้อทั้งหมดของผู้ใช้
+// ดึงประวัติการสั่งซื้อทั้งหมดของผู้ใช้
 router.get("/user/:userId", async (req, res) => {
   try {
     // ค้นหา Order ทั้งหมดที่ตรงกับ userId
     const orders = await Order.find({ userId: req.params.userId })
-                              .sort({ createdAt: -1 }); // 👈 (เรียงจากใหม่ไปเก่า)
+                              .sort({ createdAt: -1 }); 
 
     if (!orders) {
-      return res.json([]); // 👈 (ส่ง array ว่าง ถ้าไม่เจอ)
+      return res.json([]); 
     }
     
     // ส่งข้อมูลประวัติการซื้อกลับไป
@@ -35,10 +32,7 @@ router.get("/user/:userId", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// --- ⭐️ จบส่วนที่แก้ไข ⭐️ ---
 
-
-// --- (โค้ด POST / (ตัดสต็อก) ของคุณอยู่ตรงนี้ - ถูกต้องแล้ว) ---
 router.post("/", async (req, res) => {
   const { userId, items, total, addressId } = req.body;
 

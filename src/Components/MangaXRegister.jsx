@@ -1,5 +1,3 @@
-// 📄 ในไฟล์ MangaXRegister.jsx
-
 import React, { useState } from 'react'; 
 import styles from './MangaXLogin.module.css';
 
@@ -48,21 +46,16 @@ const MangaXRegister = ({ onBackToLogin, onNextToProfile }) => {
 
             if (response.ok) {
                 alert('สมัครสมาชิกสำเร็จ! กรุณากรอกข้อมูลโปรไฟล์ต่อ');
-
-                // --- ⭐️ นี่คือส่วนที่แก้ไข ⭐️ ---
-                // 'data.name' ที่ได้มาคือ 'displayName' (เช่น "Kornza")
-                // เราต้องสร้าง Object ใหม่เพื่อเก็บใน localStorage
-                
+       
                 const userInfoToStore = {
                     _id: data._id,
                     email: data.email,
-                    // ‼️ บังคับให้ 'name' ใน localStorage เป็นชื่อจริงเสมอ
+                    // บังคับให้ 'name' ใน localStorage เป็นชื่อจริงเสมอ
                     name: `${firstName} ${lastName}` 
                 };
 
                 // บันทึก object ที่แก้ไขแล้วลง localStorage
                 localStorage.setItem('userInfo', JSON.stringify(userInfoToStore)); 
-                // --- จบส่วนที่แก้ไข ---
                 
                 onNextToProfile(); // ไปขั้นตอนต่อไป
             } else {

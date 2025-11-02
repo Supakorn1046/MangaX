@@ -38,10 +38,9 @@ const MangaXProfileDetails = ({ onBackToRegister, onRegistrationComplete }) => {
             return;
         }
 
-        // --- ⭐️ ส่วนที่แก้ไข ---
         // 1. ดึงข้อมูลผู้ใช้จาก localStorage (ที่มี name จากหน้า Register)
         const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-        const userProfileName = userInfo ? userInfo.name : ""; // (เช่น "สมชาย ใจดี")
+        const userProfileName = userInfo ? userInfo.name : ""; 
 
         // 2. แยกชื่อ-นามสกุล
         let firstName = "";
@@ -51,16 +50,15 @@ const MangaXProfileDetails = ({ onBackToRegister, onRegistrationComplete }) => {
             firstName = nameParts[0] || "";
             lastName = nameParts.slice(1).join(' ') || "";
         }
-        // --- จบส่วนที่แก้ไข ---
 
-        // 💡 3. เตรียมข้อมูลสำหรับ POST /api/address (อัปเดต)
+        // 3. เตรียมข้อมูลสำหรับ POST /api/address (อัปเดต)
         const addressData = {
             userId: userId,
             address: address,
             phone: phone,
-            firstName: firstName, // 👈 เพิ่ม
-            lastName: lastName,  // 👈 เพิ่ม
-            isDefault: true // 💡 ตั้งเป็นที่อยู่หลัก
+            firstName: firstName, 
+            lastName: lastName,  
+            isDefault: true 
         };
 
         try {
@@ -72,7 +70,7 @@ const MangaXProfileDetails = ({ onBackToRegister, onRegistrationComplete }) => {
 
             if (response.ok) {
                 alert('บันทึกข้อมูลสำเร็จ! คุณสามารถเข้าสู่ระบบได้แล้ว');
-                onRegistrationComplete(); // 💡 ไปหน้า Login
+                onRegistrationComplete();
             } else {
                 const errData = await response.json();
                 setError(errData.message || 'ไม่สามารถบันทึกที่อยู่ได้');
@@ -92,7 +90,7 @@ const MangaXProfileDetails = ({ onBackToRegister, onRegistrationComplete }) => {
                     จะใช้สำหรับการจัดข้อมูลผู้ใช้เท่านั้น
                 </p>
                 
-                {/* 💡 แสดงข้อผิดพลาด (ถ้ามี) */}
+                {/* แสดงข้อผิดพลาด (ถ้ามี) */}
                 {error && <p style={{ color: 'red', textAlign: 'center', fontWeight: 'bold' }}>{error}</p>}
 
                 <p className={styles.orText} style={{ textAlign: 'left', marginBottom: '5px' }}>ที่อยู่ *</p>
@@ -119,7 +117,7 @@ const MangaXProfileDetails = ({ onBackToRegister, onRegistrationComplete }) => {
                     />
                 </div>
 
-                {/* ... (ส่วน Checkbox และข้อตกลง คงเดิม) ... */}
+                {/* ... (ส่วน Checkbox และข้อตกลง) ... */}
                 <div style={{ marginTop: '20px' }}>
                     <label style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '10px' }}>
                         <input type="checkbox" style={{ marginRight: '10px', transform: 'translateY(3px)' }} />

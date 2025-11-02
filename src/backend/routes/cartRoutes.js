@@ -3,7 +3,7 @@ import Cart from "../models/Cart.js";
 
 const router = express.Router();
 
-// ✅ ดึงตะกร้าของผู้ใช้
+// ดึงตะกร้าของผู้ใช้
 router.get("/user/:userId", async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId });
@@ -14,10 +14,10 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
-// ✅ เพิ่มสินค้าเข้าตะกร้า (แก้ไข)
+// เพิ่มสินค้าเข้าตะกร้า (แก้ไข)
 router.post("/add", async (req, res) => {
   try {
-    // 💡 1. ดึง image (URL รูปภาพ) มาจาก req.body
+    // 1. ดึง image (URL รูปภาพ) มาจาก req.body
     const { userId, bookId, title, price, quantity, image } = req.body;
     let cart = await Cart.findOne({ userId });
 
@@ -31,13 +31,13 @@ router.post("/add", async (req, res) => {
       // ถ้ามีสินค้าอยู่แล้ว ให้อัปเดตจำนวน
       cart.items[itemIndex].quantity += quantity;
       
-      // 💡 3. (Optional) อัปเดต URL รูปภาพหากยังไม่มี
+      // 3. (Optional) อัปเดต URL รูปภาพหากยังไม่มี
       if (!cart.items[itemIndex].image && image) {
           cart.items[itemIndex].image = image;
       }
 
     } else {
-      // 💡 2. เพิ่ม image เมื่อ push สินค้าใหม่
+      // 2. เพิ่ม image เมื่อ push สินค้าใหม่
       cart.items.push({ bookId, title, price, image, quantity });
     }
 
@@ -49,7 +49,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// ✅ ลบสินค้าออกจากตะกร้า
+// ลบสินค้าออกจากตะกร้า
 router.delete("/remove/:userId/:bookId", async (req, res) => {
   try {
     const { userId, bookId } = req.params;

@@ -7,7 +7,7 @@ const cartSchema = new mongoose.Schema({
       bookId: { type: mongoose.Schema.Types.ObjectId, ref: "Book" },
       title: String,
       price: Number,
-      image: String, // 💡 เพิ่มฟิลด์นี้
+      image: String, 
       quantity: { type: Number, default: 1 }
     }
   ],

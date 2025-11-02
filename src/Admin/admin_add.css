@@ -5,14 +5,12 @@ body {
   background-color: #F4D58D;
 }
 
-/* หมายเหตุ: คุณใช้ .admin-add-page ในไฟล์นี้ */
 .admin-add-page {
   display: flex;
   min-height: 100vh;
 }
 
 /* === 2. Sidebar (แถบซ้าย) === */
-/* (ส่วนนี้จะคล้ายกับไฟล์แรก แต่ใช้ selector ตาม .jsx ไฟล์นี้) */
 .sidebar {
   width: 250px;
   background-color: #343a40;
@@ -68,7 +66,6 @@ body {
 .main-content {
   flex-grow: 1;
   padding: 30px;
-  /* หน้านี้พื้นหลังเป็นสีขาว */
   background-color: #ffffff; 
 }
 
@@ -92,7 +89,7 @@ body {
 /* === 4. Form (ฟอร์ม) === */
 .product-form {
   max-width: 800px;
-  margin: 0 auto; /* จัดฟอร์มไว้กลางๆ */
+  margin: 0 auto; 
 }
 
 .form-group {
@@ -114,7 +111,7 @@ body {
   font-size: 16px;
   border: 1px solid #ced4da;
   border-radius: 6px;
-  box-sizing: border-box; /* ป้องกัน padding ทำให้ล้น */
+  box-sizing: border-box; 
 }
 
 .form-group textarea {
@@ -167,8 +164,7 @@ body {
 }
 
 /* === 6. Icons (ไอคอน) === */
-/* (ไฟล์นี้คุณใช้ span เปล่าๆ) */
 .sidebar-nav .icon {
-  width: 24px; /* จองที่ไว้ให้ไอคอน */
+  width: 24px; 
   height: 24px;
 }
