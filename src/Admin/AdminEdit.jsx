@@ -11,7 +11,7 @@ function AdminEdit() {
     const { id } = useParams();
     const navigate = useNavigate();
     
-    // 💡 ปรับ State: เพิ่ม 'category'
+    // ปรับ State: เพิ่ม 'category'
     const [product, setProduct] = useState({
         title: '',
         author: '',
@@ -19,14 +19,14 @@ function AdminEdit() {
         price: '',
         stock: '',
         image: '',
-        category: '' // 🔑 New: เพิ่ม category
+        category: '' // New: เพิ่ม category
     });
     
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     // ----------------------------------------------------
-    // 💡 useEffect: ดึงข้อมูลเดิมมาแสดง (GET /api/books/:id)
+    // useEffect: ดึงข้อมูลเดิมมาแสดง (GET /api/books/:id)
     // ----------------------------------------------------
     useEffect(() => {
         const fetchProductData = async () => {
@@ -39,7 +39,7 @@ function AdminEdit() {
                 }
                 const data = await response.json();
                 
-                // 💡 แมปข้อมูล: รวม category
+                // แมปข้อมูล: รวม category
                 setProduct({
                     title: data.title || '',
                     author: data.author || '',
@@ -47,7 +47,7 @@ function AdminEdit() {
                     price: data.price?.toString() || '',
                     stock: data.stock?.toString() || '',
                     image: data.image || '',
-                    category: data.category || '' // 🔑 New: ดึง category
+                    category: data.category || '' // New: ดึง category
                 });
             } catch (err) {
                 setError('ไม่สามารถดึงข้อมูลสินค้าเดิมได้');
@@ -90,7 +90,7 @@ function AdminEdit() {
             price: parseFloat(product.price),
             stock: parseInt(product.stock, 10),
             image: product.image,
-            category: product.category, // 🔑 New: รวม category
+            category: product.category, // New: รวม category
         };
 
         try {
@@ -240,7 +240,7 @@ function AdminEdit() {
                                 </div>
                             </div>
                             
-                            {/* 🔑 New: Input สำหรับ ประเภท (Category) */}
+                            {/* New: Input สำหรับ ประเภท (Category) */}
                             <div className="form-group">
                                 <label className="form-label">ประเภท (Category) *</label>
                                 <input
@@ -253,7 +253,7 @@ function AdminEdit() {
                                     required
                                 />
                             </div>
-                            {/* 🔑 End New Input */}
+                            {/* End New Input */}
 
 
                             <div className="form-group">

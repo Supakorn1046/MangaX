@@ -48,7 +48,6 @@ router.get("/bestsellers", async (req, res) => {
           image: "$bookDetails.image",
           stock: "$bookDetails.stock",
           createdAt: "$bookDetails.createdAt"
-          // totalSold: "$totalSold" // (ส่งยอดขายไปด้วยก็ได้ถ้าอยาก)
         }
       }
     ]);
@@ -72,7 +71,7 @@ router.get("/", async (req, res) => {
 // เพิ่มหนังสือใหม่
 router.post("/", async (req, res) => {
   try {
-    // 💡 ควรมีการตรวจสอบข้อมูลที่นี่ก่อน
+    // ควรมีการตรวจสอบข้อมูลที่นี่ก่อน
     const newBook = new Book(req.body);
     const saved = await newBook.save();
     res.json(saved);
@@ -81,7 +80,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ✅ เพิ่ม: ลบหนังสือตาม ID
+// เพิ่ม: ลบหนังสือตาม ID
 router.delete("/:id", async (req, res) => {
   try {
     const deletedBook = await Book.findByIdAndDelete(req.params.id);
@@ -90,7 +89,7 @@ router.delete("/:id", async (req, res) => {
       return res.status(404).json({ message: "Book not found" });
     }
 
-    // 💡 ตอบกลับว่าลบสำเร็จแล้ว
+    // ตอบกลับว่าลบสำเร็จแล้ว
     res.json({ message: "Book deleted successfully" });
   } catch (error) {
     // 400 Bad Request ถ้า ID ที่ส่งมาไม่ถูกต้อง (Invalid ObjectId)
@@ -98,7 +97,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// ✅ เพิ่ม: ดึงหนังสือตาม ID
+// เพิ่ม: ดึงหนังสือตาม ID
 router.get("/:id", async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -112,12 +111,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// ✅ เพิ่ม: อัปเดตหนังสือตาม ID
+// เพิ่ม: อัปเดตหนังสือตาม ID
 router.put("/:id", async (req, res) => {
   try {
-    // 💡 ใช้ findByIdAndUpdate เพื่ออัปเดตข้อมูล
-    // { new: true } หมายถึงให้คืนค่าเอกสารที่ถูกอัปเดตแล้วกลับมา
-    // { runValidators: true } หมายถึงตรวจสอบตาม Mongoose Schema (เช่น title, price ต้องมี)
+    // ใช้ findByIdAndUpdate เพื่ออัปเดตข้อมูล
     const updatedBook = await Book.findByIdAndUpdate(
       req.params.id,
       req.body,

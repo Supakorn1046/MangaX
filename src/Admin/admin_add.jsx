@@ -10,7 +10,7 @@ const API_BASE_URL = 'http://localhost:5000/api/books';
 function AdminAdd() {
     const navigate = useNavigate();
 
-    // 💡 ปรับ State: เพิ่ม 'category'
+    // ปรับ State: เพิ่ม 'category'
     const [product, setProduct] = useState({
         title: '',
         author: '',
@@ -18,7 +18,7 @@ function AdminAdd() {
         price: '',
         stock: '',
         image: '',
-        category: '' // 💡 New: เพิ่ม category
+        category: '' // New: เพิ่ม category
     });
 
     // ฟังก์ชันจัดการการเปลี่ยนแปลง input
@@ -54,12 +54,12 @@ function AdminAdd() {
         navigate('/login');
     };
 
-    // 💡 ฟังก์ชันบันทึกข้อมูล (เรียก API จริง)
+    // ฟังก์ชันบันทึกข้อมูล (เรียก API จริง)
     const handleSubmit = async (event) => {
         event.preventDefault(); 
         
         // --- 1. การตรวจสอบความถูกต้องของข้อมูล (Validation) ---
-        // 💡 เพิ่ม category ในการตรวจสอบ
+        // เพิ่ม category ในการตรวจสอบ
         if (!product.title || !product.author || !product.price || !product.stock || !product.category) {
             alert('กรุณากรอกข้อมูลให้ครบถ้วน (ชื่อเรื่อง, ชื่อผู้แต่ง, ราคา, จำนวน, ประเภท)');
             return;
@@ -85,7 +85,7 @@ function AdminAdd() {
             price: priceValue,
             stock: stockValue,
             image: product.image,
-            category: product.category, // 💡 New: ส่ง category ไป Backend
+            category: product.category, // New: ส่ง category ไป Backend
         };
         
         try {
@@ -173,7 +173,7 @@ function AdminAdd() {
                         />
                     </div>
 
-                    {/* 💡 New: ประเภทสินค้า */}
+                    {/* New: ประเภทสินค้า */}
                     <div className="form-group">
                         <label htmlFor="category">ประเภท (Category) *</label>
                         <input 

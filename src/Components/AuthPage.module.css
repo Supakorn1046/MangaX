@@ -1,16 +1,11 @@
-/* AuthPage.module.css */
-
-/* ตัวครอบหลัก เพื่อจัดให้อยู่กลางหน้าจอ */
 .logoPanel {
-    /* ... สไตล์เดิม ... */
-    width: 35%; /* ลดสัดส่วน */
+    width: 35%; 
 }
 
 /* Login Form Panel (คอลัมน์ขวา) */
 .loginFormPanel {
     padding: 40px 50px;
-    /* ... สไตล์เดิม ... */
-    width: 100%; /* เพิ่มสัดส่วน */
+    width: 100%; 
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -20,11 +15,11 @@
 .authContainer {
   display: flex;
   flex-direction: row;
-  max-width: 900px; /* ความกว้างสูงสุดของทั้ง 2 คอลัมน์ */
+  max-width: 900px; 
   width: 300%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 10px; /* ขอบมน */
-  overflow: hidden; /* ซ่อนส่วนที่เกินขอบมน */
+  border-radius: 10px; 
+  overflow: hidden; 
 }
 
 /* คอลัมน์ซ้าย (Logo Panel) */
@@ -34,23 +29,16 @@
   padding: 40px;
   display: flex;
   flex-direction: column;
-  
-  /* --- 1. แก้ไขตรงนี้ --- */
-  /* เปลี่ยนจาก flex-start (ชิดบน) กลับเป็น center */
   justify-content: center; 
-
   align-items: center;
   border: 10px solid #ffffff; 
   box-sizing: border-box; 
   border-radius: 10px 0 0 10px; 
-  
-  /* --- 2. เพิ่มบรรทัดนี้ --- */
-  /* นี่คือคำสั่งให้ "หยุดยืด" และ "จัดตัวเองอยู่กึ่งกลาง" */
   align-self: center; 
 }
 
 .authLogo {
-  max-width: 150px; /* ปรับขนาดโลโก้ */
+  max-width: 150px; 
   height: auto;
 }
 
@@ -64,7 +52,7 @@
 /* คอลัมน์ขวา (Form Panel) */
 .formPanel {
   flex-basis: 50%;
-  background-color: #E8E8E8; /* สีพื้นหลังเทา ตามภาพ */
+  background-color: #E8E8E8; 
   padding: 40px;
   display: flex;
   flex-direction: column;
