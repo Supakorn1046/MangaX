@@ -20,28 +20,95 @@ import AuthPage from './components/AuthPage.jsx'
 import Top10 from './Web/SeeAlltop10.jsx'
 import Action from './Web/Action.jsx'
 import Sport from './Web/Sport.jsx'
+import ProtectedRoute from './Components/ProtectedRoute.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AuthPage />} />
-        <Route path="/homepage" element={<Homepage />} />
-        {/* 🔑 แก้ไข: เพิ่ม /:id เพื่อให้ ProductDetail สามารถดึง ID สินค้าไปใช้ได้ */}
-        <Route path="/productdetail/:id" element={<ProductDetail />} /> 
-        <Route path="/new" element={<New />} />
-        <Route path="/buy" element={<Buy />} />
-        <Route path="/SeeAlltop10" element={<Top10 />} />
-        <Route path="/Action" element={<Action />} />
-        <Route path="/Sport" element={<Sport />} />
-        <Route path="/HomepageProfile" element={<HomepageProfile />} />
-        <Route path="/admin_list" element={<AdminList />} />
-        <Route path="/admin_edit/:id" element={<AdminEdit />} />
-        <Route path="/admin_add" element={<AdminAdd />} />
-        <Route path="/address" element={<Address />} />
-        <Route path="/payment" element={<Payment />} />
+        
+        {/* ตัวอย่างใช้ ProtectedRoute */}
+        <Route path="/homepage" element={
+          <ProtectedRoute>
+            <Homepage />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/productdetail/:id" element={
+          <ProtectedRoute>
+            <ProductDetail />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/new" element={
+          <ProtectedRoute>
+            <New />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/buy" element={
+          <ProtectedRoute>
+            <Buy />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/SeeAlltop10" element={
+          <ProtectedRoute>
+            <Top10 />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/Action" element={
+          <ProtectedRoute>
+            <Action />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/Sport" element={
+          <ProtectedRoute>
+            <Sport />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/HomepageProfile" element={
+          <ProtectedRoute>
+            <HomepageProfile />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/admin_list" element={
+          <ProtectedRoute>
+            <AdminList />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/admin_edit/:id" element={
+          <ProtectedRoute>
+            <AdminEdit />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/admin_add" element={
+          <ProtectedRoute>
+            <AdminAdd />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/address" element={
+          <ProtectedRoute>
+            <Address />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/payment" element={
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        } />
+
         <Route path="/login" element={<AuthPage />} />
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);

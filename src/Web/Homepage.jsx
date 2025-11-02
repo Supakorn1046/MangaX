@@ -42,10 +42,28 @@ function Homepage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null); 
     
-    // 🔥 เพิ่ม state สำหรับการค้นหา
+    // 🔥 State สำหรับการค้นหา
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
+
+    // 🔥 ตรวจสอบการล็อกอินเมื่อ component โหลด
+    useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem('token');
+            const userInfo = localStorage.getItem('userInfo');
+            
+            if (!token || !userInfo) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userInfo');
+                localStorage.removeItem('isAdmin');
+                navigate('/', { replace: true });
+                return;
+            }
+        };
+
+        checkAuth();
+    }, [navigate]);
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -97,17 +115,46 @@ function Homepage() {
         return () => clearInterval(interval);
     }, [images.length]);
 
-    // 🔥 เพิ่มฟังก์ชันการค้นหา
-    const handleSearch = () => {
+    // 🔥 ฟังก์ชันการค้นหาแบบ debounce
+    useEffect(() => {
         if (searchTerm.trim() === "") {
             setIsSearching(false);
             setSearchResults([]);
             return;
         }
 
+        const searchTimer = setTimeout(() => {
+            setIsSearching(true);
+            
+            // ค้นหาจากข้อมูลหนังสือทั้งหมด
+            const results = allBooks.filter(book => 
+                book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (book.author && book.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                (book.category && book.category.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            
+            setSearchResults(results);
+        }, 300); // ดีเลย์ 300ms
+
+        return () => clearTimeout(searchTimer);
+    }, [searchTerm, allBooks]);
+
+    // 🔥 ฟังก์ชันเมื่อกด Enter ในช่องค้นหา
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
+    // 🔥 ฟังก์ชันค้นหาเมื่อคลิกไอคอน
+    const handleSearch = () => {
+        if (searchTerm.trim() === "") {
+            setIsSearching(false);
+            setSearchResults([]);
+            return;
+        }
         setIsSearching(true);
         
-        // ค้นหาจากข้อมูลหนังสือทั้งหมด
         const results = allBooks.filter(book => 
             book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             (book.author && book.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
@@ -117,14 +164,7 @@ function Homepage() {
         setSearchResults(results);
     };
 
-    // 🔥 เพิ่มฟังก์ชันเมื่อกด Enter ในช่องค้นหา
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch();
-        }
-    };
-
-    // 🔥 เพิ่มฟังก์ชันล้างการค้นหา
+    // 🔥 ฟังก์ชันล้างการค้นหา
     const handleClearSearch = () => {
         setSearchTerm("");
         setIsSearching(false);
@@ -135,12 +175,15 @@ function Homepage() {
     const handleCartClick = () => {
         navigate('/buy');
     };
+
     const handleProfileClick = () => {
         navigate('/HomepageProfile');
     };
+
     const handleBookClick = (bookId) => {
         navigate(`/productdetail/${bookId}`);
     };
+
     const handleViewAll = (path) => {
         navigate(path);
     };
@@ -151,6 +194,7 @@ function Homepage() {
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
             .slice(0, 5);
     };
+
     const getBooksByCategory = (category) => {
         return allBooks
             .filter(book => book.category && book.category.toLowerCase() === category.toLowerCase())
@@ -160,14 +204,20 @@ function Homepage() {
     // Add to cart function
     const handleAddToCart = async (e, book) => {
         e.stopPropagation();
+        
+        // 🔥 ตรวจสอบการล็อกอินใหม่ทุกครั้ง
         const userInfo = localStorage.getItem('userInfo');
-        if (!userInfo) {
+        const token = localStorage.getItem('token');
+        
+        if (!token || !userInfo) {
             alert('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าลงตะกร้า');
-            navigate('/login');
+            navigate('/', { replace: true });
             return;
         }
+
         const user = JSON.parse(userInfo);
         const userId = user._id;
+        
         const cartData = {
             userId: userId,
             bookId: book._id,
@@ -176,14 +226,25 @@ function Homepage() {
             image: book.image,
             quantity: 1
         };
+
         try {
             const response = await fetch(`${API_CART_URL}/add`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(cartData)
             });
+
             if (response.ok) {
                 alert(`เพิ่ม "${book.title}" ลงตะกร้าสำเร็จ!`);
+            } else if (response.status === 401) {
+                // Token หมดอายุหรือไม่ถูกต้อง
+                localStorage.removeItem('token');
+                localStorage.removeItem('userInfo');
+                alert('เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง');
+                navigate('/', { replace: true });
             } else {
                 const errData = await response.json();
                 alert(`เกิดข้อผิดพลาด: ${errData.message || 'ไม่สามารถเพิ่มสินค้าได้'}`);
@@ -194,7 +255,15 @@ function Homepage() {
         }
     };
 
-    // BookCard component - ✅ ปรับให้มีขนาดเท่ากัน
+    // 🔥 ฟังก์ชันออกจากระบบ
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('isAdmin');
+        navigate('/', { replace: true });
+    };
+
+    // BookCard component
     const BookCard = ({ book }) => {
         const bookImage = book.image || book1;
         return (
@@ -254,7 +323,7 @@ function Homepage() {
         </section>
     );
 
-    // 🔥 เพิ่ม Search Results Section
+    // 🔥 Search Results Section
     const SearchResultsSection = () => (
         <section className="homepage-books-section">
             <div className="homepage-search-results-header">
@@ -294,11 +363,13 @@ function Homepage() {
             ))}
         </div>
     );
+
     const PaymentIcon = ({ src, alt }) => (
         <div className="homepage-image-link">
             <img src={src} alt={alt} />
         </div>
     );
+
     const SocialIcon = ({ src, alt }) => (
         <div className="homepage-image-link">
             <img src={src} alt={alt} />
@@ -313,6 +384,7 @@ function Homepage() {
                 <nav className="homepage-nav">
                     <a href="/homepage">หน้าแรก</a>
                     <a href="/SeeAlltop10">10 อันดับ</a>
+                    
                 </nav>
                 <div className="homepage-search-container">
                     <MdOutlineShoppingCart 
