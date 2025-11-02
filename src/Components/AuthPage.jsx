@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import MangaXLogin from './MangaXLogin';
+import MangaXRegister from './MangaXRegister';
+import MangaXProfileDetails from './MangaProfileDetails';
 import logo from '../assets/logo.png';
 import styles from './AuthPage.module.css'; 
 
